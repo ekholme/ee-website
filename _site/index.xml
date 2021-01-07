@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Eric Ekholm</title>
+    <link>https://www.ericekholm.com/</link>
+    <atom:link href="https://www.ericekholm.com/index.xml" rel="self" type="application/rss+xml"/>
+    <description>Using R for statistical modeling, data visualization, and other personal projects.
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Tue, 14 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Unconsciousness in the Xmen</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-06-unconsciousness-in-the-xmen</link>
+      <description>Practicing poisson regression using Xmen data.</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-06-unconsciousness-in-the-xmen</guid>
+      <pubDate>Tue, 14 Jul 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-01-06-unconsciousness-in-the-xmen/unconsciousness-in-the-xmen_files/figure-html5/unnamed-chunk-4-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>Exploring Emily Oster's COVID Data</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-06-exploring-emily-osters-covid-data</link>
+      <description>Examining child care survey data from Emily Oster</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-06-exploring-emily-osters-covid-data</guid>
+      <pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-01-06-exploring-emily-osters-covid-data/exploring-emily-osters-covid-data_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>Pulling YouTube Transcripts</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-06-pulling-youtube-transcripts</link>
+      <description>Example of pulling transcripts for an entire YouTube playlist.</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-06-pulling-youtube-transcripts</guid>
+      <pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Writing Window Functions</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-04-writing-window-functions</link>
+      <description>Examples and tutorial of writing rolling aggregate functions.</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-04-writing-window-functions</guid>
+      <pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>RVA Pets</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-04-rva-pets</link>
+      <description>Analyzing pet ownership in RVA</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-04-rva-pets</guid>
+      <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-01-04-rva-pets/rva-pets_files/figure-html5/counts-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>Scrantonicity - Part 2</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-04-scrantonicity-part-2</link>
+      <description>K means clustering using The Office dialogue</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-04-scrantonicity-part-2</guid>
+      <pubDate>Thu, 16 Apr 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-01-04-scrantonicity-part-2/scrantonicity-part-2_files/figure-html5/cluster-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>Riddler Express - March 20, 2020</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-04-riddler-express-march-20-2020</link>
+      <description>Solving a math puzzle and exploring the accumulate() function.</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-04-riddler-express-march-20-2020</guid>
+      <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-01-04-riddler-express-march-20-2020/riddler-express-march-20-2020_files/figure-html5/plot results-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+  </channel>
+</rss>
