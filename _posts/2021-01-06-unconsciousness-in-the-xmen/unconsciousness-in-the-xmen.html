@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+  <title>Unconsciousness in the Xmen</title>
+  
+  <meta property="description" itemprop="description" content="Practicing poisson regression using Xmen data."/>
+  
+  
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2020-07-14"/>
+  <meta property="article:created" itemprop="dateCreated" content="2020-07-14"/>
+  <meta name="article:author" content="EE"/>
+  
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="Unconsciousness in the Xmen"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Practicing poisson regression using Xmen data."/>
+  <meta property="og:locale" content="en_US"/>
+  
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Unconsciousness in the Xmen"/>
+  <meta property="twitter:description" content="Practicing poisson regression using Xmen data."/>
+  
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Unconsciousness in the Xmen"]},{"type":"character","attributes":{},"value":["Practicing poisson regression using Xmen data.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["EE"]},{"type":"character","attributes":{},"value":["https://www.ericekholm.com/"]}]}]},{"type":"character","attributes":{},"value":["07-14-2020"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["unconsciousness-in-the-xmen_files/figure-html5/unnamed-chunk-20-1.png","unconsciousness-in-the-xmen_files/figure-html5/unnamed-chunk-4-1.png"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+  
+  <style type="text/css">
+  
+  body {
+    background-color: white;
+  }
+  
+  .pandoc-table {
+    width: 100%;
+  }
+  
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+  
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+  
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+  
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+  
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+  
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+  
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+  
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+  
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+  }
+  
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+  
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+  
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+  
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .shaded-content {
+    background: white;
+  }
+  
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+  
+  d-appendix {
+    padding-top: 30px;
+  }
+  
+  d-article>p>img {
+    width: 100%;
+  }
+  
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+  
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+  
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+  
+  /* Tweak code blocks */
+  
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+  
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+  
+  d-article div.sourceCode {
+    background-color: white;
+  }
+  
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+  
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+  
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+  
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+  
+  d-article pre a {
+    border-bottom: none;
+  }
+  
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+  
+  @media(min-width: 768px) {
+  
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+  
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+  
+  d-article pre {
+    font-size: 14px;
+  }
+  
+  }
+  
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+  
+  /* CSS for d-contents */
+  
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+  
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+  
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+  
+  .d-contents li {
+    list-style-type: none
+  }
+  
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+  
+  .d-contents ul {
+    padding-left: 1em
+  }
+  
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+  
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+  
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+  
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+  
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+  
+  
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+  
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+  
+  
+  /* Figure */
+  
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+  
+  .figure img {
+    width: 100%;
+  }
+  
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+  
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+  
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+  
+  /* Citations */
+  
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+  
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+  
+  
+  /* Tweak 1000px media break to show more text */
+  
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+  
+    .grid {
+      grid-column-gap: 16px;
+    }
+  
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+  
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+  
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+  
+  
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+  
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  /* Include appendix styles here so they can be overridden */
+  
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+  
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+  
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+  
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+  
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+  
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+  
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  d-appendix > * {
+    grid-column: text;
+  }
+  
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+  
+  /* Include footnote styles here so they can be overridden */
+  
+  d-footnote-list {
+    contain: layout style;
+  }
+  
+  d-footnote-list > * {
+    grid-column: text;
+  }
+  
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+  
+  
+  
+  /* Anchor.js */
+  
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+  
+  /* Social footer */
+  
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+  
+  .disqus-comments {
+    margin-right: 30px;
+  }
+  
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+  
+  #disqus_thread {
+    margin-top: 30px;
+  }
+  
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+  
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+  
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+  
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+  
+  
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+  
+  
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+  
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+  
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+  
+  /* Styles for posts lists (not auto-injected) */
+  
+  
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+  
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+  
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+  
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+  
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+  
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+  
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+  
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+  
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+  
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+  
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+  
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+  
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+  
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+  
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+  .posts-list img {
+    opacity: 1;
+  }
+  
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+  
+  .posts-more {
+    clear: both;
+  }
+  
+  
+  .posts-sidebar {
+    font-size: 16px;
+  }
+  
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+  
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+  
+  .categories li>a {
+    border-bottom: none;
+  }
+  
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+  
+  .categories .active {
+    font-weight: 600;
+  }
+  
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  
+  
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+  
+  
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+  
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+  
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+  
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+  
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+  
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+  
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+  
+  
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+  
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+  
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+  
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+  
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+  
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+  
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+  
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+  
+  
+  
+  </style>
+  
+  <script type="application/javascript">
+  
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+  
+  // show body when load is complete
+  function on_load_complete() {
+  
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+  
+  
+    // set body to visible
+    document.body.style.visibility = 'visible';
+  
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+  
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+  
+  function init_distill() {
+  
+    init_common();
+  
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+  
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+  
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+  
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+  
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+  
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+  
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+  
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+  
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+  
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+  
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+  
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+  
+      // capture layout
+      var layout = $(this).attr('data-layout');
+  
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+  
+  
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+  
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+  
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+  
+    // load distill framework
+    load_distill_framework();
+  
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+  
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+  
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+  
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+  
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+  
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+  
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+  
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+  
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+  
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+  
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+  
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+  
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+  
+      // clear polling timer
+      clearInterval(tid);
+  
+      // show body now that everything is ready
+      on_load_complete();
+    }
+  
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+  
+  }
+  
+  function init_downlevel() {
+  
+    init_common();
+  
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+  
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+  
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+  
+    // remove toc
+    $('.d-contents').remove();
+  
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+  
+  
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+  
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+  
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+  
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+  
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+  
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+  
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+  
+    $('body').addClass('downlevel');
+  
+    on_load_complete();
+  }
+  
+  
+  function init_common() {
+  
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+  
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+  
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+  
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+  
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+  
+      }
+    });
+  
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+  
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      });
+    }
+  
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+  
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+  
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+  
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+  
+  </script>
+  
+  <!--/radix_placeholder_distill-->
+  <script src="unconsciousness-in-the-xmen_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="unconsciousness-in-the-xmen_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="unconsciousness-in-the-xmen_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="unconsciousness-in-the-xmen_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="unconsciousness-in-the-xmen_files/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Unconsciousness in the Xmen","description":"Practicing poisson regression using Xmen data.","authors":[{"author":"EE","authorURL":"https://www.ericekholm.com/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-07-14T00:00:00.000-04:00","citationText":"EE, 2020"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Unconsciousness in the Xmen</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>Practicing poisson regression using Xmen data.</p></p>
+</div>
+
+<div class="d-byline">
+  EE <a href="https://www.ericekholm.com/" class="uri">https://www.ericekholm.com/</a> 
+  
+<br/>07-14-2020
+</div>
+
+<div class="d-article">
+<p>A part of me has always wanted to get into comic books. I think it would be a really good fit for me – I’m definitely a nerd. I play video games, I read fantasy novels, I code/do data science for fun. Comic books should be right up my alley. But for whatever reason, I’ve never taken the plunge. Maybe it’s a time commitment thing. Maybe I know I’ll like them too much. Maybe it’s too daunting to figure out how to start. Regardless, even thought I’m not <em>into</em> comic books, they are intriguing to me, and the X-Men particularly so, which is why I wanted to take a little bit of time to analyze this X-men data promoted by the <a href="https://github.com/rfordatascience/tidytuesday/blob/master/README.md">#tidytuesday</a> project.</p>
+<p>The other main purpose of this blog post is to toy around with running a Poisson regression. A few months ago, I saw a <a href="https://www.tidyverse.org/blog/2020/04/parsnip-adjacent/">post</a> about how the tidymodels framework had some new “parsnip-adjacent” packages, with one being <a href="https://cran.r-project.org/web/packages/poissonreg/index.html"><code>{poissonreg}</code></a> which fits – you guessed it – Poisson regressions. I haven’t had much reason to use Poisson regression in any of my previous work or in datasets I’ve toyed around with, but this X-men dataset seems like a good excuse to try it out. So, onward and upward!</p>
+<h2 id="setup">Setup</h2>
+<p>First, I’ll load some packages, set some miscellaneous options, and import the data. This data comes from the <a href="http://www.claremontrun.com/">Claremont Run</a> project, which mines data from Chris Claremont’s run (1975-1991) writing the X-men comics. To learn more about the project, you can visit the website. There are several datasets available, but for this analysis, I’m going to use data from the characters dataset, the character_visualization dataset, and the locations dataset.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="exploring-the-data">Exploring the Data</h2>
+<p>Let’s first look at the characters dataset. In this dataset, each row corresponds to a character in an issue, and each column corresponds to actions or events relevant to that character. Here’s a glimpse of that data:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>characters</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>glimpse</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 4,209
+Columns: 34
+$ issue                                         &lt;dbl&gt; 97, 97, 97,...
+$ character                                     &lt;chr&gt; &quot;Professor ...
+$ rendered_unconcious                           &lt;dbl&gt; 0, 0, 0, 1,...
+$ captured                                      &lt;dbl&gt; 0, 0, 0, 0,...
+$ declared_dead                                 &lt;dbl&gt; 0, 0, 0, 0,...
+$ redressed                                     &lt;dbl&gt; 0, 0, 0, 0,...
+$ depowered                                     &lt;dbl&gt; 0, 0, 0, 0,...
+$ clothing_torn                                 &lt;dbl&gt; 0, 0, 0, 0,...
+$ subject_to_torture                            &lt;dbl&gt; 0, 0, 0, 0,...
+$ quits_team                                    &lt;dbl&gt; 0, 0, 0, 0,...
+$ surrenders                                    &lt;dbl&gt; 0, 0, 0, 0,...
+$ number_of_kills_humans                        &lt;dbl&gt; 0, 0, 0, 0,...
+$ number_of_kills_non_humans                    &lt;dbl&gt; 0, 0, 0, 0,...
+$ initiates_physical_conflict                   &lt;chr&gt; NA, NA, &quot;1&quot;...
+$ expresses_reluctance_to_fight                 &lt;dbl&gt; NA, NA, 1, ...
+$ on_a_date_with_which_character                &lt;chr&gt; NA, NA, NA,...
+$ kiss_with_which_character                     &lt;chr&gt; NA, NA, NA,...
+$ hand_holding_with_which_character             &lt;chr&gt; &quot;Moira MacT...
+$ dancing_with_which_character                  &lt;chr&gt; NA, NA, NA,...
+$ flying_with_another_character                 &lt;chr&gt; NA, NA, NA,...
+$ arm_in_arm_with_which_character               &lt;chr&gt; NA, NA, NA,...
+$ hugging_with_which_character                  &lt;chr&gt; NA, NA, NA,...
+$ physical_contact_other                        &lt;chr&gt; &quot;Moira MacT...
+$ carrying_with_which_character                 &lt;chr&gt; NA, NA, NA,...
+$ shared_bed_with_which_character               &lt;lgl&gt; NA, NA, NA,...
+$ shared_room_domestically_with_which_character &lt;lgl&gt; NA, NA, NA,...
+$ explicitly_states_i_love_you_to_whom          &lt;chr&gt; NA, NA, NA,...
+$ shared_undress                                &lt;chr&gt; NA, NA, NA,...
+$ shower_number_of_panels_shower_lasts          &lt;dbl&gt; 0, 0, 0, 0,...
+$ bath_number_of_panels_bath_lasts              &lt;dbl&gt; 0, 0, 0, 0,...
+$ depicted_eating_food                          &lt;dbl&gt; 1, 0, 0, 0,...
+$ visible_tears_number_of_panels                &lt;dbl&gt; 0, 0, 0, 0,...
+$ visible_tears_number_of_intances              &lt;dbl&gt; 0, 0, 0, 0,...
+$ special_notes                                 &lt;chr&gt; NA, NA, NA,...</code></pre>
+</div>
+<p>So, we can see in this dataset things like who Professor X held hands with in issue 97, how many humans were killed by Magneto in issue 105, etc. We see lots of NAs and 0s in this dataset. The only column I’m going to use from this is the rendered unconscious column, which will be outcome variable in the models later.</p>
+<p>In the character_visualization dataset, each row represents a per-issue count of the number of times a character is depicted, speaks, thinks, has a narrative statement (I think this is probably only relevant for the narrator character?), either when the character is in costume or not in costume.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>character_visualization</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>glimpse</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 9,800
+Columns: 7
+$ issue     &lt;dbl&gt; 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97,...
+$ costume   &lt;chr&gt; &quot;Costume&quot;, &quot;Costume&quot;, &quot;Costume&quot;, &quot;Costume&quot;, &quot;Co...
+$ character &lt;chr&gt; &quot;Editor narration&quot;, &quot;Omnipresent narration&quot;, &quot;P...
+$ speech    &lt;dbl&gt; 0, 0, 0, 7, 24, 0, 11, 9, 10, 0, 0, 0, 0, 0, 0,...
+$ thought   &lt;dbl&gt; 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+$ narrative &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+$ depicted  &lt;dbl&gt; 0, 0, 0, 10, 23, 0, 9, 17, 17, 5, 0, 0, 0, 0, 0...</code></pre>
+</div>
+<p>In the location dataset, each row corresponds to a location in which part of the issue takes place, with as many locations listed per issue as appear in that issue. The dataset also includes a “context” column that describes things like whether the location is shown in the present, as part of a flashback, in a dream, etc. Here’s a glimpse:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>locations</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>glimpse</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,413
+Columns: 4
+$ issue    &lt;dbl&gt; 97, 97, 97, 97, 97, 98, 98, 98, 98, 98, 99, 99, ...
+$ location &lt;chr&gt; &quot;Space&quot;, &quot;X-Mansion&quot;, &quot;Rio Diablo Research Facil...
+$ context  &lt;chr&gt; &quot;Dream&quot;, &quot;Present&quot;, &quot;Present&quot;, &quot;Present&quot;, &quot;Prese...
+$ notes    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Cut...</code></pre>
+</div>
+<p>Across these datasets, it probably makes the most sense to aggegrate data up to the issue level, since that’s kind of the lowest common denominator here. So, essentially the question I’m going to try to answer in this blog post is:</p>
+<p><em>What features of an X-men issue predict how many characters are rendered unconscious in that issue?</em></p>
+<p>First, let’s look at the distribution of rendered unconscious:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>characters</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>issue</span>, wt <span class='op'>=</span> <span class='va'>rendered_unconcious</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>lann</span>, bins <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="unconsciousness-in-the-xmen_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+</div>
+<p>Right, so, this is a pretty strongly right-skewed distribution, which is sort of what we’d expect from a Poisson distribution, especially one with a low expected number of events (which I’d imagine is the case in comic books).</p>
+<h2 id="cleaning-aggregating-and-joining">Cleaning, Aggregating, and Joining</h2>
+<p>Next, let’s aggregate our data up to the issue level. This will give us data where a row represents an issue rather than a character within an issue or a location within an issue. We’ll start with the characters dataset. There’s a lot we <em>could</em> do with this data, but because there are only 183 issues represented in this dataset, we need to be cognizant about how many predictors we’re including. So the only variable I’m going to use here is rendered unconscious as the outcome, which will represent the number of characters rendered unconscious in a given issue.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>rend_df</span> <span class='op'>&lt;-</span> <span class='va'>characters</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>issue</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>summarize</span><span class='op'>(</span>rendered_unconscious <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>rendered_unconcious</span>, na.rm <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Next, let’s work on the character_visualization dataset. Again, trying to keep the number of predictors relatively small, I’m going to winnow this down to represent counts of how many times a handful of key characters are depicted in each issue. I don’t know a ton about the X-men, but I know who some of the more important characters are, so I’m going to choose Wolverine, Professor X, Magneto, and Jean Grey here.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>char_sum</span> <span class='op'>&lt;-</span> <span class='va'>character_visualization</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>character</span>, <span class='st'>"Wolverine|Xavier|Jean Grey|Magneto"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>issue</span>, <span class='va'>character</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>summarize</span><span class='op'>(</span>depict <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>depicted</span>, na.rm <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>character <span class='op'>=</span> <span class='fu'>case_when</span><span class='op'>(</span>
+    <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>character</span>, <span class='st'>"Jean Grey"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Jean_Grey"</span>,
+    <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>character</span>, <span class='st'>"Wolv"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Wolverine"</span>,
+    <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>character</span>, <span class='st'>"Magneto"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Magneto"</span>,
+    <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>character</span>, <span class='st'>"Xavier"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Professor_X"</span>
+  <span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pivot_wider</span><span class='op'>(</span>
+    names_from <span class='op'>=</span> <span class='va'>character</span>,
+    values_from <span class='op'>=</span> <span class='va'>depict</span>
+  <span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Next, let’s work on our locations dataset. First, let’s look at the most common locations. Again, since we only have 183 rows in our dataset that we’re modeling with, I only want to choose a handful of variables to include in the model here.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>locations</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>location</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 785 x 2
+   location                             n
+   &lt;chr&gt;                            &lt;int&gt;
+ 1 X-Mansion                          100
+ 2 Danger Room                         27
+ 3 Space                               19
+ 4 Muir Island, Scotland               14
+ 5 Unspecified region in Australia     14
+ 6 Eagle Plaza, Dallas Texas           11
+ 7 Central Park                        10
+ 8 Morlock residence under New York    10
+ 9 Princess Lilandra&#39;s Home Planet     10
+10 San Francisco                       10
+# ... with 775 more rows</code></pre>
+</div>
+<p>Ok, so, I’m just going to go with the 3 most common locations: the X-mansion, the Danger Room (whatever that is), and Space. Danger Room sounds to me like a place where people might be rendered unconscious.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>use_locs</span> <span class='op'>&lt;-</span> <span class='va'>locations</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>location</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>top_n</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pull</span><span class='op'>(</span><span class='va'>location</span><span class='op'>)</span>
+<span class='va'>locs_sum</span> <span class='op'>&lt;-</span> <span class='va'>locations</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>issue</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>summarize</span><span class='op'>(</span>mansion <span class='op'>=</span> <span class='va'>use_locs</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>%in%</span> <span class='va'>location</span>,
+            danger_room <span class='op'>=</span> <span class='va'>use_locs</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>%in%</span> <span class='va'>location</span>,
+            space <span class='op'>=</span> <span class='va'>use_locs</span><span class='op'>[[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>%in%</span> <span class='va'>location</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span><span class='fu'>across</span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is_logical</span><span class='op'>)</span>, <span class='va'>as.numeric</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>This will return a dataset that tells us whether a given issue has the X-mansion, the Danger Room, or Space as a location.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>locs_sum</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>glimpse</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 183
+Columns: 4
+$ issue       &lt;dbl&gt; 97, 98, 99, 100, 101, 102, 103, 104, 105, 106...
+$ mansion     &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, ...
+$ danger_room &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, ...
+$ space       &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, ...</code></pre>
+</div>
+<p>Now we can join the three datasets into one useful for modeling. I’m using an inner join here because, for whatever reason, the character visualization dataset has more issues represented than the others, and we only want issues that are represented in all 3 dataframes.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>issues_joined</span> <span class='op'>&lt;-</span> <span class='fu'>reduce</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>rend_df</span>, <span class='va'>char_sum</span>, <span class='va'>locs_sum</span><span class='op'>)</span>, <span class='op'>~</span><span class='fu'>inner_join</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span>, by <span class='op'>=</span> <span class='st'>"issue"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h2 id="modeling">Modeling</h2>
+<p>Cool, so now we’re done preprocessing our data – now we can specify our model.</p>
+<p>I mentioned before that one issue here is that this is a small set of data. We have 183 observations (again, each observation is an issue), which isn’t many. One way to make our modeling more robust is to use bootstrap resampling (see our good friend <a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">Wikipedia</a> for an explanation) and to fit models to several resamples.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
+<span class='va'>booties</span> <span class='op'>&lt;-</span> <span class='fu'>bootstraps</span><span class='op'>(</span><span class='va'>issues_joined</span>, times <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>booties</span><span class='op'>$</span><span class='va'>splits</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[[1]]
+&lt;Analysis/Assess/Total&gt;
+&lt;183/68/183&gt;
+
+[[2]]
+&lt;Analysis/Assess/Total&gt;
+&lt;183/66/183&gt;
+
+[[3]]
+&lt;Analysis/Assess/Total&gt;
+&lt;183/66/183&gt;
+
+[[4]]
+&lt;Analysis/Assess/Total&gt;
+&lt;183/70/183&gt;
+
+[[5]]
+&lt;Analysis/Assess/Total&gt;
+&lt;183/64/183&gt;</code></pre>
+</div>
+<p>What we can see here is that every bootstrap sample has 183 rows in the analysis set, which is what the model will be trained on, and then some other number of rows in the assessment set. This other number is the out-of-bag sample – the rows that weren’t randomly sampled by the bootstrap process.</p>
+<p>Next, I’m going to set up a workflow. I think of this as like a little suitcase that can carry things I want to use in my model around – I think that analogy might be from Julia Silge? Anyway, I’m going to start by adding the formula I want to use in my model.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>xmen_wf</span> <span class='op'>&lt;-</span> <span class='fu'>workflow</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>add_formula</span><span class='op'>(</span><span class='va'>rendered_unconscious</span> <span class='op'>~</span> <span class='va'>Magneto</span> <span class='op'>+</span> <span class='va'>Jean_Grey</span> <span class='op'>+</span> <span class='va'>Wolverine</span> <span class='op'>+</span> <span class='va'>Professor_X</span> <span class='op'>+</span> <span class='va'>mansion</span> <span class='op'>+</span> <span class='va'>danger_room</span> <span class='op'>+</span> <span class='va'>space</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Now we can further specify the model. Remember that since our outcome is a count, we’ll be fitting a Poisson regression. Looking at the outcome distribution earlier, I don’t think I need to use a zero-inflated model here (although maybe? Again, this isn’t really my expertise), so I’m just going to proceed with a regular Poisson regression, fit using the <code>{glmnet}</code> engine. I’m also going to tune the <code>penalty</code> and <code>mixture</code> arguments, which control the amount of total regularization applied to the model as well as the proportion of the penalty that is L1 (lasso) vs L2 (ridge regression).</p>
+<p><strong>Brief Interpolation on what a Poisson regression is</strong> A Poisson regression is a generalized linear model (GLM) used to model count data. Like the name implies, GLMs are generalizations of linear models that use a link function, g(), to transform the expected value of the response (outcome) to a linear function of the predictor variables. Poisson regression uses a log link function to accomplish this transformation. For people interested in reading more, I really like John Fox’s book, <a href="https://www.amazon.com/Applied-Regression-Analysis-Generalized-Linear/dp/1452205663/ref=pd_sbs_14_1/139-8800507-2098708?_encoding=UTF8&amp;pd_rd_i=1452205663&amp;pd_rd_r=e7cdfc71-d6fa-4967-abbc-e11aa551df8f&amp;pd_rd_w=mqE5D&amp;pd_rd_wg=fNSQ2&amp;pf_rd_p=bdc67ba8-ab69-42ee-b8d8-8f5336b36a83&amp;pf_rd_r=4R6NXGVFTRME8MRA7WY3&amp;psc=1&amp;refRID=4R6NXGVFTRME8MRA7WY3"><em>Applied Regression Analysis</em></a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidymodels/poissonreg'>poissonreg</a></span><span class='op'>)</span>
+<span class='va'>poisson_mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://poissonreg.tidymodels.org/reference/poisson_reg.html'>poisson_reg</a></span><span class='op'>(</span>
+  penalty <span class='op'>=</span> <span class='fu'>tune</span><span class='op'>(</span><span class='op'>)</span>,
+  mixture <span class='op'>=</span> <span class='fu'>tune</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"glmnet"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Since I’m tuning a couple of parameters, I need to make a grid with possible values to tune across</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>poisson_tune</span> <span class='op'>&lt;-</span> <span class='fu'>grid_max_entropy</span><span class='op'>(</span>
+  <span class='fu'>penalty</span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'>mixture</span><span class='op'>(</span><span class='op'>)</span>, 
+  size <span class='op'>=</span> <span class='fl'>10</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>And I’ll drop the model spec into the previous workflow.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>xmen_wf</span> <span class='op'>&lt;-</span> <span class='va'>xmen_wf</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>add_model</span><span class='op'>(</span><span class='va'>poisson_mod</span><span class='op'>)</span>
+<span class='va'>xmen_wf</span>
+</code></pre>
+</div>
+<pre><code>== Workflow ==========================================================
+Preprocessor: Formula
+Model: poisson_reg()
+
+-- Preprocessor ------------------------------------------------------
+rendered_unconscious ~ Magneto + Jean_Grey + Wolverine + Professor_X + 
+    mansion + danger_room + space
+
+-- Model -------------------------------------------------------------
+Poisson Regression Model Specification (regression)
+
+Main Arguments:
+  penalty = tune()
+  mixture = tune()
+
+Computational engine: glmnet </code></pre>
+</div>
+<p>And now we can fit the model using our bootstrap resamples.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>xmen_fit</span> <span class='op'>&lt;-</span> <span class='fu'>tune_grid</span><span class='op'>(</span>
+  <span class='va'>xmen_wf</span>,
+  resamples <span class='op'>=</span> <span class='va'>booties</span>,
+  grid <span class='op'>=</span> <span class='va'>poisson_tune</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Our models have fit, so now we can look at our results:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>xmen_fit</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>collect_metrics</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 20 x 8
+    penalty mixture .metric .estimator   mean     n std_err .config   
+      &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;     
+ 1 8.81e- 4  0.0155 rmse    standard   1.93     100 0.0894  Preproces~
+ 2 8.81e- 4  0.0155 rsq     standard   0.0277   100 0.00398 Preproces~
+ 3 4.67e- 7  0.0676 rmse    standard   1.93     100 0.0896  Preproces~
+ 4 4.67e- 7  0.0676 rsq     standard   0.0277   100 0.00398 Preproces~
+ 5 5.56e- 1  0.148  rmse    standard   1.71     100 0.0201  Preproces~
+ 6 5.56e- 1  0.148  rsq     standard   0.0288   100 0.00426 Preproces~
+ 7 4.76e-10  0.190  rmse    standard   1.93     100 0.0895  Preproces~
+ 8 4.76e-10  0.190  rsq     standard   0.0277   100 0.00398 Preproces~
+ 9 1.09e- 2  0.500  rmse    standard   1.92     100 0.0841  Preproces~
+10 1.09e- 2  0.500  rsq     standard   0.0278   100 0.00403 Preproces~
+11 2.44e- 7  0.517  rmse    standard   1.94     100 0.0896  Preproces~
+12 2.44e- 7  0.517  rsq     standard   0.0277   100 0.00398 Preproces~
+13 1.73e-10  0.622  rmse    standard   1.94     100 0.0896  Preproces~
+14 1.73e-10  0.622  rsq     standard   0.0277   100 0.00398 Preproces~
+15 1.10e- 5  0.881  rmse    standard   1.94     100 0.0897  Preproces~
+16 1.10e- 5  0.881  rsq     standard   0.0277   100 0.00398 Preproces~
+17 1.99e- 1  0.942  rmse    standard   1.69     100 0.0190  Preproces~
+18 1.99e- 1  0.942  rsq     standard   0.0302   100 0.00404 Preproces~
+19 5.97e-10  0.985  rmse    standard   1.94     100 0.0897  Preproces~
+20 5.97e-10  0.985  rsq     standard   0.0277   100 0.00398 Preproces~</code></pre>
+</div>
+<p>Ok, so, my limited understanding of Poisson regression is that neither RMSE or R-squared values are ideal metrics, and some googling led me to find that there’s an <a href="https://github.com/tidymodels/yardstick/issues/146">open issue to add a Poisson log loss metric to the yardstick package</a>, so we’ll gloss over these for now.</p>
+<p>Anyway, let’s pick the best model here, finalize the model, and then fit it to our full training data.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>best_params</span> <span class='op'>&lt;-</span> <span class='va'>xmen_fit</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>select_best</span><span class='op'>(</span>metric <span class='op'>=</span> <span class='st'>"rmse"</span><span class='op'>)</span>
+<span class='va'>final_mod</span> <span class='op'>&lt;-</span> <span class='va'>xmen_wf</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>finalize_workflow</span><span class='op'>(</span><span class='va'>best_params</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>fit</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>issues_joined</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>And let’s check out how important how variables are. This should give us the coefficients from our model.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>final_mod</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pull_workflow_fit</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/utils/edit.html'>vi</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 7 x 3
+  Variable    Importance Sign 
+  &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;
+1 mansion        0.157   NEG  
+2 danger_room    0.113   NEG  
+3 Professor_X    0.0197  POS  
+4 Jean_Grey      0.0133  POS  
+5 Wolverine      0.00938 POS  
+6 Magneto        0.00701 POS  
+7 space          0       NEG  </code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>final_mod</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pull_workflow_fit</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>vip</span><span class='op'>(</span>num_features <span class='op'>=</span> <span class='fl'>7</span>, fill <span class='op'>=</span> <span class='va'>lann</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="unconsciousness-in-the-xmen_files/figure-html5/unnamed-chunk-20-1.png" width="624" /></p>
+</div>
+<p>Right, so, one thing to keep in mind here is that the location variables and the character variables are on different scales, so the effects aren’t directly comparable. But the interpretation here is that more appearances of Professor X are more strongly associated with more characters rendered unconscious in an issue than are more appearances of Magneto, although all of these coefficients are positive, suggesting that more appearances of any of these four characters are associated with more renderings unconscious in that issue. Similarly, the effects of danger_room and mansion are negative, suggesting that if the issue features either of those locations, there tend to be fewer characters rendered unconscious. The coefficient for space is 0, which probably means it got regularized out. Probably the most important piece, here, though, is that these effects seem to be <em>very</em> small, which means they likely don’t actually matter.</p>
+<p>I’m going to call it right here. Even though the model I built doesn’t seem to have much explanatory power, it forced me to read some more about Poisson regression and to dig back into the tidymodels framework, which I’ll count as a win. Plus it gives me an excuse to gather “domain knowledge” about comic books so I can do a better job next time.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
