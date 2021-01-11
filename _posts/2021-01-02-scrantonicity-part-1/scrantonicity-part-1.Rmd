@@ -9,7 +9,7 @@ date: 03-14-2020
 output:
   distill::distill_article:
     self_contained: false
-draft: true
+draft: false
 ---
 
 

@@ -1,0 +1,89 @@
+---
+title: "Visualizations"
+description: |
+  Some visualizations I've created
+output: html_document
+
+---
+
+```{r setup, echo = FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = FALSE, out.width = "100%")
+```
+
+
+This page presents a collection of data visualizations I've created, mostly for fun/in my free time. All visualizations were created using the R programming language.
+
+## Maynard James Keenan Songs
+
+[![](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%204%20-%20spotify/mjk_circle.jpg?raw=true){width=100%}](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%204%20-%20spotify/mjk_circle.jpg?raw=true)
+
+I gathered data through the Spotify API to analyze the length of songs by Maynard James Keenan's bands.
+
+<br/>
+
+## RVA Pets
+
+[![](https://github.com/ekholme/viz_portfolio/blob/master/RVA-VA%20Data/rva_pets_map.png?raw=true){width=100%}](https://github.com/ekholme/viz_portfolio/blob/master/RVA-VA%20Data/rva_pets_map.png?raw=true)
+
+Using data from [Richmond's Open Data Portal](https://data.richmondgov.com/Unique-and-Inclusive-Neighborhoods/Pet-Licenses/fgv9-bhf4) and [Open Street Map](https://cran.r-project.org/package=osmdata), I mapped the location of cats and dogs in RVA.
+
+<br/>
+
+## European Energy Production
+
+[![](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2032%20-%20euro%20energy/energy.png?raw=true){width=100%}](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2032%20-%20euro%20energy/energy.png?raw=true)
+
+Using data from [Eurostat](https://ec.europa.eu/eurostat/statistics-explained/index.php/Electricity_generation_statistics_%E2%80%93_first_results), I visualized how each country in Europe produced energy in 2018.
+
+<br/>
+
+## Notable Black Scientists
+
+[![](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2024%20-%20african%20american%20achievements/scientists.png?raw=true){width=100%}](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2024%20-%20african%20american%20achievements/scientists.png?raw=true)
+
+Using data from [Wikipedia](https://en.wikipedia.org/wiki/List_of_African-American_inventors_and_scientists), I adopted a minimalist approach to highlight notable Black scientists and inventors throughout the history of the US.
+
+<br/>
+
+## Beach Volleyball
+
+[![](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2021%20-%20beach%20volleyball/may_walsh.png?raw=true){width=100%}](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2021%20-%20beach%20volleyball/may_walsh.png?raw=true)
+
+Using data from the [#TidyTuesday Project](https://github.com/rfordatascience/tidytuesday/blob/master/README.md) (via [BigTime stats](https://bigtimestats.blog/data/)), I visualized Kerri Walsh Jennings and Misty May-Treanor's key match statistics over time.
+
+<br/>
+
+## Beer Production
+
+[![](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2014%20-%20beer%20production/beer_maps.jpg?raw=true){width=100%}](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2014%20-%20beer%20production/beer_maps.jpg?raw=true)
+
+Using data from the [Alcohol and Tobacco Tax and Trade Bureau](https://www.ttb.gov/beer/statistics), I created a cartogram showing which states produce the most beer relative to their populations.
+
+<br/>
+
+## White Christmas Lyrics
+
+[![](https://github.com/ekholme/TidyTuesday/blob/master/52%20-%20christmas%20songs/cosby_network.jpeg?raw=true){width=100%}](https://github.com/ekholme/TidyTuesday/blob/master/52%20-%20christmas%20songs/cosby_network.jpeg?raw=true)
+
+After pulling lyrics using the [`{genius}`](https://github.com/josiahparry/genius) package, I created a network to show connections between words used in the album.
+
+<br/>
+
+## Virginia Early Childhood Care & Education
+
+[![](https://github.com/ekholme/viz_portfolio/blob/master/Ed%20Data%20Viz/VQ/Viz/vq_vor_map.jpg?raw=true){width=100%}](https://github.com/ekholme/viz_portfolio/blob/master/Ed%20Data%20Viz/VQ/Viz/vq_vor_map.jpg?raw=true)
+
+I used data from the [Virginia Quality](https://www.virginiaquality.com/) website and [Google's GeoCoding API](https://developers.google.com/maps/documentation/geocoding/start) to create a Voronoi tesselation of high-quality ECCE sites in Virginia.
+
+## 21st Century Rap Rankings
+
+[![](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2016%20-%20rap%20artists/rap_bars.png?raw=true){width=100%}](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2016%20-%20rap%20artists/rap_bars.png?raw=true)
+
+Using data from a [BBC Music](https://www.bbc.com/culture/article/20191007-the-greatest-hip-hop-songs-of-all-time-who-voted) survey on the best hip-hop songs of all time, I analyzed who the most celebrated rappers were each year in the 21st century.
+
+<br/>
+
+## More Visualizations
+
+You can see more visualizations I've created in my [#TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/README.md) Github repo ([here](https://github.com/ekholme/TidyTuesday)) or in my miscellaneous visualizations repo ([here](https://github.com/ekholme/viz_portfolio))

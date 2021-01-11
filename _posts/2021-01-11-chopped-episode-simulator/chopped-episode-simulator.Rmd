@@ -1,0 +1,19 @@
+---
+title: "Chopped Episode Simulator"
+description: |
+  Simple app to simulate an episode of Chopped."
+author:
+  - name: EE
+    url: https://www.ericekholm.com/
+date: 09-05-2020
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+About a week ago, I used a [dataset](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-08-25/readme.md) containing ingredient lists (among other things) across the entire history of the show [Chopped](https://www.foodnetwork.com/shows/chopped) to create a simple Shiny app that will simulate an episode. I've embedded the app below, and you can find the code used to create it [here](https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2035%20-%20chopped/chopped_sim/app.R)
+
+```{r echo = FALSE}
+knitr::include_app('https://ekholme.shinyapps.io/chopped_simulator/')
+```
+

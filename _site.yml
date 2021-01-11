@@ -10,4 +10,16 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - text: "Projects"
+      menu:
+        - text: "Publications"
+          href: pubs.html
+        - text: "Visualizations"
+          href: viz.html
+    - icon: fa-twitter
+      href: https://twitter.com/ekholm_e
+    - icon: fa-github
+      href: https://github.com/ekholme/
+    - icon: fa fa-rss
+      href: index.xml
 output: distill::distill_article

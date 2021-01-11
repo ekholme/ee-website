@@ -7,7 +7,84 @@
     <description>Using R for statistical modeling, data visualization, and other personal projects.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 14 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Dungeons and Dragons - Part 2</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-11-dungeons-and-dragons-part-2</link>
+      <description>Exploring monster stats in D&amp;D 5e</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-11-dungeons-and-dragons-part-2</guid>
+      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-01-11-dungeons-and-dragons-part-2/dungeons-and-dragons-part-2_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>Dungeons and Dragons - Part 1</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-11-dungeons-and-dragons-part-1</link>
+      <description>Wrangling JSON data from an API.</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-11-dungeons-and-dragons-part-1</guid>
+      <pubDate>Fri, 18 Dec 2020 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Predicting Mobile Phone Subscription Growth</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-11-predicting-mobile-phone-subscription-growth</link>
+      <description>Using splines and iteration via map() to fit and interrogate models.</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-11-predicting-mobile-phone-subscription-growth</guid>
+      <pubDate>Wed, 18 Nov 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-01-11-predicting-mobile-phone-subscription-growth/predicting-mobile-phone-subscription-growth_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>Rstudio Table Contest Submission</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-11-rstudio-table-contest-submission</link>
+      <description>And impressions of the {gt} package.</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-11-rstudio-table-contest-submission</guid>
+      <pubDate>Mon, 26 Oct 2020 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Simulating Triangles?</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-11-simulating-triangles</link>
+      <description>Determining whether random numbers can form a triangle using simulation.</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-11-simulating-triangles</guid>
+      <pubDate>Sun, 18 Oct 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-01-11-simulating-triangles/simulating-triangles_files/figure-html5/unnamed-chunk-9-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>Your Mom's House Analysis</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-11-your-moms-house-analysis</link>
+      <description>An exploratory analysis of transcripts from the YMH podcast.</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-11-your-moms-house-analysis</guid>
+      <pubDate>Sun, 20 Sep 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-01-11-your-moms-house-analysis/your-moms-house-analysis_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>Chopped Episode Simulator</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-11-chopped-episode-simulator</link>
+      <description>Simple app to simulate an episode of Chopped."</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-11-chopped-episode-simulator</guid>
+      <pubDate>Sat, 05 Sep 2020 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Scrantonicity - Part 3</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3</link>
+      <description>Predicting the speaker of dialogue from The Office.</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3</guid>
+      <pubDate>Sat, 29 Aug 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3/scrantonicity-part-3_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>Intro to {rvest}</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-11-intro-to-rvest</link>
+      <description>Using {rvest} to find child care in Virginia.</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-11-intro-to-rvest</guid>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Unconsciousness in the Xmen</title>
       <dc:creator>EE</dc:creator>
@@ -67,7 +144,14 @@
       <description>Solving a math puzzle and exploring the accumulate() function.</description>
       <guid>https://www.ericekholm.com/posts/2021-01-04-riddler-express-march-20-2020</guid>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://www.ericekholm.com/posts/2021-01-04-riddler-express-march-20-2020/riddler-express-march-20-2020_files/figure-html5/plot results-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>Scrantonicity - Part 1</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-01-02-scrantonicity-part-1</link>
+      <description>An initial exploration of dialogue from The Office</description>
+      <guid>https://www.ericekholm.com/posts/2021-01-02-scrantonicity-part-1</guid>
+      <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
     </item>
   </channel>
 </rss>

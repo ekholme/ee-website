@@ -8,18 +8,18 @@ description: |
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
 ```
 
-I am an educator, researcher, data scientist, and writer. I am currently an Education Data Specialist for Chesterfield County Public Schools. In my free time, I enjoy reading, writing, data visualization/analysis, going to the gym, and spending time with friends & family (including my pup, Nala).
+I am an educator, researcher, data scientist, and writer. I am currently an Education Data Specialist for Chesterfield County Public Schools, where I use data to help guide decisions and improve students' educational experiences. In my free time, I enjoy reading, writing, data visualization/analysis, going to the gym, and spending time with friends & family (including my pup, Nala).
 
 
-![](/img/collage_small.jpg){width=650px} 
+![](img/collage_small.jpg){width=100%} 
 
-![](/img/em_park.jpeg){width=650px} 
+![](img/em_park.jpeg){width=100%} 
 
 <br/>
 
 I earned my PhD in educational psychology from the [VCU School of Education](https://soe.vcu.edu/) in July 2019, where I worked in the [Motivation and Self-Regulation Lab](http://wp.vcu.edu/skzumbrunn/) and in the [Cognition and Learning Lab](https://rampages.us/coglearnlab/) to study students' motivation, behaviors, and achievement. In my [dissertation](https://scholarscompass.vcu.edu/etd/5977/), I studied how writers' daily emotional states (think: anxiety, enjoyment, boredom) influenced their productivity as well as the day-to-day inertia of these emotional states.
 
-During grad school, I discovered a love for working with data -- exploring, visualizing, modeling, and communicating. I mostly work in `R`, and am proficient in the usual packages that folks use for data analysis, visualization, and modeling (e.g. the `{tidyverse}` and `{tidymodels}` suites), plus some more specialized packages. I really enjoy discovering new `R` packages and learning new things that `R` can do. I'm (very slowly) learning to code in `python` -- there's not much free time with an infant in the house -- and hope to find time to pick up `Julia` and `D3.js` as well.
+During grad school, I discovered a love for working with data -- exploring, visualizing, modeling, and communicating. I mostly work in `R`, and am proficient in the usual packages that folks use for data analysis, visualization, and modeling (e.g. the `{tidyverse}` and `{tidymodels}` suites), plus some more specialized packages. I really enjoy discovering new `R` packages and learning new things that `R` can do. I'm (very slowly) learning to code in `python` -- there's not much free time with an infant in the house -- and hope to find time to pick up other languages as well.
 
 
 ## Resume
@@ -75,7 +75,7 @@ _Virginia Tech_ <br/>
 
 ### Technical Skills & Tools
 
-+ __Programming:__ R, SQL
++ __Programming:__ R, Python, SQL
 
 + __Statistics/Modeling:__ R, Mplus, Blimp, Stata, Excel, SPSS
    - Proficient in several modeling approaches/frameworks, including inferential modeling, predictive modeling, unsupervised learning, meta-analysis, text mining/analysis, and more.
@@ -86,26 +86,3 @@ _Virginia Tech_ <br/>
 ### Publications
 
 See my list of publications on my [publications page](https://eric-ekholm.netlify.app/pubs/).
-
-
-### Grants and Awards
-
-#### Grants
-
-John Templeton Foundation Large Grant Program (2020), $799,935
-
-+ Jirout, J. (PI), Vitiello, V. (Co-PI)
-+ Title: _Curiosity and Classrooms: An exploration of curiosity and the development of intellectual virtues in schools_
-+ Role: Statistical/Methodological Consultant
-
-Virginia Commonwealth University Graduate Student Seed Funding (2018), $1,424
-
-+ Ekholm, E. (PI)
-+ Title: _Investigating Daily Writing Emotions, Self-Regulation, and Productivity: An Intensive Longitudinal Study_
-
-
-#### Awards
-
-+ Virginia Commonwealth University Schumacher Fund for Dissertation Research, February 2018
-
-+ Virginia Tech Creative Writing Award – Nonfiction, May 2010.

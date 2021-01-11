@@ -1,0 +1,2650 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+<title>Eric Ekholm: Scrantonicity - Part 3</title>
+
+<meta property="description" itemprop="description" content="Predicting the speaker of dialogue from The Office."/>
+
+<link rel="canonical" href="https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3/"/>
+
+<!--  https://schema.org/Article -->
+<meta property="article:published" itemprop="datePublished" content="2020-08-29"/>
+<meta property="article:created" itemprop="dateCreated" content="2020-08-29"/>
+<meta name="article:author" content="EE"/>
+
+<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+<meta property="og:title" content="Eric Ekholm: Scrantonicity - Part 3"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description" content="Predicting the speaker of dialogue from The Office."/>
+<meta property="og:url" content="https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3/"/>
+<meta property="og:image" content="https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3/scrantonicity-part-3_files/figure-html5/unnamed-chunk-1-1.png"/>
+<meta property="og:image:width" content="1248"/>
+<meta property="og:image:height" content="768"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="Eric Ekholm"/>
+
+<!--  https://dev.twitter.com/cards/types/summary -->
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Eric Ekholm: Scrantonicity - Part 3"/>
+<meta property="twitter:description" content="Predicting the speaker of dialogue from The Office."/>
+<meta property="twitter:url" content="https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3/"/>
+<meta property="twitter:image" content="https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3/scrantonicity-part-3_files/figure-html5/unnamed-chunk-1-1.png"/>
+<meta property="twitter:image:width" content="1248"/>
+<meta property="twitter:image:height" content="768"/>
+
+<!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
+<meta name="citation_title" content="Eric Ekholm: Scrantonicity - Part 3"/>
+<meta name="citation_fulltext_html_url" content="https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3/"/>
+<meta name="citation_online_date" content="2020/08/29"/>
+<meta name="citation_publication_date" content="2020/08/29"/>
+<meta name="citation_author" content="EE"/>
+<!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+<script type="text/json" id="radix-rmarkdown-metadata">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Scrantonicity - Part 3"]},{"type":"character","attributes":{},"value":["Predicting the speaker of dialogue from The Office."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["EE"]},{"type":"character","attributes":{},"value":["https://www.ericekholm.com/"]}]}]},{"type":"character","attributes":{},"value":["08-29-2020"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3/"]},{"type":"character","attributes":{},"value":["https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3/"]}]}
+</script>
+<!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["scrantonicity-part-3_files/figure-html5/unnamed-chunk-1-1.png","scrantonicity-part-3_files/figure-html5/unnamed-chunk-10-1.png","scrantonicity-part-3_files/figure-html5/unnamed-chunk-15-1.png","scrantonicity-part-3_files/figure-html5/unnamed-chunk-2-1.png"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+<meta name="distill:offset" content="../.."/>
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      tolerance: 5,
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.distill-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #0F2E3D;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.distill-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.distill-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
+  }
+}
+
+.distill-site-header {
+
+}
+
+.distill-site-footer {
+
+}
+
+
+/* Site Header */
+
+.distill-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.distill-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.distill-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.distill-site-header a,
+.distill-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.distill-site-header .title {
+  font-size: 18px;
+  min-width: 150px;
+}
+
+.distill-site-header .logo {
+  padding: 0;
+}
+
+.distill-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.distill-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .distill-site-header .logo img {
+    display: inline-block;
+  }
+  .distill-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .distill-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.distill-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+  .distill-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .distill-site-header .title {
+    margin-left: 0;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 0;
+  }
+  .distill-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-header.responsive {position: relative; min-height: 500px; }
+  .distill-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .distill-site-header.responsive a,
+  .distill-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .distill-site-header.responsive .nav-left,
+  .distill-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .distill-site-header.responsive .nav-dropdown {float: none;}
+  .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+  .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.distill-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+</style>
+
+<link href="../../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+<link href="../../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+<script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
+<script src="../../site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+<script src="../../site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+<script type="application/javascript">
+
+function getMeta(metaName) {
+  var metas = document.getElementsByTagName('meta');
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+  return '';
+}
+
+function offsetURL(url) {
+  var offset = getMeta('distill:offset');
+  return offset ? offset + '/' + url : url;
+}
+
+function createFuseIndex() {
+
+  // create fuse index
+  var options = {
+    keys: [
+      { name: 'title', weight: 20 },
+      { name: 'categories', weight: 15 },
+      { name: 'description', weight: 10 },
+      { name: 'contents', weight: 5 },
+    ],
+    ignoreLocation: true,
+    threshold: 0
+  };
+  var fuse = new window.Fuse([], options);
+
+  // fetch the main search.json
+  return fetch(offsetURL('search.json'))
+    .then(function(response) {
+      if (response.status == 200) {
+        return response.json().then(function(json) {
+          // index main articles
+          json.articles.forEach(function(article) {
+            fuse.add(article);
+          });
+          // download collections and index their articles
+          return Promise.all(json.collections.map(function(collection) {
+            return fetch(offsetURL(collection)).then(function(response) {
+              if (response.status === 200) {
+                return response.json().then(function(articles) {
+                  articles.forEach(function(article) {
+                    fuse.add(article);
+                  });
+                })
+              } else {
+                return Promise.reject(
+                  new Error('Unexpected status from search index request: ' +
+                            response.status)
+                );
+              }
+            });
+          })).then(function() {
+            return fuse;
+          });
+        });
+
+      } else {
+        return Promise.reject(
+          new Error('Unexpected status from search index request: ' +
+                      response.status)
+        );
+      }
+    });
+}
+
+window.document.addEventListener("DOMContentLoaded", function (event) {
+
+  // get search element (bail if we don't have one)
+  var searchEl = window.document.getElementById('distill-search');
+  if (!searchEl)
+    return;
+
+  createFuseIndex()
+    .then(function(fuse) {
+
+      // make search box visible
+      searchEl.classList.remove('hidden');
+
+      // initialize autocomplete
+      var options = {
+        autoselect: true,
+        hint: false,
+        minLength: 2,
+      };
+      window.autocomplete(searchEl, options, [{
+        source: function(query, callback) {
+          const searchOptions = {
+            isCaseSensitive: false,
+            shouldSort: true,
+            minMatchCharLength: 2,
+            limit: 10,
+          };
+          var results = fuse.search(query, searchOptions);
+          callback(results
+            .map(function(result) { return result.item; })
+            .filter(function(item) { return !!item.description; })
+          );
+        },
+        templates: {
+          suggestion: function(suggestion) {
+            var html = `
+              <div class="search-item">
+                <h3>${suggestion.title}</h3>
+                <div class="search-item-description">
+                  ${suggestion.description}
+                </div>
+                <div class="search-item-preview">
+                  <img src="${suggestion.preview ? offsetURL(suggestion.preview) : ''}"</img>
+                </div>
+              </div>
+            `;
+            return html;
+          }
+        }
+      }]).on('autocomplete:selected', function(event, suggestion) {
+        window.location.href = offsetURL(suggestion.path);
+      });
+      // remove inline display style on autocompleter (we want to
+      // manage responsive display via css)
+      $('.algolia-autocomplete').css("display", "");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+});
+
+</script>
+
+<style type="text/css">
+
+/* Algolioa Autocomplete */
+
+.algolia-autocomplete {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: sub;
+  background-color: white;
+  color: black;
+  padding: 6px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  border-radius: 6px;
+  border: 1px #0F2E3D solid;
+  width: 180px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-nav .algolia-autocomplete {
+    display: none;
+    visibility: hidden;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete {
+    display: inline-block;
+    visibility: visible;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+    margin-left: 0;
+    width: 400px;
+    max-height: 400px;
+  }
+}
+
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 550px;
+  max-height: 70vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+  padding: 5px;
+  margin-top: 3px;
+  margin-left: -150px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #999;
+  border-top: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+  margin-block-start: 0;
+  margin-block-end: 5px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+  display: inline-block;
+  overflow: hidden;
+  height: 2.8em;
+  width: 80%;
+  margin-right: 4%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+  display: inline-block;
+  width: 15%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+  height: 3em;
+  width: auto;
+  display: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+  display: initial;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #eee;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+</style>
+
+
+<!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+<style type="text/css">
+
+body {
+  background-color: white;
+}
+
+.pandoc-table {
+  width: 100%;
+}
+
+.pandoc-table>caption {
+  margin-bottom: 10px;
+}
+
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+d-byline .byline {
+  grid-template-columns: 2fr 2fr;
+}
+
+d-byline .byline h3 {
+  margin-block-start: 1.5em;
+}
+
+d-byline .byline .authors-affiliations h3 {
+  margin-block-start: 0.5em;
+}
+
+.authors-affiliations .orcid-id {
+  width: 16px;
+  height:16px;
+  margin-left: 4px;
+  margin-right: 4px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+
+d-title .dt-tags {
+  margin-top: 1em;
+  grid-column: text;
+}
+
+.dt-tags .dt-tag {
+  text-decoration: none;
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0em 0.4em;
+  margin-right: 0.5em;
+  margin-bottom: 0.4em;
+  font-size: 70%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+d-article table.gt_table td,
+d-article table.gt_table th {
+  border-bottom: none;
+}
+
+.html-widget {
+  margin-bottom: 2.0em;
+}
+
+.l-screen-inset {
+  padding-right: 16px;
+}
+
+.l-screen .caption {
+  margin-left: 10px;
+}
+
+.shaded {
+  background: rgb(247, 247, 247);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .html-widget {
+  margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .shaded-content {
+  background: white;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1.5em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+d-article {
+  padding-top: 2.5rem;
+  padding-bottom: 30px;
+}
+
+d-appendix {
+  padding-top: 30px;
+}
+
+d-article>p>img {
+  width: 100%;
+}
+
+d-article h2 {
+  margin: 1rem 0 1.5rem 0;
+}
+
+d-article h3 {
+  margin-top: 1.5rem;
+}
+
+d-article iframe {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2.0em;
+  width: 100%;
+}
+
+/* Tweak code blocks */
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: auto;
+}
+
+d-article div.sourceCode {
+  background-color: white;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 10px;
+  font-size: 12px;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+d-article pre {
+  font-size: 12px;
+  color: black;
+  background: none;
+  margin-top: 0;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+d-article pre a {
+  border-bottom: none;
+}
+
+d-article pre a:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+@media(min-width: 768px) {
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: visible !important;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+d-article pre {
+  font-size: 14px;
+}
+
+}
+
+figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* CSS for d-contents */
+
+.d-contents {
+  grid-column: text;
+  color: rgba(0,0,0,0.8);
+  font-size: 0.9em;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  padding-left: 0.25em;
+  justify-self: start;
+}
+
+@media(min-width: 1000px) {
+  .d-contents.d-contents-float {
+    height: 0;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    justify-self: center;
+    padding-right: 3em;
+    padding-left: 2em;
+  }
+}
+
+.d-contents nav h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.d-contents li {
+  list-style-type: none
+}
+
+.d-contents nav > ul {
+  padding-left: 0;
+}
+
+.d-contents ul {
+  padding-left: 1em
+}
+
+.d-contents nav ul li {
+  margin-top: 0.6em;
+  margin-bottom: 0.2em;
+}
+
+.d-contents nav a {
+  font-size: 13px;
+  border-bottom: none;
+  text-decoration: none
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.d-contents nav a:hover {
+  text-decoration: underline solid rgba(0, 0, 0, 0.6)
+}
+
+.d-contents nav > ul > li > a {
+  font-weight: 600;
+}
+
+.d-contents nav > ul > li > ul {
+  font-weight: inherit;
+}
+
+.d-contents nav > ul > li > ul > li {
+  margin-top: 0.2em;
+}
+
+
+.d-contents nav ul {
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+.d-article-with-toc h2:nth-child(2) {
+  margin-top: 0;
+}
+
+
+/* Figure */
+
+.figure {
+  position: relative;
+  margin-bottom: 2.5em;
+  margin-top: 1.5em;
+}
+
+.figure img {
+  width: 100%;
+}
+
+.figure .caption {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.figure .caption a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.figure .caption b,
+.figure .caption strong, {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1.0);
+}
+
+/* Citations */
+
+d-article .citation {
+  color: inherit;
+  cursor: inherit;
+}
+
+div.hanging-indent{
+  margin-left: 1em; text-indent: -1em;
+}
+
+
+/* Tweak 1000px media break to show more text */
+
+@media(min-width: 1000px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 16px;
+  }
+
+  .grid {
+    grid-column-gap: 16px;
+  }
+
+  d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+  }
+  figure .caption, .figure .caption, figure figcaption {
+    font-size: 13px;
+  }
+}
+
+@media(min-width: 1180px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 32px;
+  }
+
+  .grid {
+    grid-column-gap: 32px;
+  }
+}
+
+
+/* Get the citation styles for the appendix (not auto-injected on render since
+   we do our own rendering of the citation appendix) */
+
+d-appendix .citation-appendix,
+.d-appendix .citation-appendix {
+  font-size: 11px;
+  line-height: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 18px;
+  border-radius: 3px;
+  color: rgba(150, 150, 150, 1);
+  overflow: hidden;
+  margin-top: -12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Include appendix styles here so they can be overridden */
+
+d-appendix {
+  contain: layout style;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-top: 60px;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0,0,0,0.5);
+  padding-top: 60px;
+  padding-bottom: 48px;
+}
+
+d-appendix h3 {
+  grid-column: page-start / text-start;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.65);
+}
+
+d-appendix h3 + * {
+  margin-top: 1em;
+}
+
+d-appendix ol {
+  padding: 0 0 0 15px;
+}
+
+@media (min-width: 768px) {
+  d-appendix ol {
+    padding: 0 0 0 30px;
+    margin-left: -30px;
+  }
+}
+
+d-appendix li {
+  margin-bottom: 1em;
+}
+
+d-appendix a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+d-appendix > * {
+  grid-column: text;
+}
+
+d-appendix > d-footnote-list,
+d-appendix > d-citation-list,
+d-appendix > distill-appendix {
+  grid-column: screen;
+}
+
+/* Include footnote styles here so they can be overridden */
+
+d-footnote-list {
+  contain: layout style;
+}
+
+d-footnote-list > * {
+  grid-column: text;
+}
+
+d-footnote-list a.footnote-backlink {
+  color: rgba(0,0,0,0.3);
+  padding-left: 0.5em;
+}
+
+
+
+/* Anchor.js */
+
+.anchorjs-link {
+  /*transition: all .25s linear; */
+  text-decoration: none;
+  border-bottom: none;
+}
+*:hover > .anchorjs-link {
+  margin-left: -1.125em !important;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+/* Social footer */
+
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+#disqus_thread {
+  margin-top: 30px;
+}
+
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
+}
+
+.article-sharing a:hover {
+  border-bottom: none;
+}
+
+.sidebar-section.subscribe {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.subscribe p {
+  margin-bottom: 0.5em;
+}
+
+
+.article-footer .subscribe {
+  font-size: 15px;
+  margin-top: 45px;
+}
+
+
+.sidebar-section.custom {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.custom p {
+  margin-bottom: 0.5em;
+}
+
+/* Styles for listing layout (hide title) */
+.layout-listing d-title, .layout-listing .d-title {
+  display: none;
+}
+
+/* Styles for posts lists (not auto-injected) */
+
+
+.posts-with-sidebar {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.posts-list .description h2,
+.posts-list .description p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.posts-list .description h2 {
+  font-weight: 700;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.posts-list h2.post-tag {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 12px;
+}
+.posts-list {
+  margin-top: 60px;
+  margin-bottom: 24px;
+}
+
+.posts-list .post-preview {
+  text-decoration: none;
+  overflow: hidden;
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 24px 0;
+}
+
+.post-preview-last {
+  border-bottom: none !important;
+}
+
+.posts-list .posts-list-caption {
+  grid-column: screen;
+  font-weight: 400;
+}
+
+.posts-list .post-preview h2 {
+  margin: 0 0 6px 0;
+  line-height: 1.2em;
+  font-style: normal;
+  font-size: 24px;
+}
+
+.posts-list .post-preview p {
+  margin: 0 0 12px 0;
+  line-height: 1.4em;
+  font-size: 16px;
+}
+
+.posts-list .post-preview .thumbnail {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  position: relative;
+  max-width: 500px;
+}
+.posts-list .post-preview img {
+  width: 100%;
+  display: block;
+}
+
+.posts-list .metadata {
+  font-size: 12px;
+  line-height: 1.4em;
+  margin-bottom: 18px;
+}
+
+.posts-list .metadata > * {
+  display: inline-block;
+}
+
+.posts-list .metadata .publishedDate {
+  margin-right: 2em;
+}
+
+.posts-list .metadata .dt-authors {
+  display: block;
+  margin-top: 0.3em;
+  margin-right: 2em;
+}
+
+.posts-list .dt-tags {
+  display: block;
+  line-height: 1em;
+}
+
+.posts-list .dt-tags .dt-tag {
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0.3em 0.4em;
+  margin-right: 0.2em;
+  margin-bottom: 0.4em;
+  font-size: 60%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.posts-list img {
+  opacity: 1;
+}
+
+.posts-list img[data-src] {
+  opacity: 0;
+}
+
+.posts-more {
+  clear: both;
+}
+
+
+.posts-sidebar {
+  font-size: 16px;
+}
+
+.posts-sidebar h3 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+.categories ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories li {
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 0;
+}
+
+.categories li>a {
+  border-bottom: none;
+}
+
+.categories li>a:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.categories .active {
+  font-weight: 600;
+}
+
+.categories .category-count {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+
+@media(min-width: 768px) {
+  .posts-list .post-preview h2 {
+    font-size: 26px;
+  }
+  .posts-list .post-preview .thumbnail {
+    float: right;
+    width: 30%;
+    margin-bottom: 0;
+  }
+  .posts-list .post-preview .description {
+    float: left;
+    width: 45%;
+  }
+  .posts-list .post-preview .metadata {
+    float: left;
+    width: 20%;
+    margin-top: 8px;
+  }
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.5em;
+    font-size: 16px;
+  }
+  .posts-with-sidebar .posts-list {
+    float: left;
+    width: 75%;
+  }
+  .posts-with-sidebar .posts-sidebar {
+    float: right;
+    width: 20%;
+    margin-top: 60px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+
+/* Improve display for browsers without grid (IE/Edge <= 15) */
+
+.downlevel {
+  line-height: 1.6em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+}
+
+.downlevel .d-title {
+  padding-top: 6rem;
+  padding-bottom: 1.5rem;
+}
+
+.downlevel .d-title h1 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin: 0 0 0.5rem;
+}
+
+.downlevel .d-title p {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+  margin-top: 0;
+}
+
+.downlevel .d-byline {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-size: 0.8rem;
+  line-height: 1.8em;
+}
+
+.downlevel .section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.downlevel .d-article {
+  font-size: 1.06rem;
+  line-height: 1.7em;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+
+.downlevel .d-appendix {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.5);
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.downlevel .footnotes ol {
+  padding-left: 13px;
+}
+
+.downlevel .base-grid,
+.downlevel .distill-header,
+.downlevel .d-title,
+.downlevel .d-abstract,
+.downlevel .d-article,
+.downlevel .d-appendix,
+.downlevel .distill-appendix,
+.downlevel .d-byline,
+.downlevel .d-footnote-list,
+.downlevel .d-citation-list,
+.downlevel .distill-footer,
+.downlevel .appendix-bottom,
+.downlevel .posts-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media(min-width: 768px) {
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 900px;
+}
+}
+
+.downlevel pre code {
+  display: block;
+  border-left: 2px solid rgba(0, 0, 0, .1);
+  padding: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.downlevel code, .downlevel pre {
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.downlevel .posts-list .post-preview {
+  color: inherit;
+}
+
+
+
+</style>
+
+<script type="application/javascript">
+
+function is_downlevel_browser() {
+  if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                 window.navigator.userAgent)) {
+    return true;
+  } else {
+    return window.load_distill_framework === undefined;
+  }
+}
+
+// show body when load is complete
+function on_load_complete() {
+
+  // add anchors
+  if (window.anchors) {
+    window.anchors.options.placement = 'left';
+    window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+  }
+
+
+  // set body to visible
+  document.body.style.visibility = 'visible';
+
+  // force redraw for leaflet widgets
+  if (window.HTMLWidgets) {
+    var maps = window.HTMLWidgets.findAll(".leaflet");
+    $.each(maps, function(i, el) {
+      var map = this.getMap();
+      map.invalidateSize();
+      map.eachLayer(function(layer) {
+        if (layer instanceof L.TileLayer)
+          layer.redraw();
+      });
+    });
+  }
+
+  // trigger 'shown' so htmlwidgets resize
+  $('d-article').trigger('shown');
+}
+
+function init_distill() {
+
+  init_common();
+
+  // create front matter
+  var front_matter = $('<d-front-matter></d-front-matter>');
+  $('#distill-front-matter').wrap(front_matter);
+
+  // create d-title
+  $('.d-title').changeElementType('d-title');
+
+  // create d-byline
+  var byline = $('<d-byline></d-byline>');
+  $('.d-byline').replaceWith(byline);
+
+  // create d-article
+  var article = $('<d-article></d-article>');
+  $('.d-article').wrap(article).children().unwrap();
+
+  // move posts container into article
+  $('.posts-container').appendTo($('d-article'));
+
+  // create d-appendix
+  $('.d-appendix').changeElementType('d-appendix');
+
+  // flag indicating that we have appendix items
+  var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+  // replace footnotes with <d-footnote>
+  $('.footnote-ref').each(function(i, val) {
+    appendix = true;
+    var href = $(this).attr('href');
+    var id = href.replace('#', '');
+    var fn = $('#' + id);
+    var fn_p = $('#' + id + '>p');
+    fn_p.find('.footnote-back').remove();
+    var text = fn_p.html();
+    var dtfn = $('<d-footnote></d-footnote>');
+    dtfn.html(text);
+    $(this).replaceWith(dtfn);
+  });
+  // remove footnotes
+  $('.footnotes').remove();
+
+  // move refs into #references-listing
+  $('#references-listing').replaceWith($('#refs'));
+
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    var id = $(this).attr('id');
+    $('.d-contents a[href="#' + id + '"]').parent().remove();
+    appendix = true;
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+  });
+
+  // show d-appendix if we have appendix content
+  $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    var elements = $(this).children().not('div.sourceCode, pre, script');
+    elements.each(function(i, el) {
+      var layout_div = $('<div class="' + layout + '"></div>');
+      if (layout_div.hasClass('shaded')) {
+        var shaded_content = $('<div class="shaded-content"></div>');
+        $(this).wrap(shaded_content);
+        $(this).parent().wrap(layout_div);
+      } else {
+        $(this).wrap(layout_div);
+      }
+    });
+
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+  // remove code block used to force  highlighting css
+  $('.distill-force-highlighting-css').parent().remove();
+
+  // remove empty line numbers inserted by pandoc when using a
+  // custom syntax highlighting theme
+  $('code.sourceCode a:empty').remove();
+
+  // load distill framework
+  load_distill_framework();
+
+  // wait for window.distillRunlevel == 4 to do post processing
+  function distill_post_process() {
+
+    if (!window.distillRunlevel || window.distillRunlevel < 4)
+      return;
+
+    // hide author/affiliations entirely if we have no authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+    if (!have_authors)
+      $('d-byline').addClass('hidden');
+
+    // article with toc class
+    $('.d-contents').parent().addClass('d-article-with-toc');
+
+    // strip links that point to #
+    $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+    // add orcid ids
+    $('.authors-affiliations').find('.author').each(function(i, el) {
+      var orcid_id = front_matter.authors[i].orcidID;
+      if (orcid_id) {
+        var a = $('<a></a>');
+        a.attr('href', 'https://orcid.org/' + orcid_id);
+        var img = $('<img></img>');
+        img.addClass('orcid-id');
+        img.attr('alt', 'ORCID ID');
+        img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+        a.append(img);
+        $(this).append(a);
+      }
+    });
+
+    // hide elements of author/affiliations grid that have no value
+    function hide_byline_column(caption) {
+      $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+    }
+
+    // affiliations
+    var have_affiliations = false;
+    for (var i = 0; i<front_matter.authors.length; ++i) {
+      var author = front_matter.authors[i];
+      if (author.affiliation !== "&nbsp;") {
+        have_affiliations = true;
+        break;
+      }
+    }
+    if (!have_affiliations)
+      $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+    // published date
+    if (!front_matter.publishedDate)
+      hide_byline_column("Published");
+
+    // document object identifier
+    var doi = $('d-byline').find('h3:contains("DOI")');
+    var doi_p = doi.next().empty();
+    if (!front_matter.doi) {
+      // if we have a citation and valid citationText then link to that
+      if ($('#citation').length > 0 && front_matter.citationText) {
+        doi.html('Citation');
+        $('<a href="#citation"></a>')
+          .text(front_matter.citationText)
+          .appendTo(doi_p);
+      } else {
+        hide_byline_column("DOI");
+      }
+    } else {
+      $('<a></a>')
+         .attr('href', "https://doi.org/" + front_matter.doi)
+         .html(front_matter.doi)
+         .appendTo(doi_p);
+    }
+
+     // change plural form of authors/affiliations
+    if (front_matter.authors.length === 1) {
+      var grid = $('.authors-affiliations');
+      grid.children('h3:contains("Authors")').text('Author');
+      grid.children('h3:contains("Affiliations")').text('Affiliation');
+    }
+
+    // remove d-appendix and d-footnote-list local styles
+    $('d-appendix > style:first-child').remove();
+    $('d-footnote-list > style:first-child').remove();
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // clear polling timer
+    clearInterval(tid);
+
+    // show body now that everything is ready
+    on_load_complete();
+  }
+
+  var tid = setInterval(distill_post_process, 50);
+  distill_post_process();
+
+}
+
+function init_downlevel() {
+
+  init_common();
+
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
+
+  // remove toc
+  $('.d-contents').remove();
+
+  // move appendix elements
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+
+  // inject headers into references and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length === 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
+  // move posts-container right before article
+  $('.posts-container').insertBefore($('.d-article'));
+
+  $('body').addClass('downlevel');
+
+  on_load_complete();
+}
+
+
+function init_common() {
+
+  // jquery plugin to change element types
+  (function($) {
+    $.fn.changeElementType = function(newType) {
+      var attrs = {};
+
+      $.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+      });
+
+      this.replaceWith(function() {
+        return $("<" + newType + "/>", attrs).append($(this).contents());
+      });
+    };
+  })(jQuery);
+
+  // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark non-body figures created by knitr chunks as 100% width
+  $('.layout-chunk').each(function(i, val) {
+    var figures = $(this).find('img, .html-widget');
+    if ($(this).attr('data-layout') !== "l-body") {
+      figures.css('width', '100%');
+    } else {
+      figures.css('max-width', '100%');
+      figures.filter("[width]").each(function(i, val) {
+        var fig = $(this);
+        fig.css('width', fig.attr('width') + 'px');
+      });
+
+    }
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
+  });
+
+  // get rid of index.html references in header
+  if (window.location.protocol !== "file:") {
+    $('.distill-site-header a[href]').each(function(i,val) {
+      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+    });
+  }
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
+  // add figcaption style to table captions
+  $('caption').parent('table').addClass("figcaption");
+
+  // initialize posts list
+  if (window.init_posts_list)
+    window.init_posts_list();
+
+  // implmement disqus comment link
+  $('.disqus-comment-count').click(function() {
+    window.headroom_prevent_pin = true;
+    $('#disqus_thread').toggleClass('hidden');
+    if (!$('#disqus_thread').hasClass('hidden')) {
+      var offset = $(this).offset();
+      $(window).resize();
+      $('html, body').animate({
+        scrollTop: offset.top - 35
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (is_downlevel_browser())
+    init_downlevel();
+  else
+    window.addEventListener('WebComponentsReady', init_distill);
+});
+
+</script>
+
+<!--/radix_placeholder_distill-->
+  <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
+  <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+<!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Scrantonicity - Part 3","description":"Predicting the speaker of dialogue from The Office.","authors":[{"author":"EE","authorURL":"https://www.ericekholm.com/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-08-29T00:00:00.000-04:00","citationText":"EE, 2020"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a href="../../index.html" class="title">Eric Ekholm</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
+</div>
+<div class="nav-right">
+<a href="../../index.html">Home</a>
+<a href="../../about.html">About</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Projects
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="../../pubs.html">Publications</a>
+<a href="../../viz.html">Visualizations</a>
+</div>
+</div>
+<a href="https://twitter.com/ekholm_e">
+<i class="fa fa-twitter" aria-hidden="true"></i>
+</a>
+<a href="https://github.com/ekholme/">
+<i class="fa fa-github" aria-hidden="true"></i>
+</a>
+<a href="../../index.xml">
+<i class="fa fa-rss" aria-hidden="true"></i>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Scrantonicity - Part 3</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>Predicting the speaker of dialogue from The Office.</p></p>
+</div>
+
+<div class="d-byline">
+  EE <a href="https://www.ericekholm.com/" class="uri">https://www.ericekholm.com/</a> 
+  
+<br/>08-29-2020
+</div>
+
+<div class="d-article">
+<p><strong>TL;DR::</strong> In this blog, I use LASSO logistic regression and multilevel logistic regression to predict the speaker of lines of dialogue from The Office.</p>
+<p>What feels like forever ago, I wrote two blog posts analyzing transcripts from The Office. <a href="https://eric-ekholm.netlify.app/blog/office-part1/">The first</a> was a basic EDA of the dialogue, and <a href="https://eric-ekholm.netlify.app/blog/office-part2/">the second</a> used k-means clustering to determine types of Office episodes based on who speaks to whom. At the end of that second blog, I mentioned that I might do some predictive analysis with that data in the future. Well, it’s four months later, and I’m declaring that the future is now!</p>
+<p><img src="https://media.giphy.com/media/2PzAbPcFBdNgk/giphy.gif" /></p>
+<p>Basically, the goal here is going to be, for a given line of dialogue from the show, to predict whether it’s Michael talking or someone else. At first blush, this <em>seems</em> like it shouldn’t be too hard. Many of Michael’s lines are iconic (e.g. see the above gif), but I feel like this might be more a function of the delivery than the actual words themselves, and I’m curious to see how well a model (or multiple models) could predict this just from the text.</p>
+<p>In doing this, there are a couple of things I’m interested in doing here:</p>
+<ul>
+<li>Generally getting more practice with <code>{tidymodels}</code></li>
+<li>Learning to use the <code>{textrecipes}</code> package</li>
+<li>Trying the <code>{glmmTMB}</code> package (not part of the <code>{tidymodels}</code> ecosystem)</li>
+</ul>
+<p>Also, before getting too much further, I want to acknowledge that I looked at <a href="https://juliasilge.com/blog/last-airbender/">this blog</a> by Julia Silge and <a href="https://www.hvitfeldt.me/blog/tidytuesday-pos-textrecipes-the-office/">this blog</a> by Emil Hvitfeldt for some background on <code>{textrecipes}</code>. Both are really great for people interested in text analysis.</p>
+<p>Anyway, without much further ado, let’s get into it. As has been the case in all of my “Scrantonicity” posts, the data I’m using here comes from the <code>{schrute}</code> package. First, I’ll load in libraries and set some defaults/options. I’m also going to read in the data, limiting the dialogue to the first seven seasons of the show (the Michael Scott era).</p>
+<h2 id="setup">Setup</h2>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="brief-eda-and-data-preprocessing">Brief EDA and Data Preprocessing</h2>
+<p>Before modeling data, I would typically do a more thorough EDA. But I’ve already explored this data pretty closely (albeit months ago) in two previous blog posts, so rather than re-doing that EDA, I’m just going to look at those posts. One thing I will include here, though, is a quick look at the number of lines spoken by Michael Scott vs other characters, since this is the outcome I’m interested in predicting here.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>office</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>character</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>top_n</span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>n</span>, y <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_col</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>herm</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>
+    title <span class='op'>=</span> <span class='st'>"Lines by Character"</span>,
+    subtitle <span class='op'>=</span> <span class='st'>"First seven seasons"</span>,
+    y <span class='op'>=</span> <span class='cn'>NULL</span>,
+    x <span class='op'>=</span> <span class='st'>"Number of Lines"</span>
+  <span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="scrantonicity-part-3_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+</div>
+<p>So, Michael has far and away the most lines of any character. But it’ll also be useful to look at Michael vs all of the others lumped together (since this is what I’m actually predicting).</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>office</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>is_mike</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>n</span>, y <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>is_mike</span>, <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_col</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>herm</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>
+    title <span class='op'>=</span> <span class='st'>"Mike vs Not Mike"</span>,
+    y <span class='op'>=</span> <span class='st'>"Is Michael?"</span>,
+    x <span class='op'>=</span> <span class='st'>"Number of Lines"</span>
+  <span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="scrantonicity-part-3_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
+</div>
+<p>Even though Michael speaks more than any other given character, he speaks about a third as many lines as all of the other characters combined. This is relevant here because it means I’ll want to downsample when I train my model to ensure the number of observations in each class are similar, which will help the model fit.</p>
+<h3 id="data-splitting-preprocessing">Data Splitting &amp; Preprocessing</h3>
+<p>Next, I’m going to split my data into a training a testing set.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
+<span class='va'>office_split</span> <span class='op'>&lt;-</span> <span class='fu'>initial_split</span><span class='op'>(</span><span class='va'>office</span>, strata <span class='op'>=</span> <span class='va'>is_mike</span><span class='op'>)</span>
+<span class='va'>tr</span> <span class='op'>&lt;-</span> <span class='fu'>training</span><span class='op'>(</span><span class='va'>office_split</span><span class='op'>)</span>
+<span class='va'>te</span> <span class='op'>&lt;-</span> <span class='fu'>testing</span><span class='op'>(</span><span class='va'>office_split</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Now that I’ve split my data, I’m going to preprocess the data using <code>{recipes}</code>, <code>{textrecipes}</code>, and <code>{themis}</code> (to handle class imbalance). One thing to clarify here: I’m building a model to predict whether the speaker of a given line of dialogue is Michael. In this analysis, I want to build this model using <em>only</em> the text data, although there are plenty of other text-based features I could include. More specifically, I am going to handle the preprocessing such that the model I end up fitting is a bag-of-words model. This means that I want my data to include a variable for each word* (not really each word, but I’ll show later) in the transcript, each row to represent a line of dialogue, and the value in each cell to represent the tf-idf of that word. From this data structure, I can build a model where each word has an individual effect on the odds that the line is spoken by Michael, although note that this model will have no sense of word order.</p>
+<p>I’ll specify this recipe and then walk through each step afterward.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>office_recipe</span> <span class='op'>&lt;-</span> <span class='fu'>recipe</span><span class='op'>(</span><span class='va'>is_mike</span> <span class='op'>~</span> <span class='va'>text</span> <span class='op'>+</span> <span class='va'>episode_name</span>, data <span class='op'>=</span> <span class='va'>tr</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>themis</span><span class='fu'>::</span><span class='fu'><a href='https://themis.tidymodels.org/reference/step_downsample.html'>step_downsample</a></span><span class='op'>(</span><span class='va'>is_mike</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>step_tokenize</span><span class='op'>(</span><span class='va'>text</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>step_stopwords</span><span class='op'>(</span><span class='va'>text</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>step_tokenfilter</span><span class='op'>(</span><span class='va'>text</span>, max_tokens <span class='op'>=</span> <span class='fl'>200</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>step_tfidf</span><span class='op'>(</span><span class='va'>text</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>prep</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>tr_prepped</span> <span class='op'>&lt;-</span> <span class='fu'>juice</span><span class='op'>(</span><span class='va'>office_recipe</span><span class='op'>)</span>
+<span class='va'>tr_prepped_noep</span> <span class='op'>&lt;-</span> <span class='va'>tr_prepped</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>select</span><span class='op'>(</span><span class='op'>-</span><span class='va'>episode_name</span><span class='op'>)</span>
+<span class='va'>te_prepped</span> <span class='op'>&lt;-</span> <span class='fu'>bake</span><span class='op'>(</span><span class='va'>office_recipe</span>, <span class='va'>te</span><span class='op'>)</span>
+<span class='va'>te_prepped_noep</span> <span class='op'>&lt;-</span> <span class='va'>te_prepped</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>select</span><span class='op'>(</span><span class='op'>-</span><span class='va'>episode_name</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Let’s unpack this step-by-step:</p>
+<ul>
+<li><code>step_downsample()</code> will balance the data so that the number of cases where Michael is the speaker is equal to the number of cases where Michael is not the speaker. This is done by randomly dropping rows.</li>
+<li><code>step_tokenize()</code> will take the text column in the data and create a isolate each word per line.</li>
+<li><code>step_stopwords()</code> will remove stop words (e.g. “the”, “it”, “a”) that likely won’t contain much useful information.</li>
+<li><code>step_tokenfilter()</code>, as I’m using it here, will retain only the 200 most frequently used words. This is a pretty large number, but I’m going to fit a LASSO regression later, which can select out some of these if necessary.</li>
+<li><code>step_tfidf()</code> calculates the term frequency-inverse document frequency, which provides a metric for how important a word is to a given document (e.g. a line in this case).</li>
+</ul>
+<p>Another thing to note here is that I’m creating two versions of this preprocessed data for the training and test sets. The differences between “tr_prepped” and “tr_prepped_noep” (as well as their “te” counterparts) is that the “noep” versions do not have a variable identifying which line the episode came from (but are otherwise identical). This is because I don’t want to include the episode identifier in my single-level LASSO model but do want to include it in the multilevel model. I could also accomplish this by specifying the formula and having it not include the episode_number variable rather than creating two datasets.</p>
+<p>Moving along! Next, I’m going to specify my model. Since I have a binary outcomes (yes/no if the speaker is Michael), I’m going to run a logistic regression. I’m going to run this as a LASSO model, which will provide some feature selection and generally shrink coefficients. I’m going to tune the model to choose the best amount of penalty as well.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>reg_spec</span> <span class='op'>&lt;-</span> <span class='fu'>logistic_reg</span><span class='op'>(</span>mixture <span class='op'>=</span> <span class='fl'>1</span>, penalty <span class='op'>=</span> <span class='fu'>tune</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"glmnet"</span><span class='op'>)</span>
+<span class='va'>reg_spec</span>
+</code></pre>
+</div>
+<pre><code>Logistic Regression Model Specification (classification)
+
+Main Arguments:
+  penalty = tune()
+  mixture = 1
+
+Computational engine: glmnet </code></pre>
+</div>
+<p>Here, I’m creating some resamples of my training data to help with the tuning. I’m creating 10 bootstrap samples here.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
+<span class='va'>booties</span> <span class='op'>&lt;-</span> <span class='fu'>bootstraps</span><span class='op'>(</span><span class='va'>tr_prepped_noep</span>, strata <span class='op'>=</span> <span class='va'>is_mike</span>, times <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h2 id="lasso-model-fitting-examination">LASSO Model Fitting &amp; Examination</h2>
+<p>Now it’s time to fit the LASSO model. I’m going to add the logistic regression specification that I just created to a workflow. Along with that model specification, I’m also going to add a formula where <code>is_mike</code> is regressed on all of the word features I just created. Then, I’m going to tune the model across 10 candidate values of the penalty parameter (i.e. how much regularization I’m adding).</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>office_wf</span> <span class='op'>&lt;-</span> <span class='fu'>workflow</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>add_model</span><span class='op'>(</span><span class='va'>reg_spec</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>add_formula</span><span class='op'>(</span><span class='va'>is_mike</span> <span class='op'>~</span> <span class='va'>.</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
+<span class='va'>logreg_fit</span> <span class='op'>&lt;-</span> <span class='fu'>tune_grid</span><span class='op'>(</span>
+  <span class='va'>office_wf</span>,
+  resamples <span class='op'>=</span> <span class='va'>booties</span>,
+  grid <span class='op'>=</span> <span class='fl'>10</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Great. Now that the models have been fit with various penalty values across the bootstrap resamples, I can check to see what the best penalty value is to move forward with &amp; finalize a model. I’m going to choose the best by one standard error (which, in this case, happens also to be the best model). The one standard error rule will let me choose the most parsimonious model (in this case, the one with the most penalty) that is within one standard error of the best model. And once I choose the best penalty value, I’ll go ahead and finalize the model and refit on the training set.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>logreg_fit</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>show_best</span><span class='op'>(</span><span class='st'>"accuracy"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 5 x 7
+   penalty .metric  .estimator  mean     n std_err .config            
+     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;              
+1 2.27e- 3 accuracy binary     0.580    10 0.00181 Preprocessor1_Mode~
+2 1.02e-10 accuracy binary     0.577    10 0.00216 Preprocessor1_Mode~
+3 1.27e- 9 accuracy binary     0.577    10 0.00216 Preprocessor1_Mode~
+4 7.94e- 8 accuracy binary     0.577    10 0.00216 Preprocessor1_Mode~
+5 4.46e- 7 accuracy binary     0.577    10 0.00216 Preprocessor1_Mode~</code></pre>
+<div class="sourceCode">
+<pre><code><span class='va'>best_params</span> <span class='op'>&lt;-</span> <span class='va'>logreg_fit</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>select_by_one_std_err</span><span class='op'>(</span>metric <span class='op'>=</span> <span class='st'>"accuracy"</span>, <span class='fu'>desc</span><span class='op'>(</span><span class='va'>penalty</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>final_logreg</span> <span class='op'>&lt;-</span> <span class='va'>office_wf</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>finalize_workflow</span><span class='op'>(</span><span class='va'>best_params</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>fit</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>tr_prepped_noep</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>So, the best model here has an accuracy of ~58%. Not great, but better than just straight-up guessing. Remember that this is on the training set. Now, I’ll take a look at what the accuracy is on the test set.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'>bind_cols</span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>final_logreg</span>, <span class='va'>te_prepped_noep</span><span class='op'>)</span>, <span class='va'>te_prepped_noep</span>
+<span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>accuracy</span><span class='op'>(</span><span class='va'>is_mike</span>, <span class='va'>.pred_class</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 1 x 3
+  .metric  .estimator .estimate
+  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
+1 accuracy binary         0.614</code></pre>
+</div>
+<p>61% – not bad! It’s actually better than the training set accuracy, which means our training process didn’t lead to overfitting, which is great.</p>
+<p>Now, I’m going to take a look at which words are the most important to predicting whether the speaker of a line of dialogue is Michael or not.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>final_logreg</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pull_workflow_fit</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/edit.html'>vi</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>slice_max</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>Importance</span><span class='op'>)</span>, n <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>Importance</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>Variable</span> <span class='op'>%&gt;%</span> <span class='fu'>str_remove</span><span class='op'>(</span><span class='st'>"tfidf_text_"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>Importance</span><span class='op'>)</span><span class='op'>)</span>, fill <span class='op'>=</span> <span class='va'>Sign</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>
+    title <span class='op'>=</span> <span class='st'>"Most Important Words Identifying Michael Scott"</span>,
+    subtitle <span class='op'>=</span> <span class='st'>"Positive values more representative of MS, negative values more representative of others"</span>,
+    y <span class='op'>=</span> <span class='cn'>NULL</span>
+  <span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="scrantonicity-part-3_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+</div>
+<p>Not surprisingly, the word “Michael” is the strongest predictor, and has a negative effect – if a line has the word “Michael” in it, it is less likely to be spoken by Michael. Intuitively, this makes sense. Other people use Michael’s name when speaking to or about him. The rest of the effects in this chart make sense to me as well (except for “mifflin” and “dunder,” which I don’t really get). But Michael is certainly more likely to talk about Jan and David than are other characters, and “everybody” feels right to me as well…</p>
+<p><img src="https://i.redd.it/8fom420fmns11.jpg" /></p>
+<p>And the final thing I’m going to do with this logistic regression is to pull out names of the non-zero coefficients. Recall that the lasso penalty can (but doesn’t always) shrink coefficients to zero. These variables will have no effect on the outcome. The reason I’m doing this is because I want to fit a multilevel model next, but I’m not going to regularize that model. Instead, I’ll just specify a formula that doesn’t include the variables that got shrunk to zero in this model.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>keep_vars</span> <span class='op'>&lt;-</span> <span class='va'>final_logreg</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pull_workflow_fit</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/edit.html'>vi</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Importance</span> <span class='op'>!=</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pull</span><span class='op'>(</span><span class='va'>Variable</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h2 id="multilevel-model-fitting">Multilevel Model Fitting</h2>
+<p>Now, I’m going to dive into fitting a multilevel model. To give a very brief overview of multilevel models, they are models that can take into account dependencies (nesting) within data. Recall that one of the assumptions of a linear regression is that each observation is independent. We often violate that assumption in the real world. In my work, for instance, students are often nested within classrooms (i.e. a common effect – their teacher – influences them &amp; introduces a dependency). Another common case of nesting is when you have multiple observations over time from the same set of people. In the case of this current data, we can consider that each line is nested within an episode (terminology note: episode would be the “clustering variable” or “grouping variable” here). We could also go a step further and nest episodes within seasons to get a 3-level model rather than a 2-level model, but I’m not going to do that here.</p>
+<p>Fitting multilevel models allows for <em>random effects</em>, where the coefficient of a given term differs based on the clustering variable. Any term in the model can have a random effect, but the simplest form of a multilevel model – and the one I’m going to fit here – is a random intercept model, where the value of the intercept changes depending on the clustering variable. In the current dataset, this would mean that Michael might be more (or less) likely to speak <em>overall</em> in a given episode (when compared to all other episodes), and so the intercept value will change to reflect that. It’s also possible to fit random slopes, where the effect of a given non-intercept term differs from episode to episode. Contextualizing that in the current data, it might mean that the word “Jan” is more (or less) associated with being spoken by Michael depending on the episode. Usually, you want a pretty clear theoretical rationale for specifying random slopes, and I don’t really have that here. Plus, it would be unreasonable to try to estimate random slopes for all of the words in the dataset (even though I only have a subset of ~190).</p>
+<p>If you’re interested in learning more about multilevel models, <a href="https://www.amazon.com/Hierarchical-Linear-Models-Applications-Quantitative/dp/076191904X">Raudenbush &amp; Bryk (2002)</a> is a classic, and John Fox’s <a href="https://www.amazon.com/Applied-Regression-Analysis-Generalized-Linear-dp-1452205663/dp/1452205663/ref=dp_ob_title_bk">Applied Regression Analysis</a> is just generally a really good book that has a chapter on MLMs.</p>
+<p>Anyway – onward and upward. First, I want to specify the formula of the model. I’m going to include all of the variables that had non-zero coefficients in the lasso model earlier, and I’m also going to add a term at the end to specify the random intercept for each episode – (1 | episode_name).</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>glmm_formula</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/formula.html'>as.formula</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"is_mike ~ "</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>keep_vars</span>, collapse <span class='op'>=</span> <span class='st'>" + "</span><span class='op'>)</span>, <span class='st'>" + (1 | episode_name)"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>I’m going to fit this model using the <code>{glmmTMB}</code> package, which provides an interface for fitting all sort of generalized linear mixed models. I haven’t used this specific package before, but I have used <code>{lme4}</code>, which has similar syntax and is essentially the same thing for fitting linear models. I’m going to fit the model using the training data – note that I’m not tuning anything here – and I’m specifying the binomial family because this is a logistic regression.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>glmm_fit</span> <span class='op'>&lt;-</span> <span class='fu'>glmmTMB</span><span class='op'>(</span><span class='va'>glmm_formula</span>, data <span class='op'>=</span> <span class='va'>tr_prepped</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>I’m going to show the summary of the model here, but it’s going to be a biiig printout since we have so many terms in the model, so feel free to scroll on by. One thing you might want to check out, though, is the summary of the variance of the intercept, which summarizes the amount of randomness in that effect.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>glmm_fit</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code> Family: binomial  ( logit )
+Formula:          
+is_mike ~ tfidf_text_michael + tfidf_text_scott + tfidf_text_friend +  
+    tfidf_text_stanley + tfidf_text_jan + tfidf_text_everybody +  
+    tfidf_text_business + tfidf_text_may + tfidf_text_bad + tfidf_text_pretty +  
+    tfidf_text_say + tfidf_text_dunder + tfidf_text_god + tfidf_text_angela +  
+    tfidf_text_scranton + tfidf_text_somebody + tfidf_text_pam +  
+    tfidf_text_ah + tfidf_text_best + tfidf_text_going + tfidf_text_show +  
+    tfidf_text_life + tfidf_text_guy + tfidf_text_ok + tfidf_text_thing +  
+    tfidf_text_well + tfidf_text_alright + tfidf_text_holly +  
+    tfidf_text_mean + tfidf_text_know + tfidf_text_okay + tfidf_text_toby +  
+    tfidf_text_cause + tfidf_text_coming + tfidf_text_good +  
+    tfidf_text_right + tfidf_text_thinking + tfidf_text_dwight +  
+    tfidf_text_come + tfidf_text_yes + tfidf_text_people + tfidf_text_andy +  
+    tfidf_text_give + tfidf_text_party + tfidf_text_ryan + tfidf_text_today +  
+    tfidf_text_oscar + tfidf_text_fun + tfidf_text_guys + tfidf_text_everyone +  
+    tfidf_text_see + tfidf_text_away + tfidf_text_go + tfidf_text_sure +  
+    tfidf_text_please + tfidf_text_phyllis + tfidf_text_listen +  
+    tfidf_text_believe + tfidf_text_told + tfidf_text_name +  
+    tfidf_text_whole + tfidf_text_ever + tfidf_text_just + tfidf_text_money +  
+    tfidf_text_boss + tfidf_text_ask + tfidf_text_feel + tfidf_text_find +  
+    tfidf_text_three + tfidf_text_need + tfidf_text_made + tfidf_text_long +  
+    tfidf_text_gonna + tfidf_text_hear + tfidf_text_friends +  
+    tfidf_text_wow + tfidf_text_old + tfidf_text_check + tfidf_text_wait +  
+    tfidf_text_head + tfidf_text_hold + tfidf_text_look + tfidf_text_talk +  
+    tfidf_text_want + tfidf_text_company + tfidf_text_room +  
+    tfidf_text_got + tfidf_text_five + tfidf_text_new + tfidf_text_mifflin +  
+    tfidf_text_get + tfidf_text_work + tfidf_text_time + tfidf_text_every +  
+    tfidf_text_thanks + tfidf_text_one + tfidf_text_lot + tfidf_text_mr +  
+    tfidf_text_kevin + tfidf_text_hello + tfidf_text_thought +  
+    tfidf_text_stop + tfidf_text_things + tfidf_text_said + tfidf_text_two +  
+    tfidf_text_sorry + tfidf_text_never + tfidf_text_called +  
+    tfidf_text_oh + tfidf_text_back + tfidf_text_better + tfidf_text_jim +  
+    tfidf_text_much + tfidf_text_hi + tfidf_text_guess + tfidf_text_corporate +  
+    tfidf_text_care + tfidf_text_day + tfidf_text_kind + tfidf_text_little +  
+    tfidf_text_great + tfidf_text_part + tfidf_text_night + tfidf_text_fine +  
+    tfidf_text_take + tfidf_text_put + tfidf_text_saying + tfidf_text_office +  
+    tfidf_text_actually + tfidf_text_morning + tfidf_text_job +  
+    tfidf_text_um + tfidf_text_last + tfidf_text_getting + tfidf_text_around +  
+    tfidf_text_trying + tfidf_text_leave + tfidf_text_whoa +  
+    tfidf_text_idea + tfidf_text_nothing + tfidf_text_wrong +  
+    tfidf_text_went + tfidf_text_help + tfidf_text_first + tfidf_text_love +  
+    tfidf_text_us + tfidf_text_even + tfidf_text_cool + tfidf_text_wanna +  
+    tfidf_text_home + tfidf_text_anything + tfidf_text_might +  
+    tfidf_text_everything + tfidf_text_like + tfidf_text_man +  
+    tfidf_text_car + tfidf_text_now + tfidf_text_real + tfidf_text_paper +  
+    tfidf_text_still + tfidf_text_second + tfidf_text_done +  
+    tfidf_text_happy + tfidf_text_talking + tfidf_text_meet +  
+    tfidf_text_really + tfidf_text_place + tfidf_text_something +  
+    tfidf_text_call + tfidf_text_sales + tfidf_text_thank + tfidf_text_hot +  
+    tfidf_text_yeah + tfidf_text_next + tfidf_text_make + tfidf_text_big +  
+    tfidf_text_together + tfidf_text_can + tfidf_text_many +  
+    tfidf_text_years + tfidf_text_uh + tfidf_text_think + tfidf_text_ready +  
+    tfidf_text_manager + tfidf_text_year + tfidf_text_let + tfidf_text_else +  
+    tfidf_text_way + tfidf_text_maybe + tfidf_text_baby + tfidf_text_probably +  
+    tfidf_text_huh + tfidf_text_tell + tfidf_text_hey + tfidf_text_wanted +  
+    (1 | episode_name)
+Data: tr_prepped
+
+     AIC      BIC   logLik deviance df.resid 
+ 21739.8  23257.5 -10672.9  21345.8    16183 
+
+Random effects:
+
+Conditional model:
+ Groups       Name        Variance Std.Dev.
+ episode_name (Intercept) 0.2519   0.5019  
+Number of obs: 16380, groups:  episode_name, 139
+
+Conditional model:
+                       Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)           -0.284909   0.056210  -5.069 4.01e-07 ***
+tfidf_text_michael    -1.365494   0.120733 -11.310  &lt; 2e-16 ***
+tfidf_text_scott       0.817744   0.174819   4.678 2.90e-06 ***
+tfidf_text_friend      0.706557   0.205575   3.437 0.000588 ***
+tfidf_text_stanley     0.537424   0.139759   3.845 0.000120 ***
+tfidf_text_jan         0.504584   0.119162   4.234 2.29e-05 ***
+tfidf_text_everybody   0.520978   0.132091   3.944 8.01e-05 ***
+tfidf_text_business    0.563248   0.143005   3.939 8.19e-05 ***
+tfidf_text_may         0.503039   0.173855   2.893 0.003810 ** 
+tfidf_text_bad         0.471181   0.146416   3.218 0.001290 ** 
+tfidf_text_pretty     -0.412679   0.163791  -2.520 0.011751 *  
+tfidf_text_say         0.404528   0.085141   4.751 2.02e-06 ***
+tfidf_text_dunder      0.556549   0.615429   0.904 0.365822    
+tfidf_text_god         0.352119   0.081974   4.295 1.74e-05 ***
+tfidf_text_angela     -0.338799   0.125293  -2.704 0.006850 ** 
+tfidf_text_scranton    0.323568   0.130686   2.476 0.013289 *  
+tfidf_text_somebody    0.282980   0.121483   2.329 0.019839 *  
+tfidf_text_pam         0.319905   0.072147   4.434 9.25e-06 ***
+tfidf_text_ah          0.309050   0.086264   3.583 0.000340 ***
+tfidf_text_best        0.332800   0.139941   2.378 0.017400 *  
+tfidf_text_going       0.297253   0.067610   4.397 1.10e-05 ***
+tfidf_text_show        0.350289   0.150457   2.328 0.019903 *  
+tfidf_text_life        0.309884   0.136512   2.270 0.023207 *  
+tfidf_text_guy         0.311064   0.110614   2.812 0.004921 ** 
+tfidf_text_ok          0.272147   0.054382   5.004 5.60e-07 ***
+tfidf_text_thing       0.270642   0.103021   2.627 0.008613 ** 
+tfidf_text_well        0.284100   0.056668   5.013 5.35e-07 ***
+tfidf_text_alright     0.281422   0.062810   4.481 7.45e-06 ***
+tfidf_text_holly       0.303695   0.109919   2.763 0.005729 ** 
+tfidf_text_mean       -0.300037   0.088790  -3.379 0.000727 ***
+tfidf_text_know        0.273930   0.056596   4.840 1.30e-06 ***
+tfidf_text_okay        0.307069   0.044521   6.897 5.30e-12 ***
+tfidf_text_toby        0.249094   0.108059   2.305 0.021157 *  
+tfidf_text_cause      -0.248942   0.149764  -1.662 0.096469 .  
+tfidf_text_coming     -0.290930   0.145258  -2.003 0.045193 *  
+tfidf_text_good        0.268924   0.057343   4.690 2.74e-06 ***
+tfidf_text_right       0.259742   0.055691   4.664 3.10e-06 ***
+tfidf_text_thinking    0.232674   0.121078   1.922 0.054645 .  
+tfidf_text_dwight      0.253907   0.063727   3.984 6.77e-05 ***
+tfidf_text_come        0.203893   0.071037   2.870 0.004102 ** 
+tfidf_text_yes         0.248846   0.040821   6.096 1.09e-09 ***
+tfidf_text_people      0.222956   0.105130   2.121 0.033942 *  
+tfidf_text_andy       -0.157914   0.089205  -1.770 0.076687 .  
+tfidf_text_give        0.205885   0.083517   2.465 0.013694 *  
+tfidf_text_party       0.194342   0.093019   2.089 0.036683 *  
+tfidf_text_ryan        0.188932   0.096564   1.957 0.050401 .  
+tfidf_text_today       0.214202   0.112770   1.899 0.057505 .  
+tfidf_text_oscar       0.222130   0.100434   2.212 0.026988 *  
+tfidf_text_fun         0.189363   0.091348   2.073 0.038174 *  
+tfidf_text_guys        0.165921   0.080568   2.059 0.039456 *  
+tfidf_text_everyone   -0.168222   0.125141  -1.344 0.178862    
+tfidf_text_see         0.187325   0.073920   2.534 0.011271 *  
+tfidf_text_away        0.161108   0.143229   1.125 0.260664    
+tfidf_text_go          0.220001   0.061381   3.584 0.000338 ***
+tfidf_text_sure       -0.159186   0.074734  -2.130 0.033169 *  
+tfidf_text_please      0.161400   0.072772   2.218 0.026563 *  
+tfidf_text_phyllis     0.141596   0.095280   1.486 0.137251    
+tfidf_text_listen     -0.134684   0.153642  -0.877 0.380700    
+tfidf_text_believe     0.194606   0.115799   1.681 0.092850 .  
+tfidf_text_told        0.122873   0.104977   1.170 0.241808    
+tfidf_text_name        0.186708   0.094160   1.983 0.047382 *  
+tfidf_text_whole      -0.130371   0.136622  -0.954 0.339958    
+tfidf_text_ever        0.171535   0.102233   1.678 0.093369 .  
+tfidf_text_just        0.127548   0.064389   1.981 0.047604 *  
+tfidf_text_money      -0.161886   0.134932  -1.200 0.230233    
+tfidf_text_boss        0.153626   0.151328   1.015 0.310019    
+tfidf_text_ask         0.123247   0.141323   0.872 0.383154    
+tfidf_text_feel        0.128474   0.129301   0.994 0.320418    
+tfidf_text_find        0.164066   0.101733   1.613 0.106806    
+tfidf_text_three      -0.140787   0.108584  -1.297 0.194780    
+tfidf_text_need        0.162706   0.083187   1.956 0.050476 .  
+tfidf_text_made        0.123781   0.126288   0.980 0.327016    
+tfidf_text_long       -0.117803   0.138038  -0.853 0.393434    
+tfidf_text_gonna      -0.143375   0.076708  -1.869 0.061610 .  
+tfidf_text_hear        0.104088   0.102352   1.017 0.309171    
+tfidf_text_friends     0.084551   0.143475   0.589 0.555655    
+tfidf_text_wow         0.150225   0.064220   2.339 0.019324 *  
+tfidf_text_old         0.106273   0.116189   0.915 0.360374    
+tfidf_text_check       0.114413   0.098850   1.157 0.247094    
+tfidf_text_wait       -0.126842   0.081461  -1.557 0.119448    
+tfidf_text_head        0.126518   0.126729   0.998 0.318118    
+tfidf_text_hold        0.141848   0.116016   1.223 0.221459    
+tfidf_text_look        0.128788   0.071782   1.794 0.072789 .  
+tfidf_text_talk        0.121851   0.087935   1.386 0.165843    
+tfidf_text_want        0.116503   0.065304   1.784 0.074422 .  
+tfidf_text_company     0.147109   0.130804   1.125 0.260739    
+tfidf_text_room        0.107632   0.107204   1.004 0.315382    
+tfidf_text_got        -0.122130   0.067140  -1.819 0.068907 .  
+tfidf_text_five       -0.096512   0.094074  -1.026 0.304935    
+tfidf_text_new        -0.065516   0.123041  -0.532 0.594396    
+tfidf_text_mifflin    -0.294953   0.601955  -0.490 0.624139    
+tfidf_text_get         0.126518   0.064409   1.964 0.049496 *  
+tfidf_text_work        0.110293   0.100668   1.096 0.273247    
+tfidf_text_time        0.164705   0.082474   1.997 0.045820 *  
+tfidf_text_every       0.140575   0.158257   0.888 0.374395    
+tfidf_text_thanks     -0.101296   0.074035  -1.368 0.171245    
+tfidf_text_one        -0.079519   0.073817  -1.077 0.281369    
+tfidf_text_lot         0.089214   0.105700   0.844 0.398651    
+tfidf_text_mr         -0.114169   0.106592  -1.071 0.284131    
+tfidf_text_kevin       0.114483   0.083866   1.365 0.172233    
+tfidf_text_hello       0.107170   0.066524   1.611 0.107179    
+tfidf_text_thought    -0.115780   0.096173  -1.204 0.228640    
+tfidf_text_stop        0.112427   0.067616   1.663 0.096364 .  
+tfidf_text_things      0.092322   0.123791   0.746 0.455795    
+tfidf_text_said        0.111146   0.068770   1.616 0.106052    
+tfidf_text_two        -0.064680   0.094019  -0.688 0.491488    
+tfidf_text_sorry      -0.101457   0.077747  -1.305 0.191906    
+tfidf_text_never       0.101368   0.087415   1.160 0.246206    
+tfidf_text_called     -0.091985   0.127479  -0.722 0.470560    
+tfidf_text_oh          0.089262   0.047454   1.881 0.059966 .  
+tfidf_text_back       -0.078854   0.087660  -0.900 0.368366    
+tfidf_text_better     -0.060033   0.108630  -0.553 0.580509    
+tfidf_text_jim        -0.095686   0.065332  -1.465 0.143029    
+tfidf_text_much        0.076737   0.087948   0.873 0.382923    
+tfidf_text_hi         -0.088520   0.073867  -1.198 0.230775    
+tfidf_text_guess      -0.107766   0.127102  -0.848 0.396510    
+tfidf_text_corporate  -0.050761   0.132030  -0.384 0.700633    
+tfidf_text_care       -0.038296   0.138086  -0.277 0.781525    
+tfidf_text_day         0.096423   0.104991   0.918 0.358413    
+tfidf_text_kind        0.071155   0.102769   0.692 0.488699    
+tfidf_text_little      0.124122   0.100206   1.239 0.215468    
+tfidf_text_great      -0.073854   0.069929  -1.056 0.290912    
+tfidf_text_part        0.030885   0.103786   0.298 0.766023    
+tfidf_text_night      -0.086267   0.119819  -0.720 0.471540    
+tfidf_text_fine       -0.076178   0.084942  -0.897 0.369812    
+tfidf_text_take       -0.055703   0.083438  -0.668 0.504392    
+tfidf_text_put        -0.099941   0.093066  -1.074 0.282877    
+tfidf_text_saying     -0.071405   0.108057  -0.661 0.508738    
+tfidf_text_office      0.066885   0.097381   0.687 0.492187    
+tfidf_text_actually    0.069965   0.105800   0.661 0.508421    
+tfidf_text_morning     0.136949   0.115285   1.188 0.234866    
+tfidf_text_job        -0.020755   0.145005  -0.143 0.886184    
+tfidf_text_um          0.049639   0.073370   0.677 0.498685    
+tfidf_text_last       -0.050689   0.122785  -0.413 0.679732    
+tfidf_text_getting     0.089356   0.104741   0.853 0.393598    
+tfidf_text_around      0.082025   0.147866   0.555 0.579081    
+tfidf_text_trying      0.073053   0.123007   0.594 0.552583    
+tfidf_text_leave      -0.078307   0.105481  -0.742 0.457857    
+tfidf_text_whoa        0.081381   0.088434   0.920 0.357445    
+tfidf_text_idea       -0.089929   0.091961  -0.978 0.328122    
+tfidf_text_nothing     0.063688   0.086331   0.738 0.460687    
+tfidf_text_wrong       0.086905   0.092908   0.935 0.349586    
+tfidf_text_went       -0.028418   0.125718  -0.226 0.821166    
+tfidf_text_help        0.040718   0.100003   0.407 0.683888    
+tfidf_text_first       0.086366   0.122036   0.708 0.479127    
+tfidf_text_love        0.071734   0.068545   1.047 0.295317    
+tfidf_text_us         -0.040849   0.097550  -0.419 0.675399    
+tfidf_text_even       -0.038807   0.113579  -0.342 0.732596    
+tfidf_text_cool       -0.049036   0.083179  -0.590 0.555514    
+tfidf_text_wanna      -0.048928   0.105429  -0.464 0.642585    
+tfidf_text_home       -0.048600   0.144852  -0.336 0.737238    
+tfidf_text_anything   -0.016118   0.103091  -0.156 0.875756    
+tfidf_text_might      -0.046693   0.133043  -0.351 0.725615    
+tfidf_text_everything  0.091705   0.119419   0.768 0.442529    
+tfidf_text_like        0.051476   0.060225   0.855 0.392698    
+tfidf_text_man        -0.048323   0.088421  -0.547 0.584717    
+tfidf_text_car        -0.021845   0.099341  -0.220 0.825948    
+tfidf_text_now        -0.040680   0.084568  -0.481 0.630495    
+tfidf_text_real        0.052797   0.153645   0.344 0.731124    
+tfidf_text_paper       0.023861   0.107711   0.222 0.824683    
+tfidf_text_still       0.074397   0.094324   0.789 0.430265    
+tfidf_text_second     -0.053789   0.125801  -0.428 0.668965    
+tfidf_text_done        0.035836   0.087322   0.410 0.681526    
+tfidf_text_happy       0.038974   0.088629   0.440 0.660128    
+tfidf_text_talking    -0.024875   0.072337  -0.344 0.730941    
+tfidf_text_meet        0.064215   0.119743   0.536 0.591768    
+tfidf_text_really     -0.024577   0.055026  -0.447 0.655128    
+tfidf_text_place       0.038420   0.114313   0.336 0.736798    
+tfidf_text_something   0.017752   0.099054   0.179 0.857767    
+tfidf_text_call       -0.035360   0.080138  -0.441 0.659038    
+tfidf_text_sales      -0.013491   0.094396  -0.143 0.886355    
+tfidf_text_thank       0.042518   0.053183   0.799 0.424022    
+tfidf_text_hot        -0.003221   0.107750  -0.030 0.976151    
+tfidf_text_yeah       -0.023379   0.039966  -0.585 0.558559    
+tfidf_text_next        0.009379   0.138893   0.068 0.946165    
+tfidf_text_make       -0.009311   0.089531  -0.104 0.917168    
+tfidf_text_big         0.046667   0.091438   0.510 0.609791    
+tfidf_text_together   -0.021054   0.150126  -0.140 0.888470    
+tfidf_text_can         0.048398   0.067522   0.717 0.473510    
+tfidf_text_many        0.036402   0.128211   0.284 0.776468    
+tfidf_text_years      -0.003345   0.126027  -0.027 0.978824    
+tfidf_text_uh          0.033145   0.065356   0.507 0.612051    
+tfidf_text_think       0.039276   0.061806   0.635 0.525120    
+tfidf_text_ready       0.004309   0.082615   0.052 0.958406    
+tfidf_text_manager    -0.005744   0.104443  -0.055 0.956138    
+tfidf_text_year       -0.004601   0.122379  -0.038 0.970012    
+tfidf_text_let        -0.010076   0.105709  -0.095 0.924062    
+tfidf_text_else        0.036421   0.120693   0.302 0.762831    
+tfidf_text_way        -0.015943   0.086084  -0.185 0.853072    
+tfidf_text_maybe       0.014926   0.078838   0.189 0.849838    
+tfidf_text_baby        0.038613   0.100086   0.386 0.699647    
+tfidf_text_probably    0.012967   0.141661   0.092 0.927068    
+tfidf_text_huh         0.011606   0.088695   0.131 0.895889    
+tfidf_text_tell        0.025608   0.073891   0.347 0.728918    
+tfidf_text_hey         0.016844   0.043492   0.387 0.698544    
+tfidf_text_wanted     -0.003270   0.119500  -0.027 0.978169    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<p>Right, so, the next logical step in my mind is to take a closer look at the random intercepts. We see some variance in the intercept (.23), which suggests that there are meaningful between-episode differences in the number of times Michael Scott speaks. Rather than looking at all of these, let’s take a look at the largest 10 effects (as a benchmark, recall that the mean intercept is -.3)</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'>ranef</span><span class='op'>(</span><span class='va'>glmm_fit</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>grp</span>, <span class='va'>condval</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>slice_max</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>condval</span><span class='op'>)</span>, n <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>condval</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>grp</span>, <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>condval</span><span class='op'>)</span><span class='op'>)</span>, fill <span class='op'>=</span> <span class='fu'>if_else</span><span class='op'>(</span><span class='va'>condval</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='st'>"Pos"</span>, <span class='st'>"Neg"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_fill_discrete</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"Sign"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>
+    y <span class='op'>=</span> <span class='cn'>NULL</span>,
+    title <span class='op'>=</span> <span class='st'>"Top Random Intercepts"</span>
+  <span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="scrantonicity-part-3_files/figure-html5/unnamed-chunk-15-1.png" width="624" /></p>
+</div>
+<p>This plot shows the largest (in absolute value) intercepts. The way to interpret this is that, in these episodes, Michael is more or less likely to speak. The effects of each of the words remains the same across episodes (since I didn’t specify random slopes), but these change the assumed “base rate” that Michael speaks. What we see here makes sense, because Michael actually isn’t in the three episodes that have the highest values here (I should have addressed this in data cleaning – whoops!).</p>
+<p>Finally, I’ll take a look at the accuracy of the predictions from the multilevel model.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>glmm_preds_response</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>glmm_fit</span>, <span class='va'>te_prepped</span>, type <span class='op'>=</span> <span class='st'>"response"</span><span class='op'>)</span>
+<span class='va'>glmm_preds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>glmm_preds_response</span> <span class='op'>&lt;</span> <span class='fl'>.5</span>, <span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>as_factor</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>fct_relevel</span><span class='op'>(</span><span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span>
+<span class='fu'>bind_cols</span><span class='op'>(</span><span class='va'>te_prepped</span><span class='op'>$</span><span class='va'>is_mike</span>, <span class='va'>glmm_preds</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>repair_names</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>accuracy</span><span class='op'>(</span>truth <span class='op'>=</span> <span class='va'>...1</span>, estimate <span class='op'>=</span> <span class='va'>...2</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 1 x 3
+  .metric  .estimator .estimate
+  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
+1 accuracy binary         0.596</code></pre>
+</div>
+<p>It’s a little bit disappointing that the multilevel model isn’t more accurate than the single-level model I ran previously, but one thing to keep in mind is that the single level model was regularized, whereas the multilevel model wasn’t (beyond omitting the variables that got completely omitted from the single level model). So, even though our intercept seems to have a decent amount of variance – meaning random effects are probably warranted – the gains in predictive accuracy we’d get from that are more than offset by the regularization in the first model. There’s probably a way to regularize a multilevel model, but I might save that one for another day. I could also play around with changing the probability threshold for classifying a line as Michael by setting it to something higher than 50% (e.g. a line needs to have a 70% probability before being classified as spoken by Michael), but I’m also not going to go down that rabbit hole here.</p>
+<p>So, I’m going to wrap it up for now. And who knows, maybe I’ll revisit this dataset in another 4 months.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom">
+  <h3 id="citation">Citation</h3>
+  <p>For attribution, please cite this work as</p>
+  <pre class="citation-appendix short">EE (2020, Aug. 29). Eric Ekholm: Scrantonicity - Part 3. Retrieved from https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3/</pre>
+  <p>BibTeX citation</p>
+  <pre class="citation-appendix long">@misc{ee2020scrantonicity,
+  author = {EE, },
+  title = {Eric Ekholm: Scrantonicity - Part 3},
+  url = {https://www.ericekholm.com/posts/2021-01-11-scrantonicity-part-3/},
+  year = {2020}
+}</pre>
+</div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
