@@ -21,6 +21,7 @@ I earned my PhD in educational psychology from the [VCU School of Education](htt
 
 During grad school, I discovered a love for working with data -- exploring, visualizing, modeling, and communicating. I mostly work in `R`, and am proficient in the usual packages that folks use for data analysis, visualization, and modeling (e.g. the `{tidyverse}` and `{tidymodels}` suites), plus some more specialized packages. I really enjoy discovering new `R` packages and learning new things that `R` can do. I'm (very slowly) learning to code in `python` -- there's not much free time with an infant in the house -- and hope to find time to pick up other languages as well.
 
+Blog posts from this website are also contributed to [R-bloggers](https://www.r-bloggers.com/), which you should definitely check out if you haven't already.
 
 ## Resume
 
