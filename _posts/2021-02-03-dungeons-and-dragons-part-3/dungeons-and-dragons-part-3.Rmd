@@ -12,19 +12,30 @@ output:
 draft: true
 ---
 
+This post is the next installment in a mini-series I'm doing where I explore Dungeons and Dragons (D&D) data. In the [first post](https://www.ericekholm.com/posts/2021-01-11-dungeons-and-dragons-part-1/), I showed how to wrangle JSON data from a [D&D API](https://www.dnd5eapi.co/), and in the [second post](https://www.ericekholm.com/posts/2021-01-11-dungeons-and-dragons-part-2/), I explored monster statistics.
 
-```{r setup, include=FALSE}
+In this post, I'm going to use latent profile analysis (LPA) and monsters' ability scores to try to classify monsters into different "classes." For instance, we might suspect that there is a "class" of up-in-your-face monsters that have high strength and constitution but low intelligence, whereas there may be another class of spell casters that has high intelligence and charisma but low strength and constitution. LPA gives us a framework to estimate how many of these classes exist as well as which monsters fall into which classes.
+
+*Note: I'm probably going to use the terms profile, class, group, and cluster somewhat interchangeably throughout this post (because I'm undisciplined), so just as a warning ahead of time -- these all mean pretty much the same thing.*
+
+Before getting into the meat of this post, I want to give a shoutout to the excellent [`{tidyLPA]}` package](https://cran.r-project.org/package=tidyLPA), which provides some functions to make doing LPA easier.
+
+So let's get into it, then.
+
+# Setup
+
+First, I'll load some packages that are useful here. Notably, we'll load `{tidyLPA}` for doing the actual LPA. This calls the `{mclust}` package to fit the model, and I could use `{mclust}` directly, but `{tidyLPA}` makes the process somewhat more convenient. I'm also going to get a tibble of monster data in this setup chunk. I walk through this process in my first D&D blog post, so if you're curious about that, feel free to check out that post.
+
+```{r setup, echo = TRUE, results = "hide", warning = FALSE, message = FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(tidyverse)
-library(eemisc)
-library(mclust)
-library(jsonlite)
-library(tidymodels)
+library(eemisc) #ggplot theme
+library(jsonlite) #work with json data
 library(tidyLPA)
-library(harrypotter)
+library(harrypotter) #colors
 library(tidytext) #for reorder_within function
-library(gt)
+library(gt) #make tables
 
 herm <- harrypotter::hp(n = 1, option = "HermioneGranger")
 
@@ -76,6 +87,20 @@ mons_df <- mons_bind %>%
 
 ```
 
+
+# What is LPA?
+
+Before getting into actually fitting any models, I want to do a very brief and minimally technical toe-dip into what LPA actually is. Like I mentioned just above, LPA is an approach for estimating groups of people/things/monsters/whatever. You might think of it as akin to principal components analysis (PCA) or exploratory factor analysis (EFA), except instead of grouping variables together, LPA groups observations together. LPA is itself a special type of mixture model, and the basic idea of mixture modeling is that there are *k* latent (underlying) subpopulations (groups) within a population, where the number of groups *k* is something the researcher/analyst should determine either empirically or using past research.
+
+If you're familiar with k-means clustering, this probably sounds very similar. And it pretty much is. The main difference between LPA and k-means is that, since LPA estimates distributions for each subpopulation in the model, we get the probability that each observation belongs to each class, e.g. Monster 1 might have a 99% probability of belonging to class 1, whereas Monster 2 might have an 80% probability of belonging to class 1. And depending on how you intend to use your model, this information might be useful. Another potentially useful difference is that LPA provides a number of fit statistics that (at least as far as I know) aren't available for k-means clustering.
+
+As with EFA (and other latent-variable models), the assumption of LPA is that the latent (unobserved) factor "causes" (I'm using the term loosely here) observed scores on the indicator variables. So, to refer back to my initial hypothetical example, a monster being a spell caster (the unobserved class) causes it to have high intelligence, low strength, etc. rather than the inverse. This is a worthwhile distinction to keep in mind, since it has implications for how the model is fit.
+
+There are some other, more practical considerations regarding LPA that I'll bring up once we get into the modeling, but this is enough background to get started.
+
+# Binning Monsters
+
+RESUME HERE.
 
 ```{r cr_distrib}
 mons_df %>%
