@@ -23,6 +23,8 @@ library(jsonlite)
 library(tidymodels)
 library(tidyLPA)
 library(harrypotter)
+library(tidytext) #for reorder_within function
+library(gt)
 
 herm <- harrypotter::hp(n = 1, option = "HermioneGranger")
 
@@ -120,7 +122,7 @@ mons_centered <- map2_dfc(mons_bin[, ab_scores], mons_bin[, ab_scores_grp],
          ~.x - .y) %>%
   rename_with(.fn = ~str_replace_all(.x, "$", "_centered")) %>%
   bind_cols(mons_bin, .) %>%
-  select(ends_with("centered"))
+  select(name, ends_with("centered"))
 ```
 
 
@@ -129,7 +131,8 @@ set.seed(0408)
 lpa_fits <- mons_centered %>%
   estimate_profiles(1:5,
                     variances = c("equal", "varying"),
-                    covariances = c("zero", "zero"))
+                    covariances = c("zero", "zero"),
+                    select_vars = str_subset(names(mons_centered), "centered"))
 ```
 
 
@@ -142,7 +145,10 @@ bics <- map_dbl(1:10, ~pluck(lpa_fits, .x, "fit", "BIC"))
 entrops <- map_dbl(1:10, ~pluck(lpa_fits, .x, "fit", "Entropy"))
 
 fit_indices <- bind_cols(mods, bics, entrops) %>%
-  set_names(c("model", "bic", "entrop"))
+  set_names(c("model", "bic", "entrop")) %>%
+  pivot_longer(cols = c("bic", "entrop"),
+               names_to = "metric",
+               values_to = "val")
 
 lpa_fits %>%
   compare_solutions()
@@ -150,17 +156,86 @@ lpa_fits %>%
 ```
 
 
-## plot BIC and Entropy
+```{r plot_fits}
+fit_indices %>%
+  ggplot(aes(x = val, y = reorder_within(model, val, metric), fill = metric)) +
+  geom_col() +
+  geom_text(aes(label = if_else(val > 1, round(val, 0), round(val, 3)), x = val - .01), hjust = 1, color = "white") +
+  facet_wrap(vars(metric), scales = "free") +
+  scale_y_reordered() +
+  labs(
+    y = "Model",
+    x = "Value",
+    title = "Selected Fit Indices"
+  ) +
+  theme(
+    legend.position = "none"
+  )
+```
+
+```{r}
+prof_estimates <- get_estimates(lpa_fits) %>%
+  filter(Model == 2,
+         Classes == 5)
+
+prof_estimates %>%
+  filter(Category == "Means") %>%
+  mutate(Class = str_replace_all(Class, "^", "Profile "),
+         Parameter = str_remove_all(Parameter, "_centered")) %>%
+  ggplot(aes(x = Estimate, y = Parameter)) +
+  geom_col(aes(fill = if_else(Estimate > 0, TRUE, FALSE))) +
+  facet_wrap(vars(Class)) +
+  labs(
+    y = NULL,
+    x = "CR-Centered Ability Score",
+    title = "Ability Score Means by Profile",
+    caption = "5 profiles, varying variances"
+  ) +
+  theme(
+    legend.position = "none"
+  )
+
+```
 
 
-##RESUME HERE
 
-# TODO
-- divide monsters into bins by level (DONE)
-- mean center ability scores by bins (DONE)
-- fit LPAs
-- select best model
-- graph ability scores
+```{r}
+class_assigns <- get_data(lpa_fits) %>%
+  filter(model_number == 2,
+         classes_number == 5) %>%
+  group_by(id) %>%
+  filter(Probability == max(Probability)) %>%
+  ungroup() %>%
+  select(name, Class, Probability)
+
+class_assigns %>%
+  count(Class)
+#this feels reasonable -- no class here is super sparse
+```
+
+```{r example_mons}
+set.seed(0409)
+class_assigns %>%
+  group_by(Class) %>%
+  sample_n(size = 1) %>%
+  ungroup() %>%
+  select(Class, name, Probability) %>%
+  gt() %>%
+  tab_header(
+    title = "Example Monster for Each Class"
+  ) %>%
+  cols_label(
+    Class = "Esimated Class",
+    name = "Monster",
+    Probability = "Estimated Class Prob"
+  ) %>%
+  fmt_percent(
+    columns = vars(Probability)
+  )
+```
+
+
+That's it for now.
 
 
 
