@@ -1,0 +1,167 @@
+---
+title: "Dungeons and Dragons - Part 3"
+description: |
+  Grouping D&D monsters using latent profile analysis.
+author:
+  - name: EE
+    url: https://www.ericekholm.com/
+date: 02-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(tidyverse)
+library(eemisc)
+library(mclust)
+library(jsonlite)
+library(tidymodels)
+library(tidyLPA)
+library(harrypotter)
+
+herm <- harrypotter::hp(n = 1, option = "HermioneGranger")
+
+opts <- options(
+  ggplot2.discrete.fill = list(
+    harrypotter::hp(n = 3, option = "HermioneGranger"),
+    harrypotter::hp(n = 7, option = "Always")
+  )
+)
+
+theme_set(theme_ee())
+
+dnd_base <- "https://www.dnd5eapi.co/api/monsters/"
+
+#getting data from api -- see 1st d&d post
+#for process explanation
+
+fetch_monster <- function(monster) {
+  dnd_url <- "https://www.dnd5eapi.co/api/monsters/"
+  
+  ret <- fromJSON(paste0(dnd_url, monster)) %>%
+    enframe() %>%
+    pivot_wider(names_from = name,
+                values_from = value)
+  
+  return(ret)
+}
+
+compare_lens <- function(x, size = 1) {
+  all(map_lgl(x, ~length(unlist(.x)) == size))
+}
+cond_unlist <- function(x) {
+  if (compare_lens(x) == TRUE) {
+    unlist(x)
+  } else {
+    x
+  }
+}
+
+mons <- fromJSON(dnd_base)$results %>%
+  pull(index)
+
+monster_lists <- purrr::map(mons, fetch_monster)
+
+mons_bind <- bind_rows(monster_lists)
+
+mons_df <- mons_bind %>%
+  mutate(across(.cols = everything(), ~cond_unlist(x = .x)))
+
+```
+
+
+```{r cr_distrib}
+mons_df %>%
+  ggplot(aes(x = challenge_rating)) +
+  geom_histogram(alpha = .8, fill = herm, color = herm) +
+  labs(
+    title = "Distribution of Monster Challenge Rating"
+  )
+```
+
+
+```{r bin_monsters}
+#divide monsters into hexiles
+mons_bin <- mons_df %>%
+  mutate(cr_bin = ntile(x = challenge_rating, n = 6)) 
+
+mons_bin %>%
+  ggplot(aes(x = challenge_rating, y = cr_bin, color = cr_bin)) +
+  geom_jitter() +
+  scale_color_hp() +
+  labs(
+    y = "Challenge Bin",
+    x = "Challenge Rating",
+    title = "Binned CR by Actual CR"
+  ) +
+  theme(
+    legend.position = "none"
+  )
+```
+
+```{r mean_ctr}
+ab_scores <- c("strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma")
+
+mons_bin <- mons_bin %>%
+  group_by(cr_bin) %>%
+  mutate(across(.cols = ab_scores, .fns = mean, .names = "{.col}_bin_mean")) %>%
+  ungroup()
+
+
+ab_scores_grp <- str_replace_all(ab_scores, "$", "_bin_mean")
+
+
+mons_centered <- map2_dfc(mons_bin[, ab_scores], mons_bin[, ab_scores_grp],
+         ~.x - .y) %>%
+  rename_with(.fn = ~str_replace_all(.x, "$", "_centered")) %>%
+  bind_cols(mons_bin, .) %>%
+  select(ends_with("centered"))
+```
+
+
+```{r}
+set.seed(0408)
+lpa_fits <- mons_centered %>%
+  estimate_profiles(1:5,
+                    variances = c("equal", "varying"),
+                    covariances = c("zero", "zero"))
+```
+
+
+```{r}
+mods <- names(lpa_fits)
+#recall that model 1 corresponds to equal variances; model 2 corresponds to varying variances
+
+#getting some fit indices
+bics <- map_dbl(1:10, ~pluck(lpa_fits, .x, "fit", "BIC"))
+entrops <- map_dbl(1:10, ~pluck(lpa_fits, .x, "fit", "Entropy"))
+
+fit_indices <- bind_cols(mods, bics, entrops) %>%
+  set_names(c("model", "bic", "entrop"))
+
+lpa_fits %>%
+  compare_solutions()
+
+```
+
+
+## plot BIC and Entropy
+
+
+##RESUME HERE
+
+# TODO
+- divide monsters into bins by level (DONE)
+- mean center ability scores by bins (DONE)
+- fit LPAs
+- select best model
+- graph ability scores
+
+
+
+
