@@ -7,7 +7,16 @@
     <description>Using R for statistical modeling, data visualization, and other personal projects.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Dungeons and Dragons - Part 3</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-02-03-dungeons-and-dragons-part-3</link>
+      <description>Grouping D&amp;D monsters using latent profile analysis.</description>
+      <guid>https://www.ericekholm.com/posts/2021-02-03-dungeons-and-dragons-part-3</guid>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-02-03-dungeons-and-dragons-part-3/dungeons-and-dragons-part-3_files/figure-html5/cr_distrib-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Dungeons and Dragons - Part 2</title>
       <dc:creator>EE</dc:creator>
