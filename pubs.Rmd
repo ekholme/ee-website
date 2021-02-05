@@ -2,7 +2,6 @@
 title: "Publications"
 description: |
   Things I've written.
-output: html_document
 ---
 
 You can also check out my profiles on [Google Scholar](https://scholar.google.com/citations?user=d3WGzzkAAAAJ&hl=en) and [Researchgate](https://www.researchgate.net/profile/Eric_Ekholm)

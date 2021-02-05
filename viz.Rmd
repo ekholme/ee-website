@@ -2,8 +2,6 @@
 title: "Visualizations"
 description: |
   Some visualizations I've created
-output: html_document
-
 ---
 
 ```{r setup, echo = FALSE}
