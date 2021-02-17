@@ -1,7 +1,5 @@
 ---
 title: "About Me"
-description: |
-  Some background about EE
 ---
 
 ```{r setup, include=FALSE, echo = FALSE}
