@@ -1,5 +1,18 @@
 ---
-title: "Posts"
+title: "Eric Ekholm"
+image: "prof_pic.jpg"
+links:
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/eric-ekholm-8a481022/"
+  - label: Twitter
+    url: "https://twitter.com/ekholm_e"
+  - label: GitHub
+    url: "https://github.com/ekholme/"
+  - label: Email
+    url: "mailto:eric.ekholm@gmail.com"
+output:
+  postcards::jolla
 site: distill::distill_website
-listing: posts
 ---
+ 
+I am an educator, researcher, data scientist, and writer. I am currently an Education Data Specialist for Chesterfield County Public Schools, where I use data to help guide decisions and improve students' educational experiences. In my free time, I enjoy reading, writing, data visualization/analysis, going to the gym, and spending time with friends & family (including my pup, Nala).

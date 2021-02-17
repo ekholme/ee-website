@@ -1,7 +1,5 @@
 ---
 title: "Visualizations"
-description: |
-  Some visualizations I've created
 ---
 
 ```{r setup, echo = FALSE}

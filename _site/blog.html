@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
   <meta name="generator" content="distill" />
+  <link rel="alternate" type="application/rss+xml" href="https://www.ericekholm.com/blog.xml" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -86,26 +87,26 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Eric Ekholm: Visualizations</title>
+  <title>Eric Ekholm: Blog</title>
   
   
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Eric Ekholm: Visualizations"/>
+  <meta property="og:title" content="Eric Ekholm: Blog"/>
   <meta property="og:type" content="article"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Eric Ekholm"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Eric Ekholm: Visualizations"/>
+  <meta property="twitter:title" content="Eric Ekholm: Blog"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title"]}},"value":[{"type":"character","attributes":{},"value":["Visualizations"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","listing"]}},"value":[{"type":"character","attributes":{},"value":["Blog"]},{"type":"character","attributes":{},"value":["posts"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2377,12 +2378,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 </head>
 
-<body>
+<body class="layout-listing">
 
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Visualizations","authors":[]}
+{"title":"Blog","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2424,9 +2425,456 @@ Projects
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
+<!--radix_placeholder_article_listing-->
+
+
+<script type="application/javascript">
+
+function init_posts_list() {
+
+  function load_image(img) {
+    var src = $(img).attr('data-src');
+    if (src) {
+      $(img).attr('src', src);
+      $(img).load(function() {
+        img.removeAttribute('data-src');
+      });
+    }
+  }
+
+  function set_posts_visible(posts, visible) {
+    if (visible) {
+
+      // show bottom border by default
+      $(posts).removeClass('post-preview-last');
+
+      // apply limits if need be
+      var max_posts = 25;
+      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
+      if (apply_limits && posts.length > max_posts) {
+        posts = $(posts).slice(0, max_posts);
+      } else {
+        $('.posts-more a').addClass('hidden');
+      }
+
+      // apply last style
+      $(posts.slice(-1)[0]).addClass('post-preview-last');
+
+      $(posts).removeClass('hidden');
+      $(posts).find('img[data-src]').each(function(i, img) {
+        load_image(img);
+      });
+    } else {
+      $(posts).addClass('hidden');
+    }
+  }
+
+  function apply_hash_filter() {
+
+    // clear active state
+    $('.categories .active').removeClass('active');
+
+    // mark all posts invisible to start
+    set_posts_visible($('.posts-list').children('a'), false);
+
+    // if we have a hash filter
+    if (window.location.hash && window.location.hash.startsWith("#category:")) {
+
+      // mark posts that match the category visible
+      var page_category = window.location.hash.replace(/^#category:/, "");
+      var posts = $('.post-metadata').map(function(idx, script) {
+        var metadata = $.parseJSON($(script).html());
+        var post = null;
+        $.each(metadata.categories, function(idx, category) {
+          category = category.replace(/ /g,"_");
+          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
+            post = $(script).parent().get();
+            return false;
+          }
+        });
+        return post;
+      });
+      set_posts_visible(posts, true);
+
+      // mark the hash active
+      $('.categories li>a[href="' + window.location.hash + '"]').addClass('active');
+
+      // update the list_caption
+      var list_caption = $('.posts-list-caption');
+      var caption = (page_category || '').toLowerCase() === "articles"
+        ? list_caption.attr('data-caption')
+        : ('Category: ' + page_category.replace(/_/g," "));
+      list_caption.text(caption);
+
+    } else {
+
+      // no hash filter, make all posts visible (subject to max display)
+      set_posts_visible($('.posts-list').children(), true);
+
+      // reset list caption
+      var list_caption = $('.posts-list-caption');
+      list_caption.text(list_caption.attr('data-caption'));
+
+
+    }
+  }
+
+  // more articles
+  function apply_post_limits(apply) {
+    if (apply) {
+      $('.posts-container').addClass('posts-apply-limit');
+      $('.posts-more a').removeClass('hidden');
+    } else {
+      $('.posts-container').removeClass('posts-apply-limit');
+      $('.posts-more a').addClass('hidden');
+    }
+  }
+
+  // click handling for tags
+  $('.dt-tag').click(function(ev) {
+    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
+    return false;
+  })
+
+  // hash filter handling
+  apply_hash_filter();
+  $(window).on('hashchange',function() {
+    apply_post_limits(true);
+    apply_hash_filter();
+  });
+
+  // more articles link
+  $('.posts-more a').click(function(e) {
+    e.preventDefault();
+    apply_post_limits(false);
+    apply_hash_filter();
+    return false;
+  });
+
+}
+
+</script>
+
+
+
+<div class="posts-container posts-apply-limit l-page">
+<div class="posts-list">
+<h1 class="posts-list-caption" data-caption="Blog">Blog</h1>
+<a href="posts/2021-02-03-dungeons-and-dragons-part-3/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Feb. 3, 2021</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/2021-02-03-dungeons-and-dragons-part-3/dungeons-and-dragons-part-3_files/figure-html5/cr_distrib-1.png"/>
+</div>
+<div class="description">
+<h2>Dungeons and Dragons - Part 3</h2>
+<div class="dt-tags"></div>
+<p>Grouping D&amp;D monsters using latent profile analysis.</p>
+</div>
+</a>
+<a href="posts/2021-01-11-dungeons-and-dragons-part-2/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Dec. 28, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/2021-01-11-dungeons-and-dragons-part-2/dungeons-and-dragons-part-2_files/figure-html5/unnamed-chunk-1-1.png"/>
+</div>
+<div class="description">
+<h2>Dungeons and Dragons - Part 2</h2>
+<div class="dt-tags"></div>
+<p>Exploring monster stats in D&amp;D 5e</p>
+</div>
+</a>
+<a href="posts/2021-01-11-dungeons-and-dragons-part-1/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Dec. 18, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Dungeons and Dragons - Part 1</h2>
+<div class="dt-tags"></div>
+<p>Wrangling JSON data from an API.</p>
+</div>
+</a>
+<a href="posts/2021-01-11-predicting-mobile-phone-subscription-growth/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Nov. 18, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/2021-01-11-predicting-mobile-phone-subscription-growth/predicting-mobile-phone-subscription-growth_files/figure-html5/unnamed-chunk-1-1.png"/>
+</div>
+<div class="description">
+<h2>Predicting Mobile Phone Subscription Growth</h2>
+<div class="dt-tags"></div>
+<p>Using splines and iteration via map() to fit and interrogate models.</p>
+</div>
+</a>
+<a href="posts/2021-01-11-rstudio-table-contest-submission/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Oct. 26, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Rstudio Table Contest Submission</h2>
+<div class="dt-tags"></div>
+<p>And impressions of the {gt} package.</p>
+</div>
+</a>
+<a href="posts/2021-01-11-simulating-triangles/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Oct. 18, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img data-src="posts/2021-01-11-simulating-triangles/simulating-triangles_files/figure-html5/unnamed-chunk-9-1.png"/>
+</div>
+<div class="description">
+<h2>Simulating Triangles?</h2>
+<div class="dt-tags"></div>
+<p>Determining whether random numbers can form a triangle using simulation.</p>
+</div>
+</a>
+<a href="posts/2021-01-11-your-moms-house-analysis/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Sept. 20, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img data-src="posts/2021-01-11-your-moms-house-analysis/your-moms-house-analysis_files/figure-html5/unnamed-chunk-1-1.png"/>
+</div>
+<div class="description">
+<h2>Your Mom's House Analysis</h2>
+<div class="dt-tags"></div>
+<p>An exploratory analysis of transcripts from the YMH podcast.</p>
+</div>
+</a>
+<a href="posts/2021-01-11-chopped-episode-simulator/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Sept. 5, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Chopped Episode Simulator</h2>
+<div class="dt-tags"></div>
+<p>Simple app to simulate an episode of Chopped."</p>
+</div>
+</a>
+<a href="posts/2021-01-11-scrantonicity-part-3/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Aug. 29, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img data-src="posts/2021-01-11-scrantonicity-part-3/scrantonicity-part-3_files/figure-html5/unnamed-chunk-1-1.png"/>
+</div>
+<div class="description">
+<h2>Scrantonicity - Part 3</h2>
+<div class="dt-tags"></div>
+<p>Predicting the speaker of dialogue from The Office.</p>
+</div>
+</a>
+<a href="posts/2021-01-11-intro-to-rvest/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">July 24, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Intro to {rvest}</h2>
+<div class="dt-tags"></div>
+<p>Using {rvest} to find child care in Virginia.</p>
+</div>
+</a>
+<a href="posts/2021-01-06-unconsciousness-in-the-xmen/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">July 14, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img data-src="posts/2021-01-06-unconsciousness-in-the-xmen/unconsciousness-in-the-xmen_files/figure-html5/unnamed-chunk-4-1.png"/>
+</div>
+<div class="description">
+<h2>Unconsciousness in the Xmen</h2>
+<div class="dt-tags"></div>
+<p>Practicing poisson regression using Xmen data.</p>
+</div>
+</a>
+<a href="posts/2021-01-06-exploring-emily-osters-covid-data/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">June 25, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img data-src="posts/2021-01-06-exploring-emily-osters-covid-data/exploring-emily-osters-covid-data_files/figure-html5/unnamed-chunk-1-1.png"/>
+</div>
+<div class="description">
+<h2>Exploring Emily Oster's COVID Data</h2>
+<div class="dt-tags"></div>
+<p>Examining child care survey data from Emily Oster</p>
+</div>
+</a>
+<a href="posts/2021-01-06-pulling-youtube-transcripts/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">May 15, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Pulling YouTube Transcripts</h2>
+<div class="dt-tags"></div>
+<p>Example of pulling transcripts for an entire YouTube playlist.</p>
+</div>
+</a>
+<a href="posts/2021-01-04-writing-window-functions/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">May 6, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Writing Window Functions</h2>
+<div class="dt-tags"></div>
+<p>Examples and tutorial of writing rolling aggregate functions.</p>
+</div>
+</a>
+<a href="posts/2021-01-04-rva-pets/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">April 23, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img data-src="posts/2021-01-04-rva-pets/rva-pets_files/figure-html5/counts-1.png"/>
+</div>
+<div class="description">
+<h2>RVA Pets</h2>
+<div class="dt-tags"></div>
+<p>Analyzing pet ownership in RVA</p>
+</div>
+</a>
+<a href="posts/2021-01-04-scrantonicity-part-2/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">April 16, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img data-src="posts/2021-01-04-scrantonicity-part-2/scrantonicity-part-2_files/figure-html5/cluster-1.png"/>
+</div>
+<div class="description">
+<h2>Scrantonicity - Part 2</h2>
+<div class="dt-tags"></div>
+<p>K means clustering using The Office dialogue</p>
+</div>
+</a>
+<a href="posts/2021-01-04-riddler-express-march-20-2020/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">March 31, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Riddler Express - March 20, 2020</h2>
+<div class="dt-tags"></div>
+<p>Solving a math puzzle and exploring the accumulate() function.</p>
+</div>
+</a>
+<a href="posts/2021-01-02-scrantonicity-part-1/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">March 14, 2020</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Scrantonicity - Part 1</h2>
+<div class="dt-tags"></div>
+<p>An initial exploration of dialogue from The Office</p>
+</div>
+</a>
+</div>
+<div class="posts-more">
+<a href="#">More articles &raquo;</a>
+</div>
+</div>
+<!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
-<h1>Visualizations</h1>
+<h1>Blog</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 
@@ -2434,47 +2882,6 @@ Projects
 
 
 <div class="d-article">
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
-<p>This page presents a collection of data visualizations I’ve created, mostly for fun/in my free time. All visualizations were created using the R programming language.</p>
-<h2 id="maynard-james-keenan-songs">Maynard James Keenan Songs</h2>
-<p><a href="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%204%20-%20spotify/mjk_circle.jpg?raw=true"><img src="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%204%20-%20spotify/mjk_circle.jpg?raw=true" style="width:100.0%" /></a></p>
-<p>I gathered data through the Spotify API to analyze the length of songs by Maynard James Keenan’s bands.</p>
-<p><br/></p>
-<h2 id="rva-pets">RVA Pets</h2>
-<p><a href="https://github.com/ekholme/viz_portfolio/blob/master/RVA-VA%20Data/rva_pets_map.png?raw=true"><img src="https://github.com/ekholme/viz_portfolio/blob/master/RVA-VA%20Data/rva_pets_map.png?raw=true" style="width:100.0%" /></a></p>
-<p>Using data from <a href="https://data.richmondgov.com/Unique-and-Inclusive-Neighborhoods/Pet-Licenses/fgv9-bhf4">Richmond’s Open Data Portal</a> and <a href="https://cran.r-project.org/package=osmdata">Open Street Map</a>, I mapped the location of cats and dogs in RVA.</p>
-<p><br/></p>
-<h2 id="european-energy-production">European Energy Production</h2>
-<p><a href="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2032%20-%20euro%20energy/energy.png?raw=true"><img src="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2032%20-%20euro%20energy/energy.png?raw=true" style="width:100.0%" /></a></p>
-<p>Using data from <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php/Electricity_generation_statistics_%E2%80%93_first_results">Eurostat</a>, I visualized how each country in Europe produced energy in 2018.</p>
-<p><br/></p>
-<h2 id="notable-black-scientists">Notable Black Scientists</h2>
-<p><a href="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2024%20-%20african%20american%20achievements/scientists.png?raw=true"><img src="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2024%20-%20african%20american%20achievements/scientists.png?raw=true" style="width:100.0%" /></a></p>
-<p>Using data from <a href="https://en.wikipedia.org/wiki/List_of_African-American_inventors_and_scientists">Wikipedia</a>, I adopted a minimalist approach to highlight notable Black scientists and inventors throughout the history of the US.</p>
-<p><br/></p>
-<h2 id="beach-volleyball">Beach Volleyball</h2>
-<p><a href="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2021%20-%20beach%20volleyball/may_walsh.png?raw=true"><img src="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2021%20-%20beach%20volleyball/may_walsh.png?raw=true" style="width:100.0%" /></a></p>
-<p>Using data from the <a href="https://github.com/rfordatascience/tidytuesday/blob/master/README.md">#TidyTuesday Project</a> (via <a href="https://bigtimestats.blog/data/">BigTime stats</a>), I visualized Kerri Walsh Jennings and Misty May-Treanor’s key match statistics over time.</p>
-<p><br/></p>
-<h2 id="beer-production">Beer Production</h2>
-<p><a href="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2014%20-%20beer%20production/beer_maps.jpg?raw=true"><img src="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2014%20-%20beer%20production/beer_maps.jpg?raw=true" style="width:100.0%" /></a></p>
-<p>Using data from the <a href="https://www.ttb.gov/beer/statistics">Alcohol and Tobacco Tax and Trade Bureau</a>, I created a cartogram showing which states produce the most beer relative to their populations.</p>
-<p><br/></p>
-<h2 id="white-christmas-lyrics">White Christmas Lyrics</h2>
-<p><a href="https://github.com/ekholme/TidyTuesday/blob/master/52%20-%20christmas%20songs/cosby_network.jpeg?raw=true"><img src="https://github.com/ekholme/TidyTuesday/blob/master/52%20-%20christmas%20songs/cosby_network.jpeg?raw=true" style="width:100.0%" /></a></p>
-<p>After pulling lyrics using the <a href="https://github.com/josiahparry/genius"><code>{genius}</code></a> package, I created a network to show connections between words used in the album.</p>
-<p><br/></p>
-<h2 id="virginia-early-childhood-care-education">Virginia Early Childhood Care &amp; Education</h2>
-<p><a href="https://github.com/ekholme/viz_portfolio/blob/master/Ed%20Data%20Viz/VQ/Viz/vq_vor_map.jpg?raw=true"><img src="https://github.com/ekholme/viz_portfolio/blob/master/Ed%20Data%20Viz/VQ/Viz/vq_vor_map.jpg?raw=true" style="width:100.0%" /></a></p>
-<p>I used data from the <a href="https://www.virginiaquality.com/">Virginia Quality</a> website and <a href="https://developers.google.com/maps/documentation/geocoding/start">Google’s GeoCoding API</a> to create a Voronoi tesselation of high-quality ECCE sites in Virginia.</p>
-<h2 id="st-century-rap-rankings">21st Century Rap Rankings</h2>
-<p><a href="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2016%20-%20rap%20artists/rap_bars.png?raw=true"><img src="https://github.com/ekholme/TidyTuesday/blob/master/2020%20-%2016%20-%20rap%20artists/rap_bars.png?raw=true" style="width:100.0%" /></a></p>
-<p>Using data from a <a href="https://www.bbc.com/culture/article/20191007-the-greatest-hip-hop-songs-of-all-time-who-voted">BBC Music</a> survey on the best hip-hop songs of all time, I analyzed who the most celebrated rappers were each year in the 21st century.</p>
-<p><br/></p>
-<h2 id="more-visualizations">More Visualizations</h2>
-<p>You can see more visualizations I’ve created in my <a href="https://github.com/rfordatascience/tidytuesday/blob/master/README.md">#TidyTuesday</a> Github repo (<a href="https://github.com/ekholme/TidyTuesday">here</a>) or in my miscellaneous visualizations repo (<a href="https://github.com/ekholme/viz_portfolio">here</a>)</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
