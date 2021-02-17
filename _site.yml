@@ -23,7 +23,7 @@ navbar:
     - icon: fa-github
       href: https://github.com/ekholme/
     - icon: fa fa-rss
-      href: index.xml
+      href: blog.xml
 output: distill::distill_article
 theme: theme.css
 rss:
