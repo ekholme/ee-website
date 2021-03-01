@@ -132,7 +132,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["scrantonicity-part-3_files/figure-html5/unnamed-chunk-1-1.png","scrantonicity-part-3_files/figure-html5/unnamed-chunk-10-1.png","scrantonicity-part-3_files/figure-html5/unnamed-chunk-15-1.png","scrantonicity-part-3_files/figure-html5/unnamed-chunk-2-1.png"]}
+  {"type":"character","attributes":{},"value":["scrantonicity-part-3_files/anchor-4.2.2/anchor.min.js","scrantonicity-part-3_files/bowser-1.9.3/bowser.min.js","scrantonicity-part-3_files/distill-2.2.21/template.v2.js","scrantonicity-part-3_files/figure-html5/unnamed-chunk-1-1.png","scrantonicity-part-3_files/figure-html5/unnamed-chunk-10-1.png","scrantonicity-part-3_files/figure-html5/unnamed-chunk-15-1.png","scrantonicity-part-3_files/figure-html5/unnamed-chunk-2-1.png","scrantonicity-part-3_files/jquery-1.11.3/jquery.min.js","scrantonicity-part-3_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2390,6 +2390,10 @@ d-appendix d-footnote-list a.footnote-backlink {
 }</style>
 <!--/radix_placeholder_distill-->
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="../../site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
@@ -2476,13 +2480,35 @@ Projects
 <p>Anyway, without much further ado, let’s get into it. As has been the case in all of my “Scrantonicity” posts, the data I’m using here comes from the <code>{schrute}</code> package. First, I’ll load in libraries and set some defaults/options. I’m also going to read in the data, limiting the dialogue to the first seven seasons of the show (the Michael Scott era).</p>
 <h2 id="setup">Setup</h2>
 <div class="layout-chunk" data-layout="l-body">
-
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span>, warning <span class='op'>=</span> <span class='cn'>FALSE</span>, message <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ekholme/eemisc'>eemisc</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidymodels.tidymodels.org'>tidymodels</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/bradlindblad/schrute'>schrute</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidymodels/textrecipes'>textrecipes</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidymodels/themis'>themis</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/koalaverse/vip/'>vip</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/glmmTMB/glmmTMB'>glmmTMB</a></span><span class='op'>)</span>
+<span class='va'>herm</span> <span class='op'>&lt;-</span> <span class='fu'>harrypotter</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/harrypotter/man/hp.html'>hp</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>1</span>, option <span class='op'>=</span> <span class='st'>"HermioneGranger"</span><span class='op'>)</span>
+<span class='va'>opts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>
+  ggplot2.discrete.fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+    <span class='fu'>harrypotter</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/harrypotter/man/hp.html'>hp</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>3</span>, option <span class='op'>=</span> <span class='st'>"HermioneGranger"</span><span class='op'>)</span>,
+    <span class='fu'>harrypotter</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/harrypotter/man/hp.html'>hp</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span>, option <span class='op'>=</span> <span class='st'>"Always"</span><span class='op'>)</span>
+  <span class='op'>)</span>
+<span class='op'>)</span>
+<span class='fu'>theme_set</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/eemisc/man/theme_ee.html'>theme_ee</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>office</span> <span class='op'>&lt;-</span> <span class='fu'>schrute</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/schrute/man/theoffice.html'>theoffice</a></span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>season</span><span class='op'>)</span> <span class='op'>&lt;=</span> <span class='fl'>7</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>is_mike <span class='op'>=</span> <span class='fu'>if_else</span><span class='op'>(</span><span class='va'>character</span> <span class='op'>==</span> <span class='st'>"Michael"</span>, <span class='st'>"Yes"</span>, <span class='st'>"No"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
 </div>
 <h2 id="brief-eda-and-data-preprocessing">Brief EDA and Data Preprocessing</h2>
 <p>Before modeling data, I would typically do a more thorough EDA. But I’ve already explored this data pretty closely (albeit months ago) in two previous blog posts, so rather than re-doing that EDA, I’m just going to look at those posts. One thing I will include here, though, is a quick look at the number of lines spoken by Michael Scott vs other characters, since this is the outcome I’m interested in predicting here.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>character</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>top_n</span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>n</span>, y <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2500,7 +2526,7 @@ Projects
 <p>So, Michael has far and away the most lines of any character. But it’ll also be useful to look at Michael vs all of the others lumped together (since this is what I’m actually predicting).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>is_mike</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>n</span>, y <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>is_mike</span>, <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_col</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>herm</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2518,7 +2544,7 @@ Projects
 <p>Next, I’m going to split my data into a training a testing set.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
 <span class='va'>office_split</span> <span class='op'>&lt;-</span> <span class='fu'>initial_split</span><span class='op'>(</span><span class='va'>office</span>, strata <span class='op'>=</span> <span class='va'>is_mike</span><span class='op'>)</span>
 <span class='va'>tr</span> <span class='op'>&lt;-</span> <span class='fu'>training</span><span class='op'>(</span><span class='va'>office_split</span><span class='op'>)</span>
 <span class='va'>te</span> <span class='op'>&lt;-</span> <span class='fu'>testing</span><span class='op'>(</span><span class='va'>office_split</span><span class='op'>)</span>
@@ -2529,12 +2555,12 @@ Projects
 <p>I’ll specify this recipe and then walk through each step afterward.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office_recipe</span> <span class='op'>&lt;-</span> <span class='fu'>recipe</span><span class='op'>(</span><span class='va'>is_mike</span> <span class='op'>~</span> <span class='va'>text</span> <span class='op'>+</span> <span class='va'>episode_name</span>, data <span class='op'>=</span> <span class='va'>tr</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office_recipe</span> <span class='op'>&lt;-</span> <span class='fu'>recipe</span><span class='op'>(</span><span class='va'>is_mike</span> <span class='op'>~</span> <span class='va'>text</span> <span class='op'>+</span> <span class='va'>episode_name</span>, data <span class='op'>=</span> <span class='va'>tr</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>themis</span><span class='fu'>::</span><span class='fu'><a href='https://themis.tidymodels.org/reference/step_downsample.html'>step_downsample</a></span><span class='op'>(</span><span class='va'>is_mike</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>step_tokenize</span><span class='op'>(</span><span class='va'>text</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>step_stopwords</span><span class='op'>(</span><span class='va'>text</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>step_tokenfilter</span><span class='op'>(</span><span class='va'>text</span>, max_tokens <span class='op'>=</span> <span class='fl'>200</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>step_tfidf</span><span class='op'>(</span><span class='va'>text</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://textrecipes.tidymodels.org/reference/step_tokenize.html'>step_tokenize</a></span><span class='op'>(</span><span class='va'>text</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://textrecipes.tidymodels.org/reference/step_stopwords.html'>step_stopwords</a></span><span class='op'>(</span><span class='va'>text</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://textrecipes.tidymodels.org/reference/step_tokenfilter.html'>step_tokenfilter</a></span><span class='op'>(</span><span class='va'>text</span>, max_tokens <span class='op'>=</span> <span class='fl'>200</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://textrecipes.tidymodels.org/reference/step_tfidf.html'>step_tfidf</a></span><span class='op'>(</span><span class='va'>text</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>prep</span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>tr_prepped</span> <span class='op'>&lt;-</span> <span class='fu'>juice</span><span class='op'>(</span><span class='va'>office_recipe</span><span class='op'>)</span>
 <span class='va'>tr_prepped_noep</span> <span class='op'>&lt;-</span> <span class='va'>tr_prepped</span> <span class='op'>%&gt;%</span>
@@ -2557,7 +2583,7 @@ Projects
 <p>Moving along! Next, I’m going to specify my model. Since I have a binary outcomes (yes/no if the speaker is Michael), I’m going to run a logistic regression. I’m going to run this as a LASSO model, which will provide some feature selection and generally shrink coefficients. I’m going to tune the model to choose the best amount of penalty as well.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>reg_spec</span> <span class='op'>&lt;-</span> <span class='fu'>logistic_reg</span><span class='op'>(</span>mixture <span class='op'>=</span> <span class='fl'>1</span>, penalty <span class='op'>=</span> <span class='fu'>tune</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>reg_spec</span> <span class='op'>&lt;-</span> <span class='fu'>logistic_reg</span><span class='op'>(</span>mixture <span class='op'>=</span> <span class='fl'>1</span>, penalty <span class='op'>=</span> <span class='fu'>tune</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"glmnet"</span><span class='op'>)</span>
 <span class='va'>reg_spec</span>
 </code></pre>
@@ -2573,7 +2599,7 @@ Computational engine: glmnet </code></pre>
 <p>Here, I’m creating some resamples of my training data to help with the tuning. I’m creating 10 bootstrap samples here.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
 <span class='va'>booties</span> <span class='op'>&lt;-</span> <span class='fu'>bootstraps</span><span class='op'>(</span><span class='va'>tr_prepped_noep</span>, strata <span class='op'>=</span> <span class='va'>is_mike</span>, times <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2582,7 +2608,7 @@ Computational engine: glmnet </code></pre>
 <p>Now it’s time to fit the LASSO model. I’m going to add the logistic regression specification that I just created to a workflow. Along with that model specification, I’m also going to add a formula where <code>is_mike</code> is regressed on all of the word features I just created. Then, I’m going to tune the model across 10 candidate values of the penalty parameter (i.e. how much regularization I’m adding).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office_wf</span> <span class='op'>&lt;-</span> <span class='fu'>workflow</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office_wf</span> <span class='op'>&lt;-</span> <span class='fu'>workflow</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>add_model</span><span class='op'>(</span><span class='va'>reg_spec</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>add_formula</span><span class='op'>(</span><span class='va'>is_mike</span> <span class='op'>~</span> <span class='va'>.</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
@@ -2597,7 +2623,7 @@ Computational engine: glmnet </code></pre>
 <p>Great. Now that the models have been fit with various penalty values across the bootstrap resamples, I can check to see what the best penalty value is to move forward with &amp; finalize a model. I’m going to choose the best by one standard error (which, in this case, happens also to be the best model). The one standard error rule will let me choose the most parsimonious model (in this case, the one with the most penalty) that is within one standard error of the best model. And once I choose the best penalty value, I’ll go ahead and finalize the model and refit on the training set.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>logreg_fit</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>logreg_fit</span> <span class='op'>%&gt;%</span>
   <span class='fu'>show_best</span><span class='op'>(</span><span class='st'>"accuracy"</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2610,7 +2636,7 @@ Computational engine: glmnet </code></pre>
 4 7.94e- 8 accuracy binary     0.577    10 0.00216 Preprocessor1_Mode~
 5 4.46e- 7 accuracy binary     0.577    10 0.00216 Preprocessor1_Mode~</code></pre>
 <div class="sourceCode">
-<pre><code><span class='va'>best_params</span> <span class='op'>&lt;-</span> <span class='va'>logreg_fit</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>best_params</span> <span class='op'>&lt;-</span> <span class='va'>logreg_fit</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select_by_one_std_err</span><span class='op'>(</span>metric <span class='op'>=</span> <span class='st'>"accuracy"</span>, <span class='fu'>desc</span><span class='op'>(</span><span class='va'>penalty</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>final_logreg</span> <span class='op'>&lt;-</span> <span class='va'>office_wf</span> <span class='op'>%&gt;%</span>
   <span class='fu'>finalize_workflow</span><span class='op'>(</span><span class='va'>best_params</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -2621,7 +2647,7 @@ Computational engine: glmnet </code></pre>
 <p>So, the best model here has an accuracy of ~58%. Not great, but better than just straight-up guessing. Remember that this is on the training set. Now, I’ll take a look at what the accuracy is on the test set.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>bind_cols</span><span class='op'>(</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>bind_cols</span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>final_logreg</span>, <span class='va'>te_prepped_noep</span><span class='op'>)</span>, <span class='va'>te_prepped_noep</span>
 <span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>accuracy</span><span class='op'>(</span><span class='va'>is_mike</span>, <span class='va'>.pred_class</span><span class='op'>)</span>
@@ -2636,9 +2662,9 @@ Computational engine: glmnet </code></pre>
 <p>Now, I’m going to take a look at which words are the most important to predicting whether the speaker of a line of dialogue is Michael or not.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>final_logreg</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>final_logreg</span> <span class='op'>%&gt;%</span>
   <span class='fu'>pull_workflow_fit</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/edit.html'>vi</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/vip/man/vi.html'>vi</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>slice_max</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>Importance</span><span class='op'>)</span>, n <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>Importance</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>Variable</span> <span class='op'>%&gt;%</span> <span class='fu'>str_remove</span><span class='op'>(</span><span class='st'>"tfidf_text_"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>Importance</span><span class='op'>)</span><span class='op'>)</span>, fill <span class='op'>=</span> <span class='va'>Sign</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2656,9 +2682,9 @@ Computational engine: glmnet </code></pre>
 <p>And the final thing I’m going to do with this logistic regression is to pull out names of the non-zero coefficients. Recall that the lasso penalty can (but doesn’t always) shrink coefficients to zero. These variables will have no effect on the outcome. The reason I’m doing this is because I want to fit a multilevel model next, but I’m not going to regularize that model. Instead, I’ll just specify a formula that doesn’t include the variables that got shrunk to zero in this model.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>keep_vars</span> <span class='op'>&lt;-</span> <span class='va'>final_logreg</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>keep_vars</span> <span class='op'>&lt;-</span> <span class='va'>final_logreg</span> <span class='op'>%&gt;%</span>
   <span class='fu'>pull_workflow_fit</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/edit.html'>vi</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/vip/man/vi.html'>vi</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Importance</span> <span class='op'>!=</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>pull</span><span class='op'>(</span><span class='va'>Variable</span><span class='op'>)</span>
 </code></pre>
@@ -2671,21 +2697,21 @@ Computational engine: glmnet </code></pre>
 <p>Anyway – onward and upward. First, I want to specify the formula of the model. I’m going to include all of the variables that had non-zero coefficients in the lasso model earlier, and I’m also going to add a term at the end to specify the random intercept for each episode – (1 | episode_name).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>glmm_formula</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/formula.html'>as.formula</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"is_mike ~ "</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>keep_vars</span>, collapse <span class='op'>=</span> <span class='st'>" + "</span><span class='op'>)</span>, <span class='st'>" + (1 | episode_name)"</span><span class='op'>)</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>glmm_formula</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/formula.html'>as.formula</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"is_mike ~ "</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>keep_vars</span>, collapse <span class='op'>=</span> <span class='st'>" + "</span><span class='op'>)</span>, <span class='st'>" + (1 | episode_name)"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <p>I’m going to fit this model using the <code>{glmmTMB}</code> package, which provides an interface for fitting all sort of generalized linear mixed models. I haven’t used this specific package before, but I have used <code>{lme4}</code>, which has similar syntax and is essentially the same thing for fitting linear models. I’m going to fit the model using the training data – note that I’m not tuning anything here – and I’m specifying the binomial family because this is a logistic regression.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>glmm_fit</span> <span class='op'>&lt;-</span> <span class='fu'>glmmTMB</span><span class='op'>(</span><span class='va'>glmm_formula</span>, data <span class='op'>=</span> <span class='va'>tr_prepped</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>glmm_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html'>glmmTMB</a></span><span class='op'>(</span><span class='va'>glmm_formula</span>, data <span class='op'>=</span> <span class='va'>tr_prepped</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <p>I’m going to show the summary of the model here, but it’s going to be a biiig printout since we have so many terms in the model, so feel free to scroll on by. One thing you might want to check out, though, is the summary of the variance of the intercept, which summarizes the amount of randomness in that effect.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>glmm_fit</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>glmm_fit</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code> Family: binomial  ( logit )
@@ -2961,7 +2987,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>Right, so, the next logical step in my mind is to take a closer look at the random intercepts. We see some variance in the intercept (.23), which suggests that there are meaningful between-episode differences in the number of times Michael Scott speaks. Rather than looking at all of these, let’s take a look at the largest 10 effects (as a benchmark, recall that the mean intercept is -.3)</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>ranef</span><span class='op'>(</span><span class='va'>glmm_fit</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/glmmTMB/man/ranef.glmmTMB.html'>ranef</a></span><span class='op'>(</span><span class='va'>glmm_fit</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select</span><span class='op'>(</span><span class='va'>grp</span>, <span class='va'>condval</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>slice_max</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>condval</span><span class='op'>)</span>, n <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -2980,7 +3006,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>Finally, I’ll take a look at the accuracy of the predictions from the multilevel model.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>glmm_preds_response</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>glmm_fit</span>, <span class='va'>te_prepped</span>, type <span class='op'>=</span> <span class='st'>"response"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>glmm_preds_response</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>glmm_fit</span>, <span class='va'>te_prepped</span>, type <span class='op'>=</span> <span class='st'>"response"</span><span class='op'>)</span>
 <span class='va'>glmm_preds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>glmm_preds_response</span> <span class='op'>&lt;</span> <span class='fl'>.5</span>, <span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>as_factor</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>fct_relevel</span><span class='op'>(</span><span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span>
 <span class='fu'>bind_cols</span><span class='op'>(</span><span class='va'>te_prepped</span><span class='op'>$</span><span class='va'>is_mike</span>, <span class='va'>glmm_preds</span><span class='op'>)</span> <span class='op'>%&gt;%</span>

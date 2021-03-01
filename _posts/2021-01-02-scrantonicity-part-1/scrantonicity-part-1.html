@@ -308,6 +308,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     text-decoration: underline;
   }
   
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+  
   @media(min-width: 768px) {
   
   d-article pre,
@@ -462,6 +467,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   
   div.hanging-indent{
     margin-left: 1em; text-indent: -1em;
+  }
+  
+  /* Citation hover box */
+  
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+  
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
   }
   
   
@@ -1129,7 +1145,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       var layout = $(this).attr('data-layout');
   
       // apply layout to markdown level block elements
-      var elements = $(this).children().not('div.sourceCode, pre, script');
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
       elements.each(function(i, el) {
         var layout_div = $('<div class="' + layout + '"></div>');
         if (layout_div.hasClass('shaded')) {
@@ -1244,6 +1260,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
+  
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
   
       // clear polling timer
       clearInterval(tid);
@@ -1407,6 +1437,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <script src="scrantonicity-part-1_files/kePrint-0.0.1/kePrint.js"></script>
   <link href="scrantonicity-part-1_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="scrantonicity-part-1_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="scrantonicity-part-1_files/popper-2.6.0/popper.min.js"></script>
+  <link href="scrantonicity-part-1_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="scrantonicity-part-1_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="scrantonicity-part-1_files/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="scrantonicity-part-1_files/anchor-4.2.2/anchor.min.js"></script>
   <script src="scrantonicity-part-1_files/bowser-1.9.3/bowser.min.js"></script>
   <script src="scrantonicity-part-1_files/webcomponents-2.0.0/webcomponents.js"></script>
@@ -1456,7 +1490,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>First, let’s read in the data. I’m also going to limit the data to the first seven seasons, which spans the “Michael Scott” era. Not only because these are the best seasons (which they undoubtedly are), but also because doing so eliminates a major confounding factor (i.e. Steve Carell leaving the show) from the analysis.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office</span> <span class='op'>&lt;-</span> <span class='va'>theoffice</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office</span> <span class='op'>&lt;-</span> <span class='va'>theoffice</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>season</span><span class='op'>)</span> <span class='op'>&lt;=</span> <span class='fl'>7</span><span class='op'>)</span>
 
 <span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>office</span><span class='op'>)</span>
@@ -1480,14 +1514,14 @@ $ air_date         &lt;fct&gt; 2005-03-24, 2005-03-24, 2005-03-24, 2005...</code
 <p>Just to check that the data we have matches what we’re expecting, let’s take a look at which seasons we have, plus how many episodes we have per season.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office</span> <span class='op'>%&gt;%</span>
   <span class='fu'>distinct</span><span class='op'>(</span><span class='va'>season</span>, <span class='va'>episode</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>season</span>, name <span class='op'>=</span> <span class='st'>"num_episodes"</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code># A tibble: 7 x 2
   season num_episodes
-   &lt;int&gt;        &lt;int&gt;
+*  &lt;int&gt;        &lt;int&gt;
 1      1            6
 2      2           22
 3      3           23
@@ -1501,7 +1535,7 @@ $ air_date         &lt;fct&gt; 2005-03-24, 2005-03-24, 2005-03-24, 2005...</code
 <p>A few questions we can ask here involve how much/how often different characters speak. Probably the most basic question is: who has the most lines?</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>top_20_chars</span> <span class='op'>&lt;-</span> <span class='va'>office</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>top_20_chars</span> <span class='op'>&lt;-</span> <span class='va'>office</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>character</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>top_n</span><span class='op'>(</span><span class='fl'>20</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>pull</span><span class='op'>(</span><span class='va'>character</span><span class='op'>)</span>
@@ -1524,7 +1558,7 @@ $ air_date         &lt;fct&gt; 2005-03-24, 2005-03-24, 2005-03-24, 2005...</code
 <p>What if we look at the number of lines per season?</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sets.html'>is.element</a></span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>top_20_chars</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>season</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>season</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='va'>n</span>, color <span class='op'>=</span> <span class='va'>character</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
@@ -1537,7 +1571,7 @@ $ air_date         &lt;fct&gt; 2005-03-24, 2005-03-24, 2005-03-24, 2005...</code
 <p>This isn’t terribly informative – let’s go back to our bar graph.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sets.html'>is.element</a></span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>top_20_chars</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>season</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>season</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -1563,7 +1597,7 @@ $ air_date         &lt;fct&gt; 2005-03-24, 2005-03-24, 2005-03-24, 2005...</code
 <p>To start with this, I’m going to restructure the data so we have one word per row in our tibble. I’m also going to remove “stop words” (e.g. “a,” “the,” “at”), since these will show up a lot but (for our purposes) aren’t actually all that meaningful:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office_words</span> <span class='op'>&lt;-</span> <span class='va'>office</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office_words</span> <span class='op'>&lt;-</span> <span class='va'>office</span> <span class='op'>%&gt;%</span>
   <span class='fu'>unnest_tokens</span><span class='op'>(</span><span class='va'>word</span>, <span class='va'>text</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>anti_join</span><span class='op'>(</span><span class='va'>stop_words</span><span class='op'>)</span>
 <span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>office_words</span><span class='op'>)</span>
@@ -1588,7 +1622,7 @@ $ word             &lt;chr&gt; &quot;jim&quot;, &quot;quarterlies&quot;, &quot;l
 <p>As a first pass, let’s take a look at our 20 characters with the most lines of dialogue and see what each character’s most commonly-used word is:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office_words</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office_words</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sets.html'>is.element</a></span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>top_20_chars</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>word</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>character</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -1838,7 +1872,7 @@ wait
 <p>So, that’s not great. We can see that our stop words didn’t pick up “yeah.” One way around this would be to filter out additional words like “yeah,” “hey,” etc. that aren’t in our stop words list. But we’ll probably still leave out some common words that we might not want to show up in our exploration. A better approach is probably to use the tf-idf statistics (term frequency-inverse document frequency), which adjusts the weight a term is given in the analysis for each character by how commonly the word is used by all characters, with more common words getting lower weights. Essentially, this lets us figure out which words are important/unique to each of our characters.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office_words</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office_words</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sets.html'>is.element</a></span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>top_20_chars</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>word</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>bind_tf_idf</span><span class='op'>(</span><span class='va'>word</span>, <span class='va'>character</span>, <span class='va'>n</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -1868,7 +1902,7 @@ wait
 <p>Next, let’s take a closer look at how Michael’s speech compares to some of the other main characters – Dwight, Jim, and Pam. We’ll also leave Kelly in here because I think she’ll be interesting to compare to Michael.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>main_char_words</span> <span class='op'>&lt;-</span>  <span class='va'>office_words</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>main_char_words</span> <span class='op'>&lt;-</span>  <span class='va'>office_words</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>character</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Michael"</span>, <span class='st'>"Dwight"</span>, <span class='st'>"Jim"</span>, <span class='st'>"Pam"</span>, <span class='st'>"Kelly"</span><span class='op'>)</span>,
          <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>word</span>, <span class='st'>"\\d+"</span>, negate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>word</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -1907,7 +1941,7 @@ wait
 <p>Let’s take a look at what these graphs look like for Jim and Pam</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>main_char_words</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>main_char_words</span> <span class='op'>%&gt;%</span>
   <span class='fu'>char_plot</span><span class='op'>(</span><span class='va'>Jim</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -1915,7 +1949,7 @@ wait
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>main_char_words</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>main_char_words</span> <span class='op'>%&gt;%</span>
   <span class='fu'>char_plot</span><span class='op'>(</span><span class='va'>Pam</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -1924,7 +1958,7 @@ wait
 <p>Aand let’s throw Kelly in there too because it might be interesting.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>main_char_words</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>main_char_words</span> <span class='op'>%&gt;%</span>
   <span class='fu'>char_plot</span><span class='op'>(</span><span class='va'>Kelly</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -1934,7 +1968,7 @@ wait
 <p>And finally (for this section), I would be remiss if I made it through an analysis of how characters from <em>The Office</em> speak without giving a “that’s what she said” tally…</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>text</span>, <span class='st'>"what she said"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>character</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>character</span>, <span class='va'>n</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
@@ -1954,7 +1988,7 @@ wait
 <p>Finally, I want to visualize who characters talk to. To do this, I’m going to put together a network plot showing links between characters based on how frequently they interact.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
 <span class='va'>office_links</span> <span class='op'>&lt;-</span> <span class='va'>office</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>character</span> <span class='op'>%in%</span> <span class='va'>top_20_chars</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>episode</span><span class='op'>)</span> <span class='op'>%&gt;%</span>

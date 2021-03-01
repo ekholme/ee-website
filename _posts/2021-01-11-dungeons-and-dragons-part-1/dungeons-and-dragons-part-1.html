@@ -308,6 +308,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     text-decoration: underline;
   }
   
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+  
   @media(min-width: 768px) {
   
   d-article pre,
@@ -462,6 +467,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   
   div.hanging-indent{
     margin-left: 1em; text-indent: -1em;
+  }
+  
+  /* Citation hover box */
+  
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+  
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
   }
   
   
@@ -1129,7 +1145,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       var layout = $(this).attr('data-layout');
   
       // apply layout to markdown level block elements
-      var elements = $(this).children().not('div.sourceCode, pre, script');
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
       elements.each(function(i, el) {
         var layout_div = $('<div class="' + layout + '"></div>');
         if (layout_div.hasClass('shaded')) {
@@ -1244,6 +1260,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
+  
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
   
       // clear polling timer
       clearInterval(tid);
@@ -1405,6 +1435,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   
   <!--/radix_placeholder_distill-->
   <script src="dungeons-and-dragons-part-1_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="dungeons-and-dragons-part-1_files/popper-2.6.0/popper.min.js"></script>
+  <link href="dungeons-and-dragons-part-1_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="dungeons-and-dragons-part-1_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="dungeons-and-dragons-part-1_files/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="dungeons-and-dragons-part-1_files/anchor-4.2.2/anchor.min.js"></script>
   <script src="dungeons-and-dragons-part-1_files/bowser-1.9.3/bowser.min.js"></script>
   <script src="dungeons-and-dragons-part-1_files/webcomponents-2.0.0/webcomponents.js"></script>
@@ -1449,7 +1483,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>First, I’ll load the packages I need to get and wrangle the data, which is really just <code>{tidyverse}</code>, <code>{jsonlite}</code> and good old base R. I’m also adding in the base URL of the API.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span>, warning <span class='op'>=</span> <span class='cn'>FALSE</span>, message <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span>, warning <span class='op'>=</span> <span class='cn'>FALSE</span>, message <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://arxiv.org/abs/1403.2805'>jsonlite</a></span><span class='op'>)</span>
@@ -1463,7 +1497,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>We’ll use the <code>fromJSON()</code> function to get JSON data from the API. We’ll see that this gives us a pretty gnarly nested list.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>example</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>dnd_base</span>, <span class='st'>"aboleth"</span><span class='op'>)</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>example</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>dnd_base</span>, <span class='st'>"aboleth"</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>example</span><span class='op'>)</span>
 </code></pre>
@@ -1542,7 +1576,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>To clean this list up a bit, we’ll use the <code>enframe()</code> function (from <code>{tibble}</code>) to convert the lists into a dataframe and then the <code>pivot_wider()</code> function to reshape this into a single-row tibble.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>example</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>example</span> <span class='op'>%&gt;%</span>
   <span class='fu'>enframe</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>pivot_wider</span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>name</span>,
               values_from <span class='op'>=</span> <span class='va'>value</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -1585,7 +1619,7 @@ $ url                    &lt;list&gt; [&quot;/api/monsters/aboleth&quot;]</code>
 <p>Now that we know the basic process, we’ll just apply this to all of the monsters with data available through the API. To do that, I’ll write a function that executes the previous steps, get a list of all of the monsters available in the API, use <code>map()</code> to iterate the “fetch” function for each monster, and then bind all of the resulting rows together.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>fetch_monster</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>monster</span><span class='op'>)</span> <span class='op'>{</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fetch_monster</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>monster</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>dnd_url</span> <span class='op'>&lt;-</span> <span class='st'>"https://www.dnd5eapi.co/api/monsters/"</span>
   
   <span class='va'>ret</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>dnd_url</span>, <span class='va'>monster</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -1647,7 +1681,7 @@ $ forms                  &lt;list&gt; [NULL, NULL, NULL, NULL, NULL, NU...</code
 <p>To do this, we can write a couple of functions. The first, <code>compare_lens()</code> (below), will determine if the length of each element of a list is equal to whatever size we want to compare against (I’ve set the default to 1, which is what we want to use in this case). It then uses the <code>all()</code> function to determine if all of these comparisons are equal to TRUE, and will return a single value of TRUE if this is the case (and a single FALSE if not).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>compare_lens</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>size</span> <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>{</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>compare_lens</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>size</span> <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='fu'><a href='https://rdrr.io/r/base/all.html'>all</a></span><span class='op'>(</span><span class='fu'>map_lgl</span><span class='op'>(</span><span class='va'>x</span>, <span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='va'>size</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
 </code></pre>
@@ -1661,7 +1695,7 @@ $ forms                  &lt;list&gt; [NULL, NULL, NULL, NULL, NULL, NU...</code
 </ul>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>cond_unlist</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>cond_unlist</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='kw'>if</span> <span class='op'>(</span><span class='fu'>compare_lens</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>==</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>{</span>
     <span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
   <span class='op'>}</span> <span class='kw'>else</span> <span class='op'>{</span>
@@ -1674,7 +1708,7 @@ $ forms                  &lt;list&gt; [NULL, NULL, NULL, NULL, NULL, NU...</code
 <p>The final step is to apply this function to all of the columns (which, recall, are lists) in our mons_bind tibble. We can do this using a combination of <code>mutate()</code> and <code>across()</code>. After doing this, we’ll see that some of the columns in our data frame have been simplified to character, integer, and double vectors, whereas others remain lists (lists of lists, lists of data frames).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>&lt;-</span> <span class='va'>mons_bind</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>&lt;-</span> <span class='va'>mons_bind</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate</span><span class='op'>(</span><span class='fu'>across</span><span class='op'>(</span>.cols <span class='op'>=</span> <span class='fu'>everything</span><span class='op'>(</span><span class='op'>)</span>, <span class='op'>~</span><span class='fu'>cond_unlist</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>mons_df</span><span class='op'>)</span>

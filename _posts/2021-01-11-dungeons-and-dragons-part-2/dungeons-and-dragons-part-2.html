@@ -308,6 +308,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     text-decoration: underline;
   }
   
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+  
   @media(min-width: 768px) {
   
   d-article pre,
@@ -462,6 +467,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   
   div.hanging-indent{
     margin-left: 1em; text-indent: -1em;
+  }
+  
+  /* Citation hover box */
+  
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+  
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
   }
   
   
@@ -1129,7 +1145,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       var layout = $(this).attr('data-layout');
   
       // apply layout to markdown level block elements
-      var elements = $(this).children().not('div.sourceCode, pre, script');
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
       elements.each(function(i, el) {
         var layout_div = $('<div class="' + layout + '"></div>');
         if (layout_div.hasClass('shaded')) {
@@ -1244,6 +1260,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
+  
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
   
       // clear polling timer
       clearInterval(tid);
@@ -1405,6 +1435,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   
   <!--/radix_placeholder_distill-->
   <script src="dungeons-and-dragons-part-2_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="dungeons-and-dragons-part-2_files/popper-2.6.0/popper.min.js"></script>
+  <link href="dungeons-and-dragons-part-2_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="dungeons-and-dragons-part-2_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="dungeons-and-dragons-part-2_files/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="dungeons-and-dragons-part-2_files/anchor-4.2.2/anchor.min.js"></script>
   <script src="dungeons-and-dragons-part-2_files/bowser-1.9.3/bowser.min.js"></script>
   <script src="dungeons-and-dragons-part-2_files/webcomponents-2.0.0/webcomponents.js"></script>
@@ -1450,12 +1484,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>To start, I’m going to load in some packages and get the data. If you’re interested in the process for getting the data, you might want to check out my previous post in this series.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span>, warning <span class='op'>=</span> <span class='cn'>FALSE</span>, message <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span>, warning <span class='op'>=</span> <span class='cn'>FALSE</span>, message <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ekholme/eemisc'>eemisc</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://arxiv.org/abs/1403.2805'>jsonlite</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://wilkelab.org/ggridges'>ggridges</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://wilkelab.org/ggridges/'>ggridges</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/gt'>gt</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidymodels/corrr'>corrr</a></span><span class='op'>)</span>
 
@@ -1511,7 +1545,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>For whatever reason, the first thing that strikes me to look at is the monsters’ challenge ratings (CRs). As the name suggests, CRs are an indication of how difficult a monster is for a group of players to fight, with higher CRs corresponding to a more difficult fight. The general rule of thumb is that a party of players can fight monsters about equal to their own level (or lower), and that higher CR monsters could be pretty tough.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>challenge_rating</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>herm</span>, color <span class='op'>=</span> <span class='va'>herm</span>, alpha <span class='op'>=</span> <span class='fl'>.8</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>
@@ -1524,7 +1558,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>The general rule makes sense in conjunction with this distribution of CRs. Most of the action in D&amp;D campaigns tends to occur in lower levels, so it makes sense that the majority of the monsters here have CRs &lt; 10. We do see one dude hanging out at CR 30, though, so let’s see who that is.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>slice_max</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='va'>challenge_rating</span>, n <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -1547,7 +1581,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Next, let’s take a look at the distribution of monster hit points. For those unfamiliar with D&amp;D/video games more broadly, hit points represent the amount of health a character/monster has, and reducing someone to 0 hit points will defeat them. Typically (and I’ll explore this relationship more momentarily), hit points will increase as CR increases.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>hit_points</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>herm</span>, color <span class='op'>=</span> <span class='va'>herm</span>, alpha <span class='op'>=</span> <span class='fl'>.8</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>
@@ -1560,7 +1594,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Let’s look a little bit more at descriptives for these previous two stats:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mons_df</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"challenge_rating"</span>, <span class='st'>"hit_points"</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mons_df</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"challenge_rating"</span>, <span class='st'>"hit_points"</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code> challenge_rating   hit_points    
@@ -1574,7 +1608,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>And, again, presumably there’s a strong correlation between them, but let’s check that as well.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>mons_df</span><span class='op'>$</span><span class='va'>hit_points</span>, <span class='va'>mons_df</span><span class='op'>$</span><span class='va'>challenge_rating</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>mons_df</span><span class='op'>$</span><span class='va'>hit_points</span>, <span class='va'>mons_df</span><span class='op'>$</span><span class='va'>challenge_rating</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code>[1] 0.9414071</code></pre>
@@ -1582,7 +1616,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>So, we see a very strong correlation between hit points and challenge rating. Let’s plot this.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>hit_points</span>, y <span class='op'>=</span> <span class='va'>challenge_rating</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_point</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>herm</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>
@@ -1595,7 +1629,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Yeah…that’s what we’d expect a strong correlation to look like. One thing to note is that, although it looks like the Tarrasque fits on the general trend line here, outliers can have a strong influence on the correlation coefficient, so I’ll do a quick check to see what the value would be if we didn’t include the Tarrasque.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>name</span> <span class='op'>!=</span> <span class='st'>"Tarrasque"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select</span><span class='op'>(</span><span class='va'>hit_points</span>, <span class='va'>challenge_rating</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -1610,7 +1644,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>So, let’s first check out the distributions.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>abs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"strength"</span>, <span class='st'>"charisma"</span>, <span class='st'>"dexterity"</span>, <span class='st'>"intelligence"</span>, <span class='st'>"wisdom"</span>, <span class='st'>"constitution"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>abs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"strength"</span>, <span class='st'>"charisma"</span>, <span class='st'>"dexterity"</span>, <span class='st'>"intelligence"</span>, <span class='st'>"wisdom"</span>, <span class='st'>"constitution"</span><span class='op'>)</span>
 
 <span class='va'>ab_scores</span> <span class='op'>&lt;-</span> <span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select</span><span class='op'>(</span><span class='va'>name</span>, <span class='fu'>all_of</span><span class='op'>(</span><span class='va'>abs</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -1636,7 +1670,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Another interesting question to me is to what extent are these correlated. To check this out, we could use base R’s <code>cor()</code> function, but I want to try the <code>{corrr}</code> package, which provides some helpers for doing correlation analyses.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>abs_corrs</span> <span class='op'>&lt;-</span> <span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>abs_corrs</span> <span class='op'>&lt;-</span> <span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select</span><span class='op'>(</span><span class='fu'>all_of</span><span class='op'>(</span><span class='va'>abs</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://corrr.tidymodels.org/reference/correlate.html'>correlate</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://corrr.tidymodels.org/reference/rearrange.html'>rearrange</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -1655,7 +1689,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#nyidrkwezl .gt_table {
+#bzeqwtexej .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1680,7 +1714,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-left-color: #D3D3D3;
 }
 
-#nyidrkwezl .gt_heading {
+#bzeqwtexej .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1692,7 +1726,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#nyidrkwezl .gt_title {
+#bzeqwtexej .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1702,7 +1736,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-width: 0;
 }
 
-#nyidrkwezl .gt_subtitle {
+#bzeqwtexej .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1712,13 +1746,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-width: 0;
 }
 
-#nyidrkwezl .gt_bottom_border {
+#bzeqwtexej .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nyidrkwezl .gt_col_headings {
+#bzeqwtexej .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1733,7 +1767,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#nyidrkwezl .gt_col_heading {
+#bzeqwtexej .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1753,7 +1787,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#nyidrkwezl .gt_column_spanner_outer {
+#bzeqwtexej .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1765,15 +1799,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 4px;
 }
 
-#nyidrkwezl .gt_column_spanner_outer:first-child {
+#bzeqwtexej .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nyidrkwezl .gt_column_spanner_outer:last-child {
+#bzeqwtexej .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nyidrkwezl .gt_column_spanner {
+#bzeqwtexej .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1785,7 +1819,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   width: 100%;
 }
 
-#nyidrkwezl .gt_group_heading {
+#bzeqwtexej .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1807,7 +1841,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#nyidrkwezl .gt_empty_group_heading {
+#bzeqwtexej .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1822,15 +1856,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#nyidrkwezl .gt_from_md > :first-child {
+#bzeqwtexej .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nyidrkwezl .gt_from_md > :last-child {
+#bzeqwtexej .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nyidrkwezl .gt_row {
+#bzeqwtexej .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1849,7 +1883,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#nyidrkwezl .gt_stub {
+#bzeqwtexej .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1861,7 +1895,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-left: 12px;
 }
 
-#nyidrkwezl .gt_summary_row {
+#bzeqwtexej .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1871,7 +1905,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#nyidrkwezl .gt_first_summary_row {
+#bzeqwtexej .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1881,7 +1915,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#nyidrkwezl .gt_grand_summary_row {
+#bzeqwtexej .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1891,7 +1925,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#nyidrkwezl .gt_first_grand_summary_row {
+#bzeqwtexej .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1901,11 +1935,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#nyidrkwezl .gt_striped {
+#bzeqwtexej .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nyidrkwezl .gt_table_body {
+#bzeqwtexej .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1914,7 +1948,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-color: #D3D3D3;
 }
 
-#nyidrkwezl .gt_footnotes {
+#bzeqwtexej .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1928,13 +1962,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#nyidrkwezl .gt_footnote {
+#bzeqwtexej .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#nyidrkwezl .gt_sourcenotes {
+#bzeqwtexej .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1948,46 +1982,46 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#nyidrkwezl .gt_sourcenote {
+#bzeqwtexej .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#nyidrkwezl .gt_left {
+#bzeqwtexej .gt_left {
   text-align: left;
 }
 
-#nyidrkwezl .gt_center {
+#bzeqwtexej .gt_center {
   text-align: center;
 }
 
-#nyidrkwezl .gt_right {
+#bzeqwtexej .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nyidrkwezl .gt_font_normal {
+#bzeqwtexej .gt_font_normal {
   font-weight: normal;
 }
 
-#nyidrkwezl .gt_font_bold {
+#bzeqwtexej .gt_font_bold {
   font-weight: bold;
 }
 
-#nyidrkwezl .gt_font_italic {
+#bzeqwtexej .gt_font_italic {
   font-style: italic;
 }
 
-#nyidrkwezl .gt_super {
+#bzeqwtexej .gt_super {
   font-size: 65%;
 }
 
-#nyidrkwezl .gt_footnote_marks {
+#bzeqwtexej .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="nyidrkwezl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="bzeqwtexej" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="7" class="gt_heading gt_title gt_font_normal" style>Ability Score Correlations</th>
@@ -2076,7 +2110,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>We can also look at the same data using the <code>rplot()</code> function in <code>{corrr}</code>, although it’s not super easy to see:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>abs_corrs</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>abs_corrs</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://corrr.tidymodels.org/reference/rplot.html'>rplot</a></span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2085,7 +2119,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Beyond looking at the distributions and correlations of these ability scores, I think it’s also worth it to just look at the means. This will give us a sense of what the average monster in D&amp;D is like, stats-wise.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>ab_scores</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>ab_scores</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>ability</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>summarize</span><span class='op'>(</span>avg <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>score</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate</span><span class='op'>(</span>ability <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>ability</span>, <span class='va'>avg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -2106,7 +2140,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Finally, we might want to look at which monster scores the highest on each ability score.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>ab_scores</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>ab_scores</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select</span><span class='op'>(</span><span class='va'>ability</span>, <span class='va'>name</span>, <span class='va'>score</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate</span><span class='op'>(</span>ability <span class='op'>=</span> <span class='fu'>str_to_title</span><span class='op'>(</span><span class='va'>ability</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>ability</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -2132,7 +2166,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#caajeoqkgq .gt_table {
+#racplthhpd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2157,7 +2191,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-left-color: #D3D3D3;
 }
 
-#caajeoqkgq .gt_heading {
+#racplthhpd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2169,7 +2203,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#caajeoqkgq .gt_title {
+#racplthhpd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2179,7 +2213,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-width: 0;
 }
 
-#caajeoqkgq .gt_subtitle {
+#racplthhpd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2189,13 +2223,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-width: 0;
 }
 
-#caajeoqkgq .gt_bottom_border {
+#racplthhpd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#caajeoqkgq .gt_col_headings {
+#racplthhpd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2210,7 +2244,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#caajeoqkgq .gt_col_heading {
+#racplthhpd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2230,7 +2264,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#caajeoqkgq .gt_column_spanner_outer {
+#racplthhpd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2242,15 +2276,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 4px;
 }
 
-#caajeoqkgq .gt_column_spanner_outer:first-child {
+#racplthhpd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#caajeoqkgq .gt_column_spanner_outer:last-child {
+#racplthhpd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#caajeoqkgq .gt_column_spanner {
+#racplthhpd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2262,7 +2296,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   width: 100%;
 }
 
-#caajeoqkgq .gt_group_heading {
+#racplthhpd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2284,7 +2318,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#caajeoqkgq .gt_empty_group_heading {
+#racplthhpd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2299,15 +2333,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#caajeoqkgq .gt_from_md > :first-child {
+#racplthhpd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#caajeoqkgq .gt_from_md > :last-child {
+#racplthhpd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#caajeoqkgq .gt_row {
+#racplthhpd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2326,7 +2360,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#caajeoqkgq .gt_stub {
+#racplthhpd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2338,7 +2372,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-left: 12px;
 }
 
-#caajeoqkgq .gt_summary_row {
+#racplthhpd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2348,7 +2382,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#caajeoqkgq .gt_first_summary_row {
+#racplthhpd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2358,7 +2392,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#caajeoqkgq .gt_grand_summary_row {
+#racplthhpd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2368,7 +2402,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#caajeoqkgq .gt_first_grand_summary_row {
+#racplthhpd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2378,11 +2412,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#caajeoqkgq .gt_striped {
+#racplthhpd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#caajeoqkgq .gt_table_body {
+#racplthhpd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2391,7 +2425,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-color: #D3D3D3;
 }
 
-#caajeoqkgq .gt_footnotes {
+#racplthhpd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2405,13 +2439,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#caajeoqkgq .gt_footnote {
+#racplthhpd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#caajeoqkgq .gt_sourcenotes {
+#racplthhpd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2425,46 +2459,46 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#caajeoqkgq .gt_sourcenote {
+#racplthhpd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#caajeoqkgq .gt_left {
+#racplthhpd .gt_left {
   text-align: left;
 }
 
-#caajeoqkgq .gt_center {
+#racplthhpd .gt_center {
   text-align: center;
 }
 
-#caajeoqkgq .gt_right {
+#racplthhpd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#caajeoqkgq .gt_font_normal {
+#racplthhpd .gt_font_normal {
   font-weight: normal;
 }
 
-#caajeoqkgq .gt_font_bold {
+#racplthhpd .gt_font_bold {
   font-weight: bold;
 }
 
-#caajeoqkgq .gt_font_italic {
+#racplthhpd .gt_font_italic {
   font-style: italic;
 }
 
-#caajeoqkgq .gt_super {
+#racplthhpd .gt_super {
   font-size: 65%;
 }
 
-#caajeoqkgq .gt_footnote_marks {
+#racplthhpd .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="caajeoqkgq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="racplthhpd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="3" class="gt_heading gt_title gt_font_normal" style>Highest Ability Scores</th>
@@ -2542,7 +2576,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>I’ll cap this post off by looking at a few odds and ends. This one might be a little silly, but since the game is called Dungeons and <strong><em>Dragons</em></strong>, it might be relevant to see how many monsters are actually dragons.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate</span><span class='op'>(</span>is_dragon <span class='op'>=</span> <span class='fu'>if_else</span><span class='op'>(</span><span class='va'>type</span> <span class='op'>==</span> <span class='st'>"dragon"</span>, <span class='st'>"Dragon"</span>, <span class='st'>"Not Dragon"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>is_dragon</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>n</span>, y <span class='op'>=</span> <span class='va'>is_dragon</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2561,7 +2595,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Given the above, we might be interested in seeing which monster types <em>are</em> the most common:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>type</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>n</span>, y <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>type</span>, <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_col</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>herm</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2579,7 +2613,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>We can see here that beasts are the most common monster type, followed by humanoids and then dragons. I’m not really sure what’s going on with the “swarm of tiny beasts,” so let’s take a peek at those.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>type</span>, <span class='st'>"swarm"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>pull</span><span class='op'>(</span><span class='va'>name</span><span class='op'>)</span>
 </code></pre>
@@ -2594,7 +2628,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>The last thing I’m going to check out here is the experience points (xp) distributions. My sense is that it’ll look similar to the distributions for challenge rating and hit points, since tougher monsters will award more experience for beating them. But still worth checking out.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>xp</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>herm</span>, color <span class='op'>=</span> <span class='va'>herm</span>, alpha <span class='op'>=</span> <span class='fl'>.8</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>
@@ -2607,7 +2641,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>So this plot isn’t great since the Tarrasque is worth over 150k xp, which makes it harder to see the distribution at the lower end. There are also a few monsters that award ~50k xp, which again also makes it difficult to distinguish values at the lower end. I’ll filter put this on a log scale to make it easier to see the lower end.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>xp</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>herm</span>, color <span class='op'>=</span> <span class='va'>herm</span>, alpha <span class='op'>=</span> <span class='fl'>.8</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>

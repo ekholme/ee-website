@@ -132,7 +132,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["dungeons-and-dragons-part-3_files/figure-html5/bin_monsters-1.png","dungeons-and-dragons-part-3_files/figure-html5/cr_distrib-1.png","dungeons-and-dragons-part-3_files/figure-html5/unnamed-chunk-2-1.png","dungeons-and-dragons-part-3_files/figure-html5/unnamed-chunk-4-1.png"]}
+  {"type":"character","attributes":{},"value":["dungeons-and-dragons-part-3_files/anchor-4.2.2/anchor.min.js","dungeons-and-dragons-part-3_files/bowser-1.9.3/bowser.min.js","dungeons-and-dragons-part-3_files/distill-2.2.21/template.v2.js","dungeons-and-dragons-part-3_files/figure-html5/bin_monsters-1.png","dungeons-and-dragons-part-3_files/figure-html5/cr_distrib-1.png","dungeons-and-dragons-part-3_files/figure-html5/unnamed-chunk-2-1.png","dungeons-and-dragons-part-3_files/figure-html5/unnamed-chunk-4-1.png","dungeons-and-dragons-part-3_files/jquery-1.11.3/jquery.min.js","dungeons-and-dragons-part-3_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2390,6 +2390,10 @@ d-appendix d-footnote-list a.footnote-backlink {
 }</style>
 <!--/radix_placeholder_distill-->
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="../../site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
@@ -2471,7 +2475,7 @@ Projects
 <p>First, I’ll load some packages that are useful here. Notably, we’ll load <code>{tidyLPA}</code> for doing the actual LPA. This calls the <code>{mclust}</code> package to fit the model, and I could use <code>{mclust}</code> directly, but <code>{tidyLPA}</code> makes the process somewhat more convenient. I’m also going to get a tibble of monster data in this setup chunk. I walk through this process in my first D&amp;D blog post, so if you’re curious about that, feel free to check out that post.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span>, warning <span class='op'>=</span> <span class='cn'>FALSE</span>, message <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span>, warning <span class='op'>=</span> <span class='cn'>FALSE</span>, message <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ekholme/eemisc'>eemisc</a></span><span class='op'>)</span> <span class='co'>#ggplot theme</span>
@@ -2540,7 +2544,7 @@ Projects
 <p>I’m not really going to do any data exploration here, since I did that in a previous post. But I do want to quickly pull up a distribution of monster challenge rating because it’s relevant to a step we need to take before fitting our LPA.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>challenge_rating</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>.8</span>, fill <span class='op'>=</span> <span class='va'>herm</span>, color <span class='op'>=</span> <span class='va'>herm</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>
@@ -2554,7 +2558,7 @@ Projects
 <p>The approach I’m going to take is to create sexile bins using monster CR to get 6 “bins” of monsters. Using this approach, monsters in each bin will have (roughly) the same CR. We can see this in the plot below.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='co'>#divide monsters into hexiles</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#divide monsters into hexiles</span>
 <span class='va'>mons_bin</span> <span class='op'>&lt;-</span> <span class='va'>mons_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate</span><span class='op'>(</span>cr_bin <span class='op'>=</span> <span class='fu'>ntile</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>challenge_rating</span>, n <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span> 
 
@@ -2578,7 +2582,7 @@ Projects
 <p>The next step is to group mean center each monster’s ability scores. To do this, I’ll subtract the bin-average ability score from the monster ability score. So, for example, to group mean center a monster in bin 1’s strength score, I’d subtract the bin-average strength score from the monster’s strength score. The resulting score tells me if the monster’s score is higher than average for it’s CR or lower than average for it’s CR. Importantly, this removes the effect of the bin average on our LPA. I could go a step further and divide by the bin-specific standard deviation to remove the effect of bin-specific variance, but that makes the estimates somewhat harder to interpret, so I’m not going to.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>ab_scores</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"strength"</span>, <span class='st'>"dexterity"</span>, <span class='st'>"constitution"</span>, <span class='st'>"intelligence"</span>, <span class='st'>"wisdom"</span>, <span class='st'>"charisma"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>ab_scores</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"strength"</span>, <span class='st'>"dexterity"</span>, <span class='st'>"constitution"</span>, <span class='st'>"intelligence"</span>, <span class='st'>"wisdom"</span>, <span class='st'>"charisma"</span><span class='op'>)</span>
 
 <span class='va'>mons_bin</span> <span class='op'>&lt;-</span> <span class='va'>mons_bin</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>cr_bin</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -2608,7 +2612,7 @@ Projects
 <p>Also! always remember to set your seed.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
 <span class='va'>lpa_fits</span> <span class='op'>&lt;-</span> <span class='va'>mons_centered</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://data-edu.github.io/tidyLPA/reference/estimate_profiles.html'>estimate_profiles</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,
                     variances <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"equal"</span>, <span class='st'>"varying"</span><span class='op'>)</span>,
@@ -2620,7 +2624,7 @@ Projects
 <p>Now that the model is fit, I want to select the best model. <code>{tidyLPA}</code> makes this pretty easy via the <code>compare_solutions()</code> function, which I’ll use later, but I also want to explore a few fit indices – Bayesian Information Criterion (BIC) and entropy. I’ve forgotten what BIC <em>actually is</em>, but I do know that it’s the fit index that people who know more about statistics than I do suggest we want to minimize in LPA. Entropy is a measure of how distinct classes are from one another and ranges from 0-1, where values closer to 1 represent more separation between classes (which is what we want). I’m going to pull these out and plot them.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>mods</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>lpa_fits</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mods</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>lpa_fits</span><span class='op'>)</span>
 <span class='co'>#recall that model 1 corresponds to equal variances; model 2 corresponds to varying variances</span>
 
 <span class='co'>#getting some fit indices</span>
@@ -2659,7 +2663,7 @@ Projects
 <p>We can see in the above plot that Model 2, Class 5 (varying variances, 5 profiles) has the lowest BIC (other than the model we want to ignore anyway) and the highest entropy (other than the 1-profile models). So that’s the one we likely want to go with, but let’s see what <code>compare_solutions()</code> tells me.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>lpa_fits</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>lpa_fits</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://data-edu.github.io/tidyLPA/reference/compare_solutions.html'>compare_solutions</a></span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2685,7 +2689,7 @@ An analytic hierarchy process, based on the fit indices AIC, AWE, BIC, CLC, and 
 <p>Now that we’ve selected a model specification, let’s look at what each profile looks like. The plot below shows the average bin-centered ability scores for each profile.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>prof_estimates</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://data-edu.github.io/tidyLPA/reference/get_estimates.html'>get_estimates</a></span><span class='op'>(</span><span class='va'>lpa_fits</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>prof_estimates</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://data-edu.github.io/tidyLPA/reference/get_estimates.html'>get_estimates</a></span><span class='op'>(</span><span class='va'>lpa_fits</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Model</span> <span class='op'>==</span> <span class='fl'>2</span>,
          <span class='va'>Classes</span> <span class='op'>==</span> <span class='fl'>5</span><span class='op'>)</span>
 
@@ -2718,7 +2722,7 @@ An analytic hierarchy process, based on the fit indices AIC, AWE, BIC, CLC, and 
 <p>Next, I’ll check how many monsters ended up in each class. I didn’t get a warning for this model suggesting that a class had dangerously low membership, but it’s still good practice to check this.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>class_assigns</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://data-edu.github.io/tidyLPA/reference/get_data.html'>get_data</a></span><span class='op'>(</span><span class='va'>lpa_fits</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>class_assigns</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://data-edu.github.io/tidyLPA/reference/get_data.html'>get_data</a></span><span class='op'>(</span><span class='va'>lpa_fits</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>model_number</span> <span class='op'>==</span> <span class='fl'>2</span>,
          <span class='va'>classes_number</span> <span class='op'>==</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>id</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -2732,7 +2736,7 @@ An analytic hierarchy process, based on the fit indices AIC, AWE, BIC, CLC, and 
 </div>
 <pre><code># A tibble: 5 x 2
   Class     n
-  &lt;dbl&gt; &lt;int&gt;
+* &lt;dbl&gt; &lt;int&gt;
 1     1    72
 2     2    61
 3     3    33
@@ -2743,7 +2747,7 @@ An analytic hierarchy process, based on the fit indices AIC, AWE, BIC, CLC, and 
 <p>Finally, let’s take a quick look at one example monster from each class as well as the estimated probability that the mosnter belongs to that class (note that the assigned/estimated class is the class for each monster with the highest probability.)</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0409</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0409</span><span class='op'>)</span>
 <span class='va'>class_assigns</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>Class</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>sample_n</span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>

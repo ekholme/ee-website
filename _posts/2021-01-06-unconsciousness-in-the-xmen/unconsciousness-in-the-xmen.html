@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["unconsciousness-in-the-xmen_files/figure-html5/unnamed-chunk-20-1.png","unconsciousness-in-the-xmen_files/figure-html5/unnamed-chunk-4-1.png"]}
+  {"type":"character","attributes":{},"value":["unconsciousness-in-the-xmen_files/anchor-4.2.2/anchor.min.js","unconsciousness-in-the-xmen_files/bowser-1.9.3/bowser.min.js","unconsciousness-in-the-xmen_files/distill-2.2.21/template.v2.js","unconsciousness-in-the-xmen_files/figure-html5/unnamed-chunk-20-1.png","unconsciousness-in-the-xmen_files/figure-html5/unnamed-chunk-4-1.png","unconsciousness-in-the-xmen_files/jquery-1.11.3/jquery.min.js","unconsciousness-in-the-xmen_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -308,6 +308,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     text-decoration: underline;
   }
   
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+  
   @media(min-width: 768px) {
   
   d-article pre,
@@ -462,6 +467,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   
   div.hanging-indent{
     margin-left: 1em; text-indent: -1em;
+  }
+  
+  /* Citation hover box */
+  
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+  
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
   }
   
   
@@ -1129,7 +1145,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       var layout = $(this).attr('data-layout');
   
       // apply layout to markdown level block elements
-      var elements = $(this).children().not('div.sourceCode, pre, script');
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
       elements.each(function(i, el) {
         var layout_div = $('<div class="' + layout + '"></div>');
         if (layout_div.hasClass('shaded')) {
@@ -1244,6 +1260,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
+  
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
   
       // clear polling timer
       clearInterval(tid);
@@ -1405,6 +1435,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   
   <!--/radix_placeholder_distill-->
   <script src="unconsciousness-in-the-xmen_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="unconsciousness-in-the-xmen_files/popper-2.6.0/popper.min.js"></script>
+  <link href="unconsciousness-in-the-xmen_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="unconsciousness-in-the-xmen_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="unconsciousness-in-the-xmen_files/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="unconsciousness-in-the-xmen_files/anchor-4.2.2/anchor.min.js"></script>
   <script src="unconsciousness-in-the-xmen_files/bowser-1.9.3/bowser.min.js"></script>
   <script src="unconsciousness-in-the-xmen_files/webcomponents-2.0.0/webcomponents.js"></script>
@@ -1448,13 +1482,27 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="setup">Setup</h2>
 <p>First, I’ll load some packages, set some miscellaneous options, and import the data. This data comes from the <a href="http://www.claremontrun.com/">Claremont Run</a> project, which mines data from Chris Claremont’s run (1975-1991) writing the X-men comics. To learn more about the project, you can visit the website. There are several datasets available, but for this analysis, I’m going to use data from the characters dataset, the character_visualization dataset, and the locations dataset.</p>
 <div class="layout-chunk" data-layout="l-body">
-
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span>, warning <span class='op'>=</span> <span class='cn'>FALSE</span>, message <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidymodels.tidymodels.org'>tidymodels</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://github.com/hrbrmstr/hrbrthemes'>hrbrthemes</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aljrico/gameofthrones'>gameofthrones</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/wch/extrafont'>extrafont</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/koalaverse/vip/'>vip</a></span><span class='op'>)</span>
+<span class='fu'>theme_set</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/hrbrthemes/man/theme_ipsum.html'>theme_ipsum</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>lann</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gameofthrones/man/got.html'>got</a></span><span class='op'>(</span><span class='fl'>1</span>, option <span class='op'>=</span> <span class='st'>"Lannister"</span><span class='op'>)</span>
+<span class='va'>characters</span> <span class='op'>&lt;-</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-06-30/characters.csv'</span><span class='op'>)</span>
+<span class='va'>locations</span> <span class='op'>&lt;-</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-06-30/locations.csv'</span><span class='op'>)</span>
+<span class='va'>character_visualization</span> <span class='op'>&lt;-</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-06-30/character_visualization.csv'</span><span class='op'>)</span>
+</code></pre>
+</div>
 </div>
 <h2 id="exploring-the-data">Exploring the Data</h2>
 <p>Let’s first look at the characters dataset. In this dataset, each row corresponds to a character in an issue, and each column corresponds to actions or events relevant to that character. Here’s a glimpse of that data:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>characters</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>characters</span> <span class='op'>%&gt;%</span>
   <span class='fu'>glimpse</span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -1499,7 +1547,7 @@ $ special_notes                                 &lt;chr&gt; NA, NA, NA,...</code
 <p>In the character_visualization dataset, each row represents a per-issue count of the number of times a character is depicted, speaks, thinks, has a narrative statement (I think this is probably only relevant for the narrator character?), either when the character is in costume or not in costume.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>character_visualization</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>character_visualization</span> <span class='op'>%&gt;%</span>
   <span class='fu'>glimpse</span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -1516,7 +1564,7 @@ $ depicted  &lt;dbl&gt; 0, 0, 0, 10, 23, 0, 9, 17, 17, 5, 0, 0, 0, 0, 0...</code
 <p>In the location dataset, each row corresponds to a location in which part of the issue takes place, with as many locations listed per issue as appear in that issue. The dataset also includes a “context” column that describes things like whether the location is shown in the present, as part of a flashback, in a dream, etc. Here’s a glimpse:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>locations</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>locations</span> <span class='op'>%&gt;%</span>
   <span class='fu'>glimpse</span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -1532,7 +1580,7 @@ $ notes    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Cut...<
 <p>First, let’s look at the distribution of rendered unconscious:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>characters</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>characters</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>issue</span>, wt <span class='op'>=</span> <span class='va'>rendered_unconcious</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>lann</span>, bins <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span>
@@ -1545,7 +1593,7 @@ $ notes    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Cut...<
 <p>Next, let’s aggregate our data up to the issue level. This will give us data where a row represents an issue rather than a character within an issue or a location within an issue. We’ll start with the characters dataset. There’s a lot we <em>could</em> do with this data, but because there are only 183 issues represented in this dataset, we need to be cognizant about how many predictors we’re including. So the only variable I’m going to use here is rendered unconscious as the outcome, which will represent the number of characters rendered unconscious in a given issue.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>rend_df</span> <span class='op'>&lt;-</span> <span class='va'>characters</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>rend_df</span> <span class='op'>&lt;-</span> <span class='va'>characters</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>issue</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>summarize</span><span class='op'>(</span>rendered_unconscious <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>rendered_unconcious</span>, na.rm <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
@@ -1554,7 +1602,7 @@ $ notes    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Cut...<
 <p>Next, let’s work on the character_visualization dataset. Again, trying to keep the number of predictors relatively small, I’m going to winnow this down to represent counts of how many times a handful of key characters are depicted in each issue. I don’t know a ton about the X-men, but I know who some of the more important characters are, so I’m going to choose Wolverine, Professor X, Magneto, and Jean Grey here.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>char_sum</span> <span class='op'>&lt;-</span> <span class='va'>character_visualization</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>char_sum</span> <span class='op'>&lt;-</span> <span class='va'>character_visualization</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>character</span>, <span class='st'>"Wolverine|Xavier|Jean Grey|Magneto"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>issue</span>, <span class='va'>character</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>summarize</span><span class='op'>(</span>depict <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>depicted</span>, na.rm <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -1574,7 +1622,7 @@ $ notes    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Cut...<
 <p>Next, let’s work on our locations dataset. First, let’s look at the most common locations. Again, since we only have 183 rows in our dataset that we’re modeling with, I only want to choose a handful of variables to include in the model here.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>locations</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>locations</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>location</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -1596,7 +1644,7 @@ $ notes    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Cut...<
 <p>Ok, so, I’m just going to go with the 3 most common locations: the X-mansion, the Danger Room (whatever that is), and Space. Danger Room sounds to me like a place where people might be rendered unconscious.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>use_locs</span> <span class='op'>&lt;-</span> <span class='va'>locations</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>use_locs</span> <span class='op'>&lt;-</span> <span class='va'>locations</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>location</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>top_n</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>pull</span><span class='op'>(</span><span class='va'>location</span><span class='op'>)</span>
@@ -1612,7 +1660,7 @@ $ notes    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Cut...<
 <p>This will return a dataset that tells us whether a given issue has the X-mansion, the Danger Room, or Space as a location.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>locs_sum</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>locs_sum</span> <span class='op'>%&gt;%</span>
   <span class='fu'>glimpse</span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -1626,7 +1674,7 @@ $ space       &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, ...</code
 <p>Now we can join the three datasets into one useful for modeling. I’m using an inner join here because, for whatever reason, the character visualization dataset has more issues represented than the others, and we only want issues that are represented in all 3 dataframes.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>issues_joined</span> <span class='op'>&lt;-</span> <span class='fu'>reduce</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>rend_df</span>, <span class='va'>char_sum</span>, <span class='va'>locs_sum</span><span class='op'>)</span>, <span class='op'>~</span><span class='fu'>inner_join</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span>, by <span class='op'>=</span> <span class='st'>"issue"</span><span class='op'>)</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>issues_joined</span> <span class='op'>&lt;-</span> <span class='fu'>reduce</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>rend_df</span>, <span class='va'>char_sum</span>, <span class='va'>locs_sum</span><span class='op'>)</span>, <span class='op'>~</span><span class='fu'>inner_join</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span>, by <span class='op'>=</span> <span class='st'>"issue"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
@@ -1635,7 +1683,7 @@ $ space       &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, ...</code
 <p>I mentioned before that one issue here is that this is a small set of data. We have 183 observations (again, each observation is an issue), which isn’t many. One way to make our modeling more robust is to use bootstrap resampling (see our good friend <a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">Wikipedia</a> for an explanation) and to fit models to several resamples.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
 <span class='va'>booties</span> <span class='op'>&lt;-</span> <span class='fu'>bootstraps</span><span class='op'>(</span><span class='va'>issues_joined</span>, times <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>booties</span><span class='op'>$</span><span class='va'>splits</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
 </code></pre>
@@ -1664,7 +1712,7 @@ $ space       &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, ...</code
 <p>Next, I’m going to set up a workflow. I think of this as like a little suitcase that can carry things I want to use in my model around – I think that analogy might be from Julia Silge? Anyway, I’m going to start by adding the formula I want to use in my model.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>xmen_wf</span> <span class='op'>&lt;-</span> <span class='fu'>workflow</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>xmen_wf</span> <span class='op'>&lt;-</span> <span class='fu'>workflow</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>add_formula</span><span class='op'>(</span><span class='va'>rendered_unconscious</span> <span class='op'>~</span> <span class='va'>Magneto</span> <span class='op'>+</span> <span class='va'>Jean_Grey</span> <span class='op'>+</span> <span class='va'>Wolverine</span> <span class='op'>+</span> <span class='va'>Professor_X</span> <span class='op'>+</span> <span class='va'>mansion</span> <span class='op'>+</span> <span class='va'>danger_room</span> <span class='op'>+</span> <span class='va'>space</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -1673,7 +1721,7 @@ $ space       &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, ...</code
 <p><strong>Brief Interpolation on what a Poisson regression is</strong> A Poisson regression is a generalized linear model (GLM) used to model count data. Like the name implies, GLMs are generalizations of linear models that use a link function, g(), to transform the expected value of the response (outcome) to a linear function of the predictor variables. Poisson regression uses a log link function to accomplish this transformation. For people interested in reading more, I really like John Fox’s book, <a href="https://www.amazon.com/Applied-Regression-Analysis-Generalized-Linear/dp/1452205663/ref=pd_sbs_14_1/139-8800507-2098708?_encoding=UTF8&amp;pd_rd_i=1452205663&amp;pd_rd_r=e7cdfc71-d6fa-4967-abbc-e11aa551df8f&amp;pd_rd_w=mqE5D&amp;pd_rd_wg=fNSQ2&amp;pf_rd_p=bdc67ba8-ab69-42ee-b8d8-8f5336b36a83&amp;pf_rd_r=4R6NXGVFTRME8MRA7WY3&amp;psc=1&amp;refRID=4R6NXGVFTRME8MRA7WY3"><em>Applied Regression Analysis</em></a>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidymodels/poissonreg'>poissonreg</a></span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidymodels/poissonreg'>poissonreg</a></span><span class='op'>)</span>
 <span class='va'>poisson_mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://poissonreg.tidymodels.org/reference/poisson_reg.html'>poisson_reg</a></span><span class='op'>(</span>
   penalty <span class='op'>=</span> <span class='fu'>tune</span><span class='op'>(</span><span class='op'>)</span>,
   mixture <span class='op'>=</span> <span class='fu'>tune</span><span class='op'>(</span><span class='op'>)</span>
@@ -1685,7 +1733,7 @@ $ space       &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, ...</code
 <p>Since I’m tuning a couple of parameters, I need to make a grid with possible values to tune across</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>poisson_tune</span> <span class='op'>&lt;-</span> <span class='fu'>grid_max_entropy</span><span class='op'>(</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>poisson_tune</span> <span class='op'>&lt;-</span> <span class='fu'>grid_max_entropy</span><span class='op'>(</span>
   <span class='fu'>penalty</span><span class='op'>(</span><span class='op'>)</span>,
   <span class='fu'>mixture</span><span class='op'>(</span><span class='op'>)</span>, 
   size <span class='op'>=</span> <span class='fl'>10</span>
@@ -1696,7 +1744,7 @@ $ space       &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, ...</code
 <p>And I’ll drop the model spec into the previous workflow.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>xmen_wf</span> <span class='op'>&lt;-</span> <span class='va'>xmen_wf</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>xmen_wf</span> <span class='op'>&lt;-</span> <span class='va'>xmen_wf</span> <span class='op'>%&gt;%</span>
   <span class='fu'>add_model</span><span class='op'>(</span><span class='va'>poisson_mod</span><span class='op'>)</span>
 <span class='va'>xmen_wf</span>
 </code></pre>
@@ -1721,7 +1769,7 @@ Computational engine: glmnet </code></pre>
 <p>And now we can fit the model using our bootstrap resamples.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>xmen_fit</span> <span class='op'>&lt;-</span> <span class='fu'>tune_grid</span><span class='op'>(</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>xmen_fit</span> <span class='op'>&lt;-</span> <span class='fu'>tune_grid</span><span class='op'>(</span>
   <span class='va'>xmen_wf</span>,
   resamples <span class='op'>=</span> <span class='va'>booties</span>,
   grid <span class='op'>=</span> <span class='va'>poisson_tune</span>
@@ -1732,7 +1780,7 @@ Computational engine: glmnet </code></pre>
 <p>Our models have fit, so now we can look at our results:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>xmen_fit</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>xmen_fit</span> <span class='op'>%&gt;%</span>
   <span class='fu'>collect_metrics</span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -1764,7 +1812,7 @@ Computational engine: glmnet </code></pre>
 <p>Anyway, let’s pick the best model here, finalize the model, and then fit it to our full training data.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>best_params</span> <span class='op'>&lt;-</span> <span class='va'>xmen_fit</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>best_params</span> <span class='op'>&lt;-</span> <span class='va'>xmen_fit</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select_best</span><span class='op'>(</span>metric <span class='op'>=</span> <span class='st'>"rmse"</span><span class='op'>)</span>
 <span class='va'>final_mod</span> <span class='op'>&lt;-</span> <span class='va'>xmen_wf</span> <span class='op'>%&gt;%</span>
   <span class='fu'>finalize_workflow</span><span class='op'>(</span><span class='va'>best_params</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -1775,9 +1823,9 @@ Computational engine: glmnet </code></pre>
 <p>And let’s check out how important how variables are. This should give us the coefficients from our model.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>final_mod</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>final_mod</span> <span class='op'>%&gt;%</span>
   <span class='fu'>pull_workflow_fit</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://rdrr.io/r/utils/edit.html'>vi</a></span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/vip/man/vi.html'>vi</a></span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code># A tibble: 7 x 3
@@ -1793,9 +1841,9 @@ Computational engine: glmnet </code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>final_mod</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>final_mod</span> <span class='op'>%&gt;%</span>
   <span class='fu'>pull_workflow_fit</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>vip</span><span class='op'>(</span>num_features <span class='op'>=</span> <span class='fl'>7</span>, fill <span class='op'>=</span> <span class='va'>lann</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/vip/man/vip.html'>vip</a></span><span class='op'>(</span>num_features <span class='op'>=</span> <span class='fl'>7</span>, fill <span class='op'>=</span> <span class='va'>lann</span><span class='op'>)</span>
 </code></pre>
 </div>
 <p><img src="unconsciousness-in-the-xmen_files/figure-html5/unnamed-chunk-20-1.png" width="624" /></p>
