@@ -132,7 +132,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["scrantonicity-part-2_files/anchor-4.2.2/anchor.min.js","scrantonicity-part-2_files/bowser-1.9.3/bowser.min.js","scrantonicity-part-2_files/distill-2.2.21/template.v2.js","scrantonicity-part-2_files/figure-html5/cluster-1.png","scrantonicity-part-2_files/figure-html5/unnamed-chunk-1-1.png","scrantonicity-part-2_files/jquery-1.11.3/jquery.min.js","scrantonicity-part-2_files/kePrint-0.0.1/kePrint.js","scrantonicity-part-2_files/lightable-0.0.1/lightable.css","scrantonicity-part-2_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["scrantonicity-part-2_files/anchor-4.2.2/anchor.min.js","scrantonicity-part-2_files/bowser-1.9.3/bowser.min.js","scrantonicity-part-2_files/distill-2.2.21/template.v2.js","scrantonicity-part-2_files/figure-html5/cluster-1.png","scrantonicity-part-2_files/figure-html5/unnamed-chunk-1-1.png","scrantonicity-part-2_files/jquery-1.11.3/jquery.min.js","scrantonicity-part-2_files/kePrint-0.0.1/kePrint.js","scrantonicity-part-2_files/lightable-0.0.1/lightable.css","scrantonicity-part-2_files/popper-2.6.0/popper.min.js","scrantonicity-part-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","scrantonicity-part-2_files/tippy-6.2.7/tippy-light-border.css","scrantonicity-part-2_files/tippy-6.2.7/tippy.css","scrantonicity-part-2_files/tippy-6.2.7/tippy.umd.min.js","scrantonicity-part-2_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2392,6 +2392,10 @@ d-appendix d-footnote-list a.footnote-backlink {
   <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="../../site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
@@ -2471,7 +2475,21 @@ Projects
 <h3 id="setup">Setup</h3>
 <p>As in the previous blog, I’ll be using the <code>{schrute}</code> package to get the transcripts from the show, and I’m going to limit the dialogue to the first 7 seasons of the show, which is when Michael Scott was around. I’ll also use a handful of other packages for data cleaning, analysis, and visualization. Let’s load all of this in and do some general setup.</p>
 <div class="layout-chunk" data-layout="l-body">
-
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span>, warning <span class='op'>=</span> <span class='cn'>FALSE</span>, error <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0408</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/bradlindblad/schrute'>schrute</a></span><span class='op'>)</span> <span class='co'>#office dialogue</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span> <span class='co'>#data wrangling tools</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span> <span class='co'>#tidying models</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/juliasilge/tidytext'>tidytext</a></span><span class='op'>)</span> <span class='co'>#tools for working with text data</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://yihui.org/knitr/'>knitr</a></span><span class='op'>)</span> <span class='co'>#markdown functionality</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://haozhu233.github.io/kableExtra/'>kableExtra</a></span><span class='op'>)</span> <span class='co'>#styling for tables</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://github.com/hrbrmstr/hrbrthemes'>hrbrthemes</a></span><span class='op'>)</span> <span class='co'>#ggplot themes</span>
+<span class='fu'>theme_set</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/hrbrthemes/man/theme_ipsum.html'>theme_ipsum</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>office</span> <span class='op'>&lt;-</span> <span class='va'>theoffice</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>season</span><span class='op'>)</span> <span class='op'>&lt;=</span> <span class='fl'>7</span><span class='op'>)</span>
+</code></pre>
+</div>
 </div>
 <h2 id="im-not-superstitious-but-i-am-a-little-stitious.">I’m not superstitious, but I am a little stitious.</h2>
 <p>Now that we have our data read in and our packages loaded, let’s start with the cluster analysis. The goal here is going to be to figure out if there are certain “types” (clusters, groups, whatever you want to call them) of episodes. There are several frameworks we could use to go about doing this. One approach would be a mixture modeling approach (e.g. latent profile analysis, latent class analysis). I’m not doing that here because I want each episode to be an observation when we cluster, and I’m not sure we have enough episodes here to get good model fits using this approach. Instead, I’m going to use k-means clustering, which basically places observations (episodes, in this case) into one of <em>k</em> groups (where <em>k</em> is supplied by the user) by trying to minimize the “distance” between each observation and the center of the group. The algorithm iteratively assigns observations to groups, updates the center of each group, reassigns observations to groups, etc. until it reaches a stable solution.</p>
@@ -2479,7 +2497,7 @@ Projects
 <p>Let’s go ahead and set up our data. I’m also going to decide to only use the 5 characters who speak the most during the first 7 seasons in this analysis, otherwise the number of combinations of possible exchanges would be huge. These five characters are:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>top5_chars</span> <span class='op'>&lt;-</span> <span class='va'>office</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>top5_chars</span> <span class='op'>&lt;-</span> <span class='va'>office</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>character</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>top_n</span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>pull</span><span class='op'>(</span><span class='va'>character</span><span class='op'>)</span>
@@ -2492,7 +2510,7 @@ Projects
 <p>Additionally, we want to code our changes so that Michael &amp; Jim is the same as Jim &amp; Michael.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>combos</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/combn.html'>combn</a></span><span class='op'>(</span><span class='va'>top5_chars</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>combos</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/combn.html'>combn</a></span><span class='op'>(</span><span class='va'>top5_chars</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>as_tibble</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate</span><span class='op'>(</span>comb <span class='op'>=</span> <span class='fu'>glue</span><span class='fu'>::</span><span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"{V1}&amp;{V2}"</span><span class='op'>)</span>,
          comb_inv <span class='op'>=</span> <span class='fu'>glue</span><span class='fu'>::</span><span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"{V2}&amp;{V1}"</span><span class='op'>)</span><span class='op'>)</span>
@@ -2530,7 +2548,7 @@ Projects
 <p>Great – now our data is all set up so that we know the number of lines exchanged between main characters in each episode. We can run some clustering algorithms now to see if there are patterns in these exchanges. To do this, we’ll fit models testing out 1-10 clusters. We’ll then look at the error for each of these models graphically and use this to choose how many clusters we want to include in our final model.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>clusters_fit</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='op'>(</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>clusters_fit</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='op'>(</span>
   k <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>,
   km_fit <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>, <span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/stats/kmeans.html'>kmeans</a></span><span class='op'>(</span><span class='va'>office_exchanges</span> <span class='op'>%&gt;%</span> <span class='fu'>select</span><span class='op'>(</span><span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>, centers <span class='op'>=</span> <span class='va'>.</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -2549,7 +2567,7 @@ Projects
 <p>We can see that error decreases as we add more clusters, and error will <em>always</em> decrease as k increases. But we can also see that the rate of decrease slows down a bit as we increase our number of clusters. Ideally, there would be a definitive bend, or “elbow” in this plot where the rate of decrease levels off (which is also the number of clusters we’d choose), but that’s not quite the case here. It seems like there’s some slight elbow-ing at 5 clusters, so let’s just go ahead and choose that. Now we can look at the patterns of exchanges in each of these clusters.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office_clustered</span> <span class='op'>&lt;-</span> <span class='fu'>augment</span><span class='op'>(</span><span class='va'>clusters_fit</span><span class='op'>$</span><span class='va'>km_fit</span><span class='op'>[[</span><span class='fl'>5</span><span class='op'>]</span><span class='op'>]</span>, data <span class='op'>=</span> <span class='va'>office_exchanges</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office_clustered</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>clusters_fit</span><span class='op'>$</span><span class='va'>km_fit</span><span class='op'>[[</span><span class='fl'>5</span><span class='op'>]</span><span class='op'>]</span>, data <span class='op'>=</span> <span class='va'>office_exchanges</span><span class='op'>)</span>
 <span class='va'>clusters_long</span> <span class='op'>&lt;-</span> <span class='va'>office_clustered</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate</span><span class='op'>(</span>season <span class='op'>=</span> <span class='fu'>as_factor</span><span class='op'>(</span><span class='va'>season</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>.cluster</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -2563,7 +2581,7 @@ Projects
     <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
     <span class='fu'>facet_wrap</span><span class='op'>(</span><span class='op'>~</span><span class='va'>.cluster</span>, ncol <span class='op'>=</span> <span class='fl'>2</span>, scales <span class='op'>=</span> <span class='st'>"free_y"</span><span class='op'>)</span> <span class='op'>+</span>
     <span class='co'>#scale_y_reordered() +</span>
-    <span class='fu'>scale_fill_ipsum</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/hrbrthemes/man/scale_ipsum.html'>scale_fill_ipsum</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
     <span class='fu'>theme_minimal</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
     <span class='fu'>labs</span><span class='op'>(</span>
       title <span class='op'>=</span> <span class='st'>"Types of Office Episodes"</span>
@@ -2579,10 +2597,10 @@ Projects
 <p>One thing to remember is that these clusters aren’t necessarily balanced. As the table below shows, <em>most</em> episodes fit into Cluster 3.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office_clustered</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office_clustered</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count</span><span class='op'>(</span><span class='va'>.cluster</span>, name <span class='op'>=</span> <span class='st'>"num_episodes"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>kable</span><span class='op'>(</span>format <span class='op'>=</span> <span class='st'>"html"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>kable_styling</span><span class='op'>(</span>bootstrap_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"condensed"</span>, <span class='st'>"striped"</span>, <span class='st'>"hover"</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>format <span class='op'>=</span> <span class='st'>"html"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>bootstrap_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"condensed"</span>, <span class='st'>"striped"</span>, <span class='st'>"hover"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 <table class="table table-condensed table-striped table-hover" style="margin-left: auto; margin-right: auto;">
@@ -2644,12 +2662,12 @@ num_episodes
 <p>Finally, let’s just choose a random episode from each cluster to see which episodes are falling into which categories.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>office_clustered</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>office_clustered</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>.cluster</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>sample_n</span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select</span><span class='op'>(</span><span class='va'>.cluster</span>, <span class='va'>season</span>, <span class='va'>episode_name</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>kable</span><span class='op'>(</span>format <span class='op'>=</span> <span class='st'>"html"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>kable_styling</span><span class='op'>(</span>bootstrap_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"hover"</span>, <span class='st'>"condensed"</span>, <span class='st'>"striped"</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>format <span class='op'>=</span> <span class='st'>"html"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>bootstrap_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"hover"</span>, <span class='st'>"condensed"</span>, <span class='st'>"striped"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 <table class="table table-hover table-condensed table-striped" style="margin-left: auto; margin-right: auto;">

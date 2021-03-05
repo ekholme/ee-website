@@ -36,7 +36,7 @@ colors <- c("Dog" = pal[1], "Cat" = pal[3])
 Next, we'll read in the data and clean it up a little bit. In this dataset, each row represents a licensed pet in Richmond, Virginia. The dataset includes animal type (dog, cat, puppy, kitten) and the address of the owners. Whoever set up the data was also nice enough to include longitude and latitude for each address in the dataset, which means I don't need to go out and get it. For our purposes here, I'm going to lump puppies in with dogs and kittens in with cats. I'm also going to extract the "location" column into a few separate columns. Let's take a look at the first few entries.
 
 ```{r cleaning}
-pets_raw <- read_csv(here::here("data/rva_pets_2019.csv"))
+pets_raw <- read_csv("~/Data/ee_website/data/rva_pets_2019.csv")
 pets_clean <- pets_raw %>%
   clean_names() %>%
   extract(col = location_1,
@@ -121,7 +121,7 @@ pets_map <- st_as_sf(pets_clean %>%
                      crs = 4326)
 get_rva_maps <- function(key, value) {
   getbb("Richmond Virginia United States") %>%
-    opq() %>%
+    opq(timeout = 80) %>%
     add_osm_feature(key = key,
                     value = value) %>%
     osmdata_sf()
