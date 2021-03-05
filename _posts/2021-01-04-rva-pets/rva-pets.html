@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["rva-pets_files/anchor-4.2.2/anchor.min.js","rva-pets_files/bowser-1.9.3/bowser.min.js","rva-pets_files/distill-2.2.21/template.v2.js","rva-pets_files/figure-html5/by zip-1.png","rva-pets_files/figure-html5/counts-1.png","rva-pets_files/figure-html5/names-1.png","rva-pets_files/jquery-1.11.3/jquery.min.js","rva-pets_files/kePrint-0.0.1/kePrint.js","rva-pets_files/lightable-0.0.1/lightable.css","rva-pets_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["rva-pets_files/anchor-4.2.2/anchor.min.js","rva-pets_files/bowser-1.9.3/bowser.min.js","rva-pets_files/distill-2.2.21/template.v2.js","rva-pets_files/figure-html5/by zip-1.png","rva-pets_files/figure-html5/counts-1.png","rva-pets_files/figure-html5/names-1.png","rva-pets_files/jquery-1.11.3/jquery.min.js","rva-pets_files/kePrint-0.0.1/kePrint.js","rva-pets_files/lightable-0.0.1/lightable.css","rva-pets_files/popper-2.6.0/popper.min.js","rva-pets_files/tippy-6.2.7/tippy-bundle.umd.min.js","rva-pets_files/tippy-6.2.7/tippy-light-border.css","rva-pets_files/tippy-6.2.7/tippy.css","rva-pets_files/tippy-6.2.7/tippy.umd.min.js","rva-pets_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1503,7 +1503,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Next, we’ll read in the data and clean it up a little bit. In this dataset, each row represents a licensed pet in Richmond, Virginia. The dataset includes animal type (dog, cat, puppy, kitten) and the address of the owners. Whoever set up the data was also nice enough to include longitude and latitude for each address in the dataset, which means I don’t need to go out and get it. For our purposes here, I’m going to lump puppies in with dogs and kittens in with cats. I’m also going to extract the “location” column into a few separate columns. Let’s take a look at the first few entries.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>pets_raw</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span><span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data/rva_pets_2019.csv"</span><span class='op'>)</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>pets_raw</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span><span class='st'>"~/Data/ee_website/data/rva_pets_2019.csv"</span><span class='op'>)</span>
 <span class='va'>pets_clean</span> <span class='op'>&lt;-</span> <span class='va'>pets_raw</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/pkg/janitor/man/clean_names.html'>clean_names</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>extract</span><span class='op'>(</span>col <span class='op'>=</span> <span class='va'>location_1</span>,
@@ -1754,7 +1754,7 @@ Henri
                      crs <span class='op'>=</span> <span class='fl'>4326</span><span class='op'>)</span>
 <span class='va'>get_rva_maps</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>key</span>, <span class='va'>value</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='fu'><a href='https://docs.ropensci.org/osmdata/reference/getbb.html'>getbb</a></span><span class='op'>(</span><span class='st'>"Richmond Virginia United States"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='https://docs.ropensci.org/osmdata/reference/opq.html'>opq</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://docs.ropensci.org/osmdata/reference/opq.html'>opq</a></span><span class='op'>(</span>timeout <span class='op'>=</span> <span class='fl'>80</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://docs.ropensci.org/osmdata/reference/add_osm_feature.html'>add_osm_feature</a></span><span class='op'>(</span>key <span class='op'>=</span> <span class='va'>key</span>,
                     value <span class='op'>=</span> <span class='va'>value</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://docs.ropensci.org/osmdata/reference/osmdata_sf.html'>osmdata_sf</a></span><span class='op'>(</span><span class='op'>)</span>
