@@ -7,7 +7,16 @@
     <description>Using R for statistical modeling, data visualization, and other personal projects.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 10 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Improving ggplots with Text Color</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-03-24-improving-ggplots-with-text-color</link>
+      <description>A walkthrough of how -- and when -- to replace your legend with colored text</description>
+      <guid>https://www.ericekholm.com/posts/2021-03-24-improving-ggplots-with-text-color</guid>
+      <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-03-24-improving-ggplots-with-text-color/improving-ggplots-with-text-color_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Dungeons and Dragons - Part 4</title>
       <dc:creator>EE</dc:creator>
