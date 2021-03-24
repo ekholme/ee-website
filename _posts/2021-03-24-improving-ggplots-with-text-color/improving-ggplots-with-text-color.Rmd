@@ -21,7 +21,7 @@ You'll notice that, instead of having a legend off to the right or the bottom or
 
 Let's walk through how (and when) to do this, then!
 
-*Disclaimer: I'm not a data viz expert, and there are tons of people who create visualizations for #TidyTuesday that regularly blow anything I make out of the water (see [@CedScherer](https://twitter.com/CedScherer) or [@geokaramanis](https://twitter.com/geokaramanis), for example). That said, what I want to walk through here is a useful, easy-to-implement trick that I use for a lot of plots I make for my job and doesn't require you to be a ggplot wizard.*
+*Disclaimer: I'm not a data viz expert, and there are tons of people who create visualizations for #TidyTuesday that regularly blow anything I make out of the water (see [CedScherer](https://twitter.com/CedScherer) or [geokaramanis](https://twitter.com/geokaramanis), for example). That said, what I want to walk through here is a useful, easy-to-implement trick that I use for a lot of plots I make for my job and doesn't require you to be a ggplot wizard.*
 
 # Setup
 
