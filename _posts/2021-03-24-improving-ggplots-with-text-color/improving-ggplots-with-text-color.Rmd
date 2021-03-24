@@ -139,7 +139,7 @@ Although I think this is a great trick to improve a lot of different plots, it's
 
 Like I mentioned at the outset, I have a custom ggplot theme in my personal R package (`{eemisc}`) that tweaks the above plot in a few ways to make it look nicer (in my opinion). Additionally, it assumes titles and subtitles are `element_markdown()` already, so it saves that line of code. Using my theme, we can revise the previous plot to the following:
 
-```{r}
+```{r, preview = TRUE}
 p_final <- movies %>%
   ggplot(aes(x = as_factor(decade), y = imdb_rating, color = binary, group = as_factor(binary))) +
   geom_quasirandom(dodge.width = .7, width = .15, alpha = .6) +
