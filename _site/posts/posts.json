@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-04-25-this-code-is-big-time/",
+    "title": "This Code is Big Time",
+    "description": "Wrap your R code in Your Mom's House audio drops",
+    "author": [
+      {
+        "name": "EE",
+        "url": "https://www.ericekholm.com/"
+      }
+    ],
+    "date": "2021-04-25",
+    "categories": [],
+    "contents": "\r\nWhat’s up, Jeans. This short post is targeting the very niche crowd of R users who also happen to love Tim and Christine, the main mommies of Your Mom’s House. Basically, I discovered the {beepr} package a few days ago, which makes it easier you play short sound files through R, and so naturally my first thought was to “try it out” with a YMH drop. The result was 2 functions added to my personal/miscellaneous package, {eemisc}:\r\nbig_time(), which will play the “THIS SHIT IS BIG TIME” drop from the YMH intro, and\r\nbig_time_operator(), which lets you wrap a function and play the “THIS SHIT IS BIG TIME” drop whenever you call that function.\r\nI’ll demonstrate these below.\r\nSetup\r\nTo use these functions, you’ll need my personal package, {eemisc}, installed. You can install it via Github via the following command:\r\n\r\n\r\nremotes::install_github(\"ekholme/eemisc\")\r\n\r\n\r\n\r\nEventually, I might put these functions into their own package, but for now they live in my odds-and-ends package.\r\nBig Time\r\nTo play the “THIS SHIT IS BIG TIME” drop, you just need to call the function big_time():\r\n\r\n\r\nlibrary(eemisc)\r\n\r\nbig_time()\r\n\r\n\r\n\r\nThat’s it. That will play the drop.\r\nBig Time Operator\r\nBut I took it a step further for all of my kings and queens above 18. The big_time_operator() takes a function of your choosing and produces as its output a new function that wraps the input function with the “big time” drop. Want to let everyone know that taking the mean is big time?\r\n\r\n\r\nbig_time_mean <- big_time_operator(mean)\r\n\r\nx <- 1:10\r\n\r\nbig_time_mean(x)\r\n\r\n\r\n[1] 5.5\r\n\r\nYou can pass any function you want into big_time_operator() to get the same effect.\r\nAnyway, that’s all for now. Keep it high and tight, Jeans, and you bet I’m coming up in May.\r\n\r\n\r\n\r\n",
+    "preview": "posts/2021-04-25-this-code-is-big-time/img/ymh_logo.jpg",
+    "last_modified": "2021-04-25T15:23:01-04:00",
+    "input_file": "this-code-is-big-time.utf8.md"
+  },
+  {
     "path": "posts/2021-04-02-personalizing-the-distill-template/",
     "title": "Personalizing the Distill Template",
     "description": "How to modify the distill template to fit your preferences.",
