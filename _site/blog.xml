@@ -7,7 +7,16 @@
     <description>Using R for statistical modeling, data visualization, and other personal projects.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 25 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 May 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Publishing Rmarkdown to Google Sites</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-04-26-publishing-rmarkdown-to-google-sites</link>
+      <description>A workaround for people in organizations that use Google Sites</description>
+      <guid>https://www.ericekholm.com/posts/2021-04-26-publishing-rmarkdown-to-google-sites</guid>
+      <pubDate>Mon, 03 May 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-04-26-publishing-rmarkdown-to-google-sites/img/google_sites_logo.jpg" medium="image" type="image/jpeg"/>
+    </item>
     <item>
       <title>This Code is Big Time</title>
       <dc:creator>EE</dc:creator>
