@@ -2,13 +2,13 @@
 title: "Eric Ekholm"
 image: "prof_pic.jpg"
 links:
-  - label: LinkedIn
+  - label: '<i class="fab fa-linkedin"></i> LinkedIn'
     url: "https://www.linkedin.com/in/eric-ekholm-8a481022/"
-  - label: Twitter
+  - label: '<i class="fab fa-twitter"></i> Twitter'
     url: "https://twitter.com/ekholm_e"
-  - label: GitHub
+  - label: '<i class="fab fa-github"></i> GitHub'
     url: "https://github.com/ekholme/"
-  - label: Email
+  - label: '<i class="fas fa-envelope"></i> Email'
     url: "mailto:eric.ekholm@gmail.com"
 output:
   postcards::jolla

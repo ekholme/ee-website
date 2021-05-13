@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
     <loc>https://www.ericekholm.com/about.html</loc>
-    <lastmod>2021-02-17T06:00:12-05:00</lastmod>
+    <lastmod>2021-05-13T16:13:57-04:00</lastmod>
   </url>
   <url>
     <loc>https://www.ericekholm.com/blog.html</loc>
@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://www.ericekholm.com/</loc>
-    <lastmod>2021-02-17T06:36:51-05:00</lastmod>
+    <lastmod>2021-05-13T15:55:00-04:00</lastmod>
   </url>
   <url>
     <loc>https://www.ericekholm.com/pubs.html</loc>
@@ -22,15 +22,15 @@
   </url>
   <url>
     <loc>https://www.ericekholm.com/posts/2021-04-26-publishing-rmarkdown-to-google-sites/</loc>
-    <lastmod>2021-05-03T21:46:09-04:00</lastmod>
+    <lastmod>2021-05-03T21:47:18-04:00</lastmod>
   </url>
   <url>
     <loc>https://www.ericekholm.com/posts/2021-04-25-this-code-is-big-time/</loc>
-    <lastmod>2021-04-25T15:23:01-04:00</lastmod>
+    <lastmod>2021-04-25T15:23:02-04:00</lastmod>
   </url>
   <url>
     <loc>https://www.ericekholm.com/posts/2021-04-02-personalizing-the-distill-template/</loc>
-    <lastmod>2021-04-05T21:20:21-04:00</lastmod>
+    <lastmod>2021-04-05T21:20:22-04:00</lastmod>
   </url>
   <url>
     <loc>https://www.ericekholm.com/posts/2021-03-24-improving-ggplots-with-text-color/</loc>
