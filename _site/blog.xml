@@ -7,7 +7,16 @@
     <description>Using R for statistical modeling, data visualization, and other personal projects.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 03 May 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 May 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>It's-a Me, Linear Regression!</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-05-30-its-a-me-linear-regression</link>
+      <description>Using feature engineering and linear regression to predict Mario Kart world records</description>
+      <guid>https://www.ericekholm.com/posts/2021-05-30-its-a-me-linear-regression</guid>
+      <pubDate>Sun, 30 May 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-05-30-its-a-me-linear-regression/its-a-me-linear-regression_files/figure-html5/pct-better-plot-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Publishing Rmarkdown to Google Sites</title>
       <dc:creator>EE</dc:creator>
