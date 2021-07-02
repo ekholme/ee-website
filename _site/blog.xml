@@ -7,7 +7,16 @@
     <description>Using R for statistical modeling, data visualization, and other personal projects.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 30 May 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Robustly Create Parameterized Reports</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-07-02-robustly-create-parameterized-reports</link>
+      <description>Wrapping functions to safeguard against errors</description>
+      <guid>https://www.ericekholm.com/posts/2021-07-02-robustly-create-parameterized-reports</guid>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-07-02-robustly-create-parameterized-reports/robustly-create-parameterized-reports_files/figure-html5/unnamed-chunk-2-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>It's-a Me, Linear Regression!</title>
       <dc:creator>EE</dc:creator>
