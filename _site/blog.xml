@@ -7,7 +7,16 @@
     <description>Using R for statistical modeling, data visualization, and other personal projects.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 02 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Scooby Doo EDA</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-07-20-scooby-doo-eda</link>
+      <description>Stream-of-consciousness exploration and modeling</description>
+      <guid>https://www.ericekholm.com/posts/2021-07-20-scooby-doo-eda</guid>
+      <pubDate>Tue, 20 Jul 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-07-20-scooby-doo-eda/img/scooby_doo.jpg" medium="image" type="image/jpeg"/>
+    </item>
     <item>
       <title>Robustly Create Parameterized Reports</title>
       <dc:creator>EE</dc:creator>
