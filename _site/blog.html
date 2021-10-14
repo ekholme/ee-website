@@ -2489,7 +2489,6 @@ function init_posts_list() {
 
       // mark posts that match the category visible
       var page_category = window.location.hash.replace(/^#category:/, "");
-      page_category = decodeURIComponent(page_category)
       var posts = $('.post-metadata').map(function(idx, script) {
         var metadata = $.parseJSON($(script).html());
         var post = null;
@@ -2505,7 +2504,7 @@ function init_posts_list() {
       set_posts_visible(posts, true);
 
       // mark the hash active
-      $('.categories li>a[href="' + decodeURIComponent(window.location.hash) + '"]').addClass('active');
+      $('.categories li>a[href="' + window.location.hash + '"]').addClass('active');
 
       // update the list_caption
       var list_caption = $('.posts-list-caption');
@@ -2568,6 +2567,23 @@ function init_posts_list() {
 <div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
 <div class="posts-list">
 <h1 class="posts-list-caption" data-caption="Blog">Blog</h1>
+<a href="posts/2021-10-13-2021-virginia-datathon-recap/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Oct. 13, 2021</div>
+<div class="dt-authors">
+<div class="dt-author">EE</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/2021-10-13-2021-virginia-datathon-recap/img/datathon_logo.jpg"/>
+</div>
+<div class="description">
+<h2>2021 Virginia Datathon Recap</h2>
+<div class="dt-tags"></div>
+<p>Lessons learned and takeaways from the 2021 VA Datathon. Plus a Shiny app.</p>
+</div>
+</a>
 <a href="posts/2021-07-20-scooby-doo-eda/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":[]}</script>
 <div class="metadata">
@@ -2645,7 +2661,7 @@ function init_posts_list() {
 </div>
 </div>
 <div class="thumbnail">
-<img src="posts/2021-04-25-this-code-is-big-time/img/ymh_logo.jpg"/>
+<img data-src="posts/2021-04-25-this-code-is-big-time/img/ymh_logo.jpg"/>
 </div>
 <div class="description">
 <h2>This Code is Big Time</h2>
@@ -3028,7 +3044,7 @@ function init_posts_list() {
 <a href="#">More articles &raquo;</a>
 </div>
 </div>
-<!--/radix_placeholder_article_listing-->
+<!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
 <h1>Blog</h1>

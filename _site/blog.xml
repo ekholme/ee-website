@@ -7,7 +7,16 @@
     <description>Using R for statistical modeling, data visualization, and other personal projects.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 20 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 13 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>2021 Virginia Datathon Recap</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2021-10-13-2021-virginia-datathon-recap</link>
+      <description>Lessons learned and takeaways from the 2021 VA Datathon. Plus a Shiny app.</description>
+      <guid>https://www.ericekholm.com/posts/2021-10-13-2021-virginia-datathon-recap</guid>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://www.ericekholm.com/posts/2021-10-13-2021-virginia-datathon-recap/img/datathon_logo.jpg" medium="image" type="image/jpeg"/>
+    </item>
     <item>
       <title>Scooby Doo EDA</title>
       <dc:creator>EE</dc:creator>
