@@ -2,15 +2,15 @@
 title: "Publications"
 ---
 
-You can also check out my profiles on [Google Scholar](https://scholar.google.com/citations?user=d3WGzzkAAAAJ&hl=en) and [Researchgate](https://www.researchgate.net/profile/Eric_Ekholm)
+Since I earned by PhD and finished grad school in summer 2019, publishing peer-reviewed research has been less of a priority for me. However, this page contains most of my research projects.
 
 <br/>
 
 #### Peer-Reviewed Publications
 
-+ Chow, J., __Ekholm, E.__, & Bae, C. (2020, accepted). Relative Contribution of Verbal Working Memory and Attention to Child Language. _Assessment for Effective Intervention_.
++ Chow, J., __Ekholm, E.__, & Bae, C. (2020). Relative Contribution of Verbal Working Memory and Attention to Child Language. _Assessment for Effective Intervention_.
 
-+ Broda, M., __Ekholm, E.__, & Zumbrunn, S. (2020, in press). Assessing the predictive nature of teacher and student writing self-regulation discrepancy. _Frontline Learning Research_.
++ Broda, M., __Ekholm, E.__, & Zumbrunn, S. (2020). Assessing the predictive nature of teacher and student writing self-regulation discrepancy. _Frontline Learning Research_.
 
 + Gellock, J., __Ekholm, E.__, Greenhalgh, G., LeCrom, C., Reina, C., & Kudesia, R. (2019). Women’s lacrosse players’ perceptions of teammate leadership: Examining athlete leadership behaviors, attributes, and interactions. _Journal of Athlete Development and Experience, 1(2)_, 2. https://scholarworks.bgsu.edu/jade/vol1/iss2/2.  
 
@@ -59,7 +59,9 @@ You can also check out my profiles on [Google Scholar](https://scholar.google.co
 #### Conference Presentations
 _Only conference presentations since 2018 included_
 
-+ __Ekholm, E.__, & Zumbrun, S. (April, 2020). Investigating relations between writers’ emotional experiences and attention regulation: A daily diary study. Paper to be presented at the American Educational Research Association (AERA) Annual Meeting, San Francisco, CA.
++ __Ekholme, E.__, & Fox, P. (October, 2021). Using machine learning to support student attendance practices. Session presented at the annual [Metropolitan Education Research Consortium (MERC) conference](https://merc.soe.vcu.edu/conference/program/2021/), Richmond, VA.
+
++ __Ekholm, E.__, & Zumbrun, S. (April, 2020). Investigating relations between writers’ emotional experiences and attention regulation: A daily diary study. Paper presented at the American Educational Research Association (AERA) Annual Meeting, San Francisco, CA.
 
 + __Ekholm, E.__, Zumbrunn, S., Broda, M., & Luther, T. C. (April, 2019). The development of student writing feedback attitudes in grades 3-7: A latent growth analysis. Poster presented at the American Educational Research Association (AERA) Annual Meeting, Toronto, Canada.
 
