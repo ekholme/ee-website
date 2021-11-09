@@ -59,7 +59,7 @@ Since I earned by PhD and finished grad school in summer 2019, publishing peer-r
 #### Conference Presentations
 _Only conference presentations since 2018 included_
 
-+ __Ekholme, E.__, & Fox, P. (October, 2021). Using machine learning to support student attendance practices. Session presented at the annual [Metropolitan Education Research Consortium (MERC) conference](https://merc.soe.vcu.edu/conference/program/2021/), Richmond, VA.
++ __Ekholme, E.__, & Fox, P. (October, 2021). Using machine learning to support student attendance practices. Session presented at the annual [Metropolitan Education Research Consortium (MERC) conference](https://merc.soe.vcu.edu/conference/program/2021/), Richmond, VA. Video available [here](https://www.youtube.com/watch?v=gbTfelMWMiY) (~27:30 timestamp).
 
 + __Ekholm, E.__, & Zumbrun, S. (April, 2020). Investigating relations between writers’ emotional experiences and attention regulation: A daily diary study. Paper presented at the American Educational Research Association (AERA) Annual Meeting, San Francisco, CA.
 
