@@ -9,6 +9,7 @@ date: 03-15-2022
 output:
   distill::distill_article:
     self_contained: false
+preview: img/purrr_hex.png
 ---
 
 The point of this blog post is to walk through a pattern I've started using in some of my analyses that combines `do.call()`, `purrr::pmap()`, and some wrapper functions to customize how a given analysis gets run. I'll start by demonstrating `do.call()` and `pmap()` separately, then showing how you can use them together to do some cool things. I'm not going to go super in-depth on either `do.call()` or `pmap()`, so it might be worthwhile to look into some of the documentation for those functions separately.
