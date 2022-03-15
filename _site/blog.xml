@@ -7,7 +7,15 @@
     <description>Using R for statistical modeling, data visualization, and other personal projects.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sat, 20 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Combining pmap and do.call</title>
+      <dc:creator>EE</dc:creator>
+      <link>https://www.ericekholm.com/posts/2022-03-15-combining-pmap-and-docall</link>
+      <description>A pattern to create flexible analysis workflows.</description>
+      <guid>https://www.ericekholm.com/posts/2022-03-15-combining-pmap-and-docall</guid>
+      <pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Fitting a Multiple Regression with Torch</title>
       <dc:creator>EE</dc:creator>
