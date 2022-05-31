@@ -56,7 +56,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
+code span.at { } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
 code span.cf { color: #007ba5; } /* ControlFlow */
@@ -77,13 +77,14 @@ code span.kw { color: #007ba5; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
 code span.ot { color: #007ba5; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
 code span.st { color: #20794d; } /* String */
 code span.va { color: #111111; } /* Variable */
 code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
+
 
   <!--radix_placeholder_meta_tags-->
   <title>Eric Ekholm: Publications</title>
@@ -1859,7 +1860,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -2363,7 +2367,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     color: var(--hover-color, white);
   }</style>
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2442,59 +2446,188 @@ Projects
 
 
 <div class="d-article">
-<p>Since I earned by PhD and finished grad school in summer 2019, publishing peer-reviewed research has been less of a priority for me. However, this page contains most of my academic research and other publications.</p>
+<p>Since I earned by PhD and finished grad school in summer 2019,
+publishing peer-reviewed research has been less of a priority for me.
+However, this page contains most of my academic research and other
+publications.</p>
 <p><br/></p>
 <h4 id="peer-reviewed-publications">Peer-Reviewed Publications</h4>
 <ul>
-<li><p>Zumbrunn, S., <strong>Ekholm, E.</strong>, Broda, M., &amp; Koenka, A. C. (accepted). Trajectories of students’ writing feedback attitudes. <em>Journal of Experimental Education</em>.</p></li>
-<li><p>Chow, J., <strong>Ekholm, E.</strong>, &amp; Bae, C. (2021). Relative contribution of verbal working memory and attention to child language. <em>Assessment for Effective Intervention</em>, <em>47</em>(1), 3-13.</p></li>
-<li><p>Broda, M., <strong>Ekholm, E.</strong>, &amp; Zumbrunn, S. (2020). Assessing the predictive nature of teacher and student writing self-regulation discrepancy. <em>Frontline Learning Research</em>, <em>8</em>(4), 52.</p></li>
-<li><p>Gellock, J., <strong>Ekholm, E.</strong>, Greenhalgh, G., LeCrom, C., Reina, C., &amp; Kudesia, R. (2019). Women’s lacrosse players’ perceptions of teammate leadership: Examining athlete leadership behaviors, attributes, and interactions. <em>Journal of Athlete Development and Experience, 1(2)</em>, 2. <a href="https://scholarworks.bgsu.edu/jade/vol1/iss2/2" class="uri">https://scholarworks.bgsu.edu/jade/vol1/iss2/2</a>.</p></li>
-<li><p>Zumbrunn, S., Marrs, S., Broda, M., <strong>Ekholm, E.</strong>, Jackson, L., &amp; DeBusk-Lane, M. (2019). Toward a more complete understanding of writing enjoyment: A mixed methods study of elementary students. <em>AERA Open, 5(2)</em>, <a href="https://doi.org/10.1177/2332858419850792" class="uri">https://doi.org/10.1177/2332858419850792</a>.</p></li>
-<li><p>Broda, M., Tucker, S., <strong>Ekholm, E.</strong>, Johnson, T., &amp; Liang, Q. (2019). Small fingers, big data: Preschoolers’ subitizing speed and accuracy during interactions with multi-touch technology. <em>The Journal of Educational Research, 112(2)</em>, 211-222. <a href="https://doi.org/10.1080/00220671.2018.1486281" class="uri">https://doi.org/10.1080/00220671.2018.1486281</a>.</p></li>
-<li><p><strong>Ekholm, E.</strong> &amp; Chow. J. C. (2018). Addressing publication bias in educational psychology. <em>Translational Issues in Psychological Science, 4(4)</em>, 425-439. <a href="http://dx.doi.org/10.1037/tps0000181" class="uri">http://dx.doi.org/10.1037/tps0000181</a>.</p></li>
-<li><p>Broda, M., <strong>Ekholm, E.</strong>, Schneider, B., &amp; Hutton, A. (2018). Teachers’ social networks, college-going practices, and the diffusion of a school-based reform initiative. <em>SAGE Open</em>. <a href="https://doi.org/10.1177/2158244018817397" class="uri">https://doi.org/10.1177/2158244018817397</a>.</p></li>
-<li><p>Chow, J.C., <strong>Ekholm, E.</strong>, &amp; Coleman, H. (2018). Does oral language underpin the development of later behavior problems? A longitudinal meta-analysis. <em>School Psychology Quarterly, 33(3)</em>, 337-349. <a href="http://dx.doi.org/10.1037/spq0000255" class="uri">http://dx.doi.org/10.1037/spq0000255</a>.</p></li>
-<li><p>Chow, J.C., &amp; <strong>Ekholm, E.</strong> (2018). Do published studies yield larger effect sizes than unpublished studies in education and special education? A meta-review. <em>Educational Psychology Review, 30(3)</em>, 727-744. <a href="https://doi.org/10.1007/s10648-018-9437-7" class="uri">https://doi.org/10.1007/s10648-018-9437-7</a>.</p></li>
-<li><p>Chow, J. C., &amp; <strong>Ekholm, E.</strong> (2018). Language domains differentially predict mathematics performance in young children. <em>Early Childhood Research Quarterly, 46</em>, 179-186. <a href="https://doi.org/10.1016/j.ecresq.2018.02.011" class="uri">https://doi.org/10.1016/j.ecresq.2018.02.011</a></p></li>
-<li><p><strong>Ekholm, E.</strong>, Zumbrunn, S. &amp; DeBusk-Lane, M. (2018). Clarifying an elusive construct: A systematic review of writing attitudes. <em>Educational Psychology Review, 30(3)</em>, 827-856. <a href="https://doi.org/10.1007/s10648-017-9423-5" class="uri">https://doi.org/10.1007/s10648-017-9423-5</a>.</p></li>
-<li><p><strong>Ekholm, E.</strong> (2017). Ethical concerns of using texts involving death in the English classroom. <em>English Journal, 107(2)</em>, 25-30.</p></li>
-<li><p>Zumbrunn, S., <strong>Ekholm, E.</strong>, Stringer, J. K., McKnight, K., &amp; DeBusk-Lane, M. (2017). Student experiences with writing: Taking the temperature of the classroom. <em>The Reading Teacher, 70(6)</em>, 667-677. <a href="https://doi.org/10.1002/trtr.1574" class="uri">https://doi.org/10.1002/trtr.1574</a>.</p></li>
-<li><p><strong>Ekholm, E.</strong>, Zumbrunn, S., &amp; Conklin, S. (2015). The relation of college student self-efficacy toward writing and writing self-regulation aptitude: writing feedback perceptions as a mediating variable. <em>Teaching in Higher Education, 20(2)</em>, 197-207. <a href="https://doi.org/10.1080/13562517.2014.974026" class="uri">https://doi.org/10.1080/13562517.2014.974026</a>.</p></li>
+<li><p>Zumbrunn, S., <strong>Ekholm, E.</strong>, Broda, M., &amp;
+Koenka, A. C. (2022). Trajectories of students’ writing feedback
+attitudes. <em>Journal of Experimental Education</em>. <a
+href="https://doi.org/10.1080/00220973.2022.2064413"
+class="uri">https://doi.org/10.1080/00220973.2022.2064413</a></p></li>
+<li><p>Chow, J., <strong>Ekholm, E.</strong>, &amp; Bae, C. (2021).
+Relative contribution of verbal working memory and attention to child
+language. <em>Assessment for Effective Intervention</em>,
+<em>47</em>(1), 3-13.</p></li>
+<li><p>Broda, M., <strong>Ekholm, E.</strong>, &amp; Zumbrunn, S.
+(2020). Assessing the predictive nature of teacher and student writing
+self-regulation discrepancy. <em>Frontline Learning Research</em>,
+<em>8</em>(4), 52.</p></li>
+<li><p>Gellock, J., <strong>Ekholm, E.</strong>, Greenhalgh, G., LeCrom,
+C., Reina, C., &amp; Kudesia, R. (2019). Women’s lacrosse players’
+perceptions of teammate leadership: Examining athlete leadership
+behaviors, attributes, and interactions. <em>Journal of Athlete
+Development and Experience, 1(2)</em>, 2. <a
+href="https://scholarworks.bgsu.edu/jade/vol1/iss2/2"
+class="uri">https://scholarworks.bgsu.edu/jade/vol1/iss2/2</a>.</p></li>
+<li><p>Zumbrunn, S., Marrs, S., Broda, M., <strong>Ekholm, E.</strong>,
+Jackson, L., &amp; DeBusk-Lane, M. (2019). Toward a more complete
+understanding of writing enjoyment: A mixed methods study of elementary
+students. <em>AERA Open, 5(2)</em>, <a
+href="https://doi.org/10.1177/2332858419850792"
+class="uri">https://doi.org/10.1177/2332858419850792</a>.</p></li>
+<li><p>Broda, M., Tucker, S., <strong>Ekholm, E.</strong>, Johnson, T.,
+&amp; Liang, Q. (2019). Small fingers, big data: Preschoolers’
+subitizing speed and accuracy during interactions with multi-touch
+technology. <em>The Journal of Educational Research, 112(2)</em>,
+211-222. <a href="https://doi.org/10.1080/00220671.2018.1486281"
+class="uri">https://doi.org/10.1080/00220671.2018.1486281</a>.</p></li>
+<li><p><strong>Ekholm, E.</strong> &amp; Chow. J. C. (2018). Addressing
+publication bias in educational psychology. <em>Translational Issues in
+Psychological Science, 4(4)</em>, 425-439. <a
+href="http://dx.doi.org/10.1037/tps0000181"
+class="uri">http://dx.doi.org/10.1037/tps0000181</a>.</p></li>
+<li><p>Broda, M., <strong>Ekholm, E.</strong>, Schneider, B., &amp;
+Hutton, A. (2018). Teachers’ social networks, college-going practices,
+and the diffusion of a school-based reform initiative. <em>SAGE
+Open</em>. <a href="https://doi.org/10.1177/2158244018817397"
+class="uri">https://doi.org/10.1177/2158244018817397</a>.</p></li>
+<li><p>Chow, J.C., <strong>Ekholm, E.</strong>, &amp; Coleman, H.
+(2018). Does oral language underpin the development of later behavior
+problems? A longitudinal meta-analysis. <em>School Psychology Quarterly,
+33(3)</em>, 337-349. <a href="http://dx.doi.org/10.1037/spq0000255"
+class="uri">http://dx.doi.org/10.1037/spq0000255</a>.</p></li>
+<li><p>Chow, J.C., &amp; <strong>Ekholm, E.</strong> (2018). Do
+published studies yield larger effect sizes than unpublished studies in
+education and special education? A meta-review. <em>Educational
+Psychology Review, 30(3)</em>, 727-744. <a
+href="https://doi.org/10.1007/s10648-018-9437-7"
+class="uri">https://doi.org/10.1007/s10648-018-9437-7</a>.</p></li>
+<li><p>Chow, J. C., &amp; <strong>Ekholm, E.</strong> (2018). Language
+domains differentially predict mathematics performance in young
+children. <em>Early Childhood Research Quarterly, 46</em>, 179-186. <a
+href="https://doi.org/10.1016/j.ecresq.2018.02.011"
+class="uri">https://doi.org/10.1016/j.ecresq.2018.02.011</a></p></li>
+<li><p><strong>Ekholm, E.</strong>, Zumbrunn, S. &amp; DeBusk-Lane, M.
+(2018). Clarifying an elusive construct: A systematic review of writing
+attitudes. <em>Educational Psychology Review, 30(3)</em>, 827-856. <a
+href="https://doi.org/10.1007/s10648-017-9423-5"
+class="uri">https://doi.org/10.1007/s10648-017-9423-5</a>.</p></li>
+<li><p><strong>Ekholm, E.</strong> (2017). Ethical concerns of using
+texts involving death in the English classroom. <em>English Journal,
+107(2)</em>, 25-30.</p></li>
+<li><p>Zumbrunn, S., <strong>Ekholm, E.</strong>, Stringer, J. K.,
+McKnight, K., &amp; DeBusk-Lane, M. (2017). Student experiences with
+writing: Taking the temperature of the classroom. <em>The Reading
+Teacher, 70(6)</em>, 667-677. <a
+href="https://doi.org/10.1002/trtr.1574"
+class="uri">https://doi.org/10.1002/trtr.1574</a>.</p></li>
+<li><p><strong>Ekholm, E.</strong>, Zumbrunn, S., &amp; Conklin, S.
+(2015). The relation of college student self-efficacy toward writing and
+writing self-regulation aptitude: writing feedback perceptions as a
+mediating variable. <em>Teaching in Higher Education, 20(2)</em>,
+197-207. <a href="https://doi.org/10.1080/13562517.2014.974026"
+class="uri">https://doi.org/10.1080/13562517.2014.974026</a>.</p></li>
 </ul>
 <p><br/></p>
 <h4 id="other-publications">Other Publications</h4>
 <h5 id="fiction-and-humor">Fiction and Humor</h5>
 <ul>
-<li><p><strong>Ekholm, E</strong>. <a href="https://www.mcsweeneys.net/articles/if-you-take-my-survey-ill-let-you-watch-me-cut-my-finger-off">“If You Take My Survey, I’ll Let You Watch Me Cut My Finger Off.”</a> McSweeney’s Internet Tendency (June 7, 2016).</p></li>
-<li><p><strong>Ekholm, E.</strong> <a href="http://www.mcsweeneys.net/articles/call-for-submissions-for-apas-annual-conference-sponsored-by-shark-week">“Call for Submissions for APA’s Annual Conference, Sponsored by Shark Week.”</a> McSweeney’s Internet Tendency (August 11, 2014).</p></li>
+<li><p><strong>Ekholm, E</strong>. <a
+href="https://www.mcsweeneys.net/articles/if-you-take-my-survey-ill-let-you-watch-me-cut-my-finger-off">“If
+You Take My Survey, I’ll Let You Watch Me Cut My Finger Off.”</a>
+McSweeney’s Internet Tendency (June 7, 2016).</p></li>
+<li><p><strong>Ekholm, E.</strong> <a
+href="http://www.mcsweeneys.net/articles/call-for-submissions-for-apas-annual-conference-sponsored-by-shark-week">“Call
+for Submissions for APA’s Annual Conference, Sponsored by Shark
+Week.”</a> McSweeney’s Internet Tendency (August 11, 2014).</p></li>
 </ul>
 <h5 id="book-reviews">Book Reviews</h5>
 <ul>
-<li><strong>Ekholm, E.</strong> (September, 2016). <a href="http://www.ncte.org/library/NCTEFiles/Resources/Journals/EJ/1061_sep2016/EJ1061Reviews.pdf">A review of Kelly Gallagher’s <em>In the Best Interests of Students</em>.</a></li>
+<li><strong>Ekholm, E.</strong> (September, 2016). <a
+href="http://www.ncte.org/library/NCTEFiles/Resources/Journals/EJ/1061_sep2016/EJ1061Reviews.pdf">A
+review of Kelly Gallagher’s <em>In the Best Interests of
+Students</em>.</a></li>
 </ul>
 <h5 id="other">Other</h5>
 <ul>
-<li>Guest blog post, AERA Motivation SIG Blog, <strong>Ekholm, E.</strong> (2018). <a href="http://motsig.org/what-motivation-researchers-can-learn-from-professional-sports-teams/">“What Motivation Researchers Can Learn from Professional Sports Teams.”</a> November 6, 2018.</li>
+<li>Guest blog post, AERA Motivation SIG Blog, <strong>Ekholm,
+E.</strong> (2018). <a
+href="http://motsig.org/what-motivation-researchers-can-learn-from-professional-sports-teams/">“What
+Motivation Researchers Can Learn from Professional Sports Teams.”</a>
+November 6, 2018.</li>
 </ul>
 <p><br/></p>
 <h4 id="conference-presentations">Conference Presentations</h4>
 <p><em>Only conference presentations since 2018 included</em></p>
 <ul>
-<li><p><strong>Ekholme, E.</strong>, &amp; Fox, P. (October, 2021). Using machine learning to support student attendance practices. Session presented at the annual <a href="https://merc.soe.vcu.edu/conference/program/2021/">Metropolitan Education Research Consortium (MERC) conference</a>, Richmond, VA. Video available <a href="https://www.youtube.com/watch?v=gbTfelMWMiY">here</a> (~27:30 timestamp).</p></li>
-<li><p><strong>Ekholm, E.</strong>, &amp; Zumbrun, S. (April, 2020). Investigating relations between writers’ emotional experiences and attention regulation: A daily diary study. Paper presented at the American Educational Research Association (AERA) Annual Meeting, San Francisco, CA.</p></li>
-<li><p><strong>Ekholm, E.</strong>, Zumbrunn, S., Broda, M., &amp; Luther, T. C. (April, 2019). The development of student writing feedback attitudes in grades 3-7: A latent growth analysis. Poster presented at the American Educational Research Association (AERA) Annual Meeting, Toronto, Canada.</p></li>
-<li><p>Zumbrunn, S., Broda, M., Marrs, S., &amp; <strong>Ekholm, E.</strong> (April, 2019). The complexities and challenges of understanding individual differences and the development of multiple dimensions of writing self-efficacy. Poster presented at the American Educational Research Association (AERA) Annual Meeting, Toronto, Canada.</p></li>
-<li><p>Broda, M., <strong>Ekholm, E.</strong>, Hutton, C., &amp; Schneider, B. (April, 2019). Teachers’ social networks, college-going practices, and the diffusion of a school-based reform initiative. Paper presented at the American Educational Research Association (AERA) Annual Meeting, Toronto, Canada.</p></li>
-<li><p>Zumbrunn, S., Broda, M., <strong>Ekholm, E.</strong>, &amp; Luther, T. C. (April, 2019). RoboCogger: Using mobile technology to assess and increase student writing metacognition, motivation, and performance. Paper presented at the American Educational Research Association (AERA) Annual Meeting, Toronto, Canada.</p></li>
-<li><p>Broda, M., <strong>Ekholm, E.</strong>, &amp; Zumbrunn, S. (October, 2018). Are we grading the “write” stuff? The relationship between teachers’ expectations, students’ self-regulation, and writing achievement. Paper presented at the CREATE Conference, Williamsburg, VA.</p></li>
-<li><p>Zumbrunn, S., Marrs, S., Malmberg, L., <strong>Ekholm, E.</strong>, Broda, M., &amp; DeBusk-Lane, M. (August, 2018). Individual differences and the development of multiple dimensions of writing self-efficacy. Paper presented at the International Conference of the EARLI Special Interest Group on Writing, Antwerp, Belgium.</p></li>
-<li><p><strong>Ekholm, E.</strong>, Zumbrunn, S., Hope, S., &amp; Stim, H. (April, 2018). Teachers’ writing beliefs and instructional practices: A mixed-methods study. Poster presented at the American Educational Research Association (AERA) Annual Meeting, New York City, NY.</p></li>
-<li><p>Marrs, S., <strong>Ekholm, E.</strong>, &amp; Zumbrunn, S. (April, 2018). Exploring profiles of student perceptions of writing feedback. Roundtable presented at the American Educational Research Association (AERA) Annual Meeting, New York City, NY.</p></li>
-<li><p>Tucker, S., Broda, M., <strong>Ekholm, E.</strong>, Johnson, T., &amp; Liang, Q. (April, 2018). Preschoolers’ subitizing speed and accuracy during interactions with multi-touch technology. Roundtable presented at the American Educational Research Association (AERA) Annual Meeting, New York City, NY.</p></li>
-<li><p>Chow, J.C. &amp; <strong>Ekholm, E.</strong> (February, 2018). Estimating the magnitude of the difference between published and unpublished studies in special education: A metareview. Poster presented at the Council for Exceptional Children Annual Convention, Tampa, FL.</p></li>
+<li><p><strong>Ekholme, E.</strong>, &amp; Fox, P. (October, 2021).
+Using machine learning to support student attendance practices. Session
+presented at the annual <a
+href="https://merc.soe.vcu.edu/conference/program/2021/">Metropolitan
+Education Research Consortium (MERC) conference</a>, Richmond, VA. Video
+available <a href="https://www.youtube.com/watch?v=gbTfelMWMiY">here</a>
+(~27:30 timestamp).</p></li>
+<li><p><strong>Ekholm, E.</strong>, &amp; Zumbrun, S. (April, 2020).
+Investigating relations between writers’ emotional experiences and
+attention regulation: A daily diary study. Paper presented at the
+American Educational Research Association (AERA) Annual Meeting, San
+Francisco, CA.</p></li>
+<li><p><strong>Ekholm, E.</strong>, Zumbrunn, S., Broda, M., &amp;
+Luther, T. C. (April, 2019). The development of student writing feedback
+attitudes in grades 3-7: A latent growth analysis. Poster presented at
+the American Educational Research Association (AERA) Annual Meeting,
+Toronto, Canada.</p></li>
+<li><p>Zumbrunn, S., Broda, M., Marrs, S., &amp; <strong>Ekholm,
+E.</strong> (April, 2019). The complexities and challenges of
+understanding individual differences and the development of multiple
+dimensions of writing self-efficacy. Poster presented at the American
+Educational Research Association (AERA) Annual Meeting, Toronto,
+Canada.</p></li>
+<li><p>Broda, M., <strong>Ekholm, E.</strong>, Hutton, C., &amp;
+Schneider, B. (April, 2019). Teachers’ social networks, college-going
+practices, and the diffusion of a school-based reform initiative. Paper
+presented at the American Educational Research Association (AERA) Annual
+Meeting, Toronto, Canada.</p></li>
+<li><p>Zumbrunn, S., Broda, M., <strong>Ekholm, E.</strong>, &amp;
+Luther, T. C. (April, 2019). RoboCogger: Using mobile technology to
+assess and increase student writing metacognition, motivation, and
+performance. Paper presented at the American Educational Research
+Association (AERA) Annual Meeting, Toronto, Canada.</p></li>
+<li><p>Broda, M., <strong>Ekholm, E.</strong>, &amp; Zumbrunn, S.
+(October, 2018). Are we grading the “write” stuff? The relationship
+between teachers’ expectations, students’ self-regulation, and writing
+achievement. Paper presented at the CREATE Conference, Williamsburg,
+VA.</p></li>
+<li><p>Zumbrunn, S., Marrs, S., Malmberg, L., <strong>Ekholm,
+E.</strong>, Broda, M., &amp; DeBusk-Lane, M. (August, 2018). Individual
+differences and the development of multiple dimensions of writing
+self-efficacy. Paper presented at the International Conference of the
+EARLI Special Interest Group on Writing, Antwerp, Belgium.</p></li>
+<li><p><strong>Ekholm, E.</strong>, Zumbrunn, S., Hope, S., &amp; Stim,
+H. (April, 2018). Teachers’ writing beliefs and instructional practices:
+A mixed-methods study. Poster presented at the American Educational
+Research Association (AERA) Annual Meeting, New York City, NY.</p></li>
+<li><p>Marrs, S., <strong>Ekholm, E.</strong>, &amp; Zumbrunn, S.
+(April, 2018). Exploring profiles of student perceptions of writing
+feedback. Roundtable presented at the American Educational Research
+Association (AERA) Annual Meeting, New York City, NY.</p></li>
+<li><p>Tucker, S., Broda, M., <strong>Ekholm, E.</strong>, Johnson, T.,
+&amp; Liang, Q. (April, 2018). Preschoolers’ subitizing speed and
+accuracy during interactions with multi-touch technology. Roundtable
+presented at the American Educational Research Association (AERA) Annual
+Meeting, New York City, NY.</p></li>
+<li><p>Chow, J.C. &amp; <strong>Ekholm, E.</strong> (February, 2018).
+Estimating the magnitude of the difference between published and
+unpublished studies in special education: A metareview. Poster presented
+at the Council for Exceptional Children Annual Convention, Tampa,
+FL.</p></li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
